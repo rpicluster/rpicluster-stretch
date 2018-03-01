@@ -86,16 +86,16 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-cd rpicluster
-sudo chmod +x LCD_show_35hdmi.tar.gz
-tar -xzvf LCD_show_35hdmi.tar.gz
-cd LCD_show_35hdmi
-apt-get update
-sudo ./LCD_backup
-sudo ./LCD35_810*540
-sudo apt-mark hold raspberrypi-kernel
-sudo apt-mark hold raspberrypi-bootloader
-cd ../..
+# cd rpicluster
+# sudo chmod +x LCD_show_35hdmi.tar.gz
+# tar -xzvf LCD_show_35hdmi.tar.gz
+# cd LCD_show_35hdmi
+# apt-get update
+# sudo ./LCD_backup
+# sudo ./LCD35_810*540
+# sudo apt-mark hold raspberrypi-kernel
+# sudo apt-mark hold raspberrypi-bootloader
+# cd ../..
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
