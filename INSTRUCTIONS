@@ -1,0 +1,160 @@
+sudo apt-get update
+sudo apt-get upgrade
+sudo rpi-update
+
+sudo apt-get install hostapd
+sudo apt-get install dnsmasq
+
+IF YOU WANT TO USE WIFI AS INTERNET PROVIDER-----------------
+sudo nano  /etc/wpa_supplicant/wpa_supplicant.conf--->>>
+
+network={
+        ssid="networkname"
+        psk="networkpassword"
+}
+
+-------------------------------------------------------------
+
+sudo reboot -h now
+
+sudo system status dnsmasq
+
+sudo service hostapd stop
+sudo service dnsmasq stop
+
+sudo nano /etc/dhcpcd.conf--->>>
+
+interface wlan0
+static ip_address=192.168.220.1/24
+static routers=192.168.220.0
+
+--------------------------------
+
+sudo service dhcpcd restart
+
+sudo nano /etc/hostapd/hostapd.conf--->>>
+
+interface=wlan0
+driver=nl80211
+
+hw_mode=g
+channel=6
+ieee80211n=1
+wmm_enabled=1
+ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
+macaddr_acl=0
+ignore_broadcast_ssid=0
+
+# Use WPA2
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+
+# This is the name of the network
+ssid=rpicluster
+# The network passphrase
+wpa_passphrase=arguello
+
+--------------------------------
+
+sudo nano /etc/default/hostapd--->>>
+
+#DAEMON_CONF="" --->>> DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+--------------------------------
+
+sudo nano /etc/init.d/hostapd--->>>
+
+DAEMON_CONF= --->>> DAEMON_CONF=/etc/hostapd/hostapd.conf
+
+--------------------------------
+
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+
+sudo nano /etc/dnsmasq.conf--->>>
+
+interface=wlan0       # Use interface wlan0  
+listen-address=192.168.220.1   # Specify the address to listen on  
+bind-interfaces      # Bind to the interface
+server=8.8.8.8       # Use Google DNS  
+domain-needed        # Don't forward short names  
+bogus-priv           # Drop the non-routed address spaces.  
+dhcp-range=192.168.220.50,192.168.220.150,12h # IP range and lease time  
+
+--------------------------------
+
+sed -i '28 s/#//' sysctl.conf
+
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+ETHERNET TO WIFI-------------------------------------------------
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE  
+sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT  
+-----------------------------------------------------------------
+BUILT IN WIFI TO DONGLE------------------------------------------
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE  
+sudo iptables -A FORWARD -i wlan0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i wlan1 -o wlan0 -j ACCEPT
+-----------------------------------------------------------------
+
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
+sudo reboot -h now
+
+sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' rc.local
+
+sudo service hostapd start
+sudo service dnsmasq start
+
+sudo reboot -h now
+
+
+
+
+FIX DNSMASQ START UP RUN----------------------------------------------
+
+Step 1, edit the file /lib/systemd/system/dnsmasq.service:
+
+sudo nano /lib/systemd/system/dnsmasq.service
+
+Add the following line before “ExecStartPre=/sur/sbin/dnsmasq –test”:
+
+ExecStartPre=/bin/sleep 30
+
+Save and exit
+
+Step 2, enable automatic startup
+
+sudo systemctl enable dnsmasq.service
+
+Reboot and it should be working.
+
+sudo systemctl enable dnsmasq.service
+
+-----------------------------------------------------------------------
+
+REVERT TO JESSIE NETWORKING--------------------------------------------
+
+If you want to continue to do things the old way, using the /etc/network/interfaces file, just disable dhcpcd and enable traditional debian networking.
+
+sudo systemctl disable dhcpcd
+sudo systemctl enable networking
+
+Then pretend you are on Jessie or before.
+
+-----------------------------------------------------------------------
+
+IF HOSTAPD FAILS TO RUN, RUN MANUALLY AND CHECK FOR ERRORS-------------
+
+run it manually from the command line and if it tells you that the AP dongle isnt capable of [DSSS_CCK-40], remove that from the hostapd.conf file.
+
+-----------------------------------------------------------------------
+
+IF DONGLE IS CAPABLE OF AP --------------------------------------------
+
+may need to swap wlan1 and wlan0 in iptables because the dongle 
+is capable of becoming wlan0
+
+-----------------------------------------------------------------------
