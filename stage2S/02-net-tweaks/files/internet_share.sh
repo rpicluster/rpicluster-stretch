@@ -25,6 +25,8 @@ sudo ip route del 0/0 dev $eth &> /dev/null
 
 sudo systemctl stop dnsmasq
 
+#sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig  
+
 sudo chmod 770 /etc/dnsmasq.conf
 
 sudo echo -e "interface=$eth\n\
