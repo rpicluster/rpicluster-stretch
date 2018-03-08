@@ -1,7 +1,13 @@
 sudo apt-get update -y && sudo apt-get upgrade -y
 
+#https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=206784
+#derek ur retarted do as he does
+
 sudo apt-get install -y hostapd
 sudo apt-get install -y dnsmasq
+sudo apt-get install -y rng-tools
+#status RNG
+#sudo service rng-tools status
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
 
