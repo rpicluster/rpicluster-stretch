@@ -1,3 +1,6 @@
+#PREDICTABLE NETWORK NAMES FIX
+#"net.ifnames=1" to the end of cmdline.txt
+
 sudo apt-get update -y && sudo apt-get upgrade -y
 
 #https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=206784
@@ -22,10 +25,15 @@ sudo systemctl stop hostapd
 # IF BUILT IN IS ON WLAN0 THEN SWAP WLAN1 FOR WLAN0 
 # builtin MUST be the access point as dongle needs AP Mode
 # ENDING MAC FOR DONGLE = ...:6f
-
-sudo echo "interface wlan0
-static ip_address=192.168.220.1/24
-static routers=192.168.220.0" | sudo tee -a /etc/dhcpcd.conf
+#ADDED IN DENYINTERFACES FOR AP INTERFACE
+#ADDED IN STATIC DOMAIN_NAME_SERVERS
+#CHANGED IPS FROM 220.x to 1.x
+#SPECIFYING ip/24 TAKES PLACE OF HAVING TO SPECIFY THE NETMASK netmask=255.255.255.0
+sudo echo "denyinterfaces wlan0
+interface wlan0
+static ip_address=192.168.1.15/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1" | sudo tee -a /etc/dhcpcd.conf
 
 sudo systemctl daemon-reload
 
@@ -52,11 +60,11 @@ sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hosta
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 sudo echo "interface=wlan0  
-listen-address=192.168.220.1
+listen-address=192.168.1.15
 server=8.8.8.8       # Use Google DNS  
 domain-needed        # Don't forward short names  
 bogus-priv           # Drop the non-routed address spaces.  
-dhcp-range=192.168.220.50,192.168.220.150,12h # IP range and lease time " | sudo tee /etc/dnsmasq.conf
+dhcp-range=192.168.1.50,192.168.1.150,12h # IP range and lease time " | sudo tee /etc/dnsmasq.conf
 
 # IPTABLES: ------------------------------------------
 sudo iptables -X
