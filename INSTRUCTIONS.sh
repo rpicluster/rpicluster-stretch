@@ -10,9 +10,8 @@ sudo apt-get update -y && sudo apt-get upgrade -y
 
 echo "Installing host services . . . 
 "
-
-sudo apt-get install -y hostapd
 sudo apt-get install -y dnsmasq
+sudo apt-get install -y hostapd
 sudo apt-get install -y rng-tools
 
 #sudo service rng-tools status
@@ -104,24 +103,45 @@ dhcp-authoritative
 # IPTABLES: ------------------------------------------
 echo "Generating new iptable Rules . . . 
 "
-
-sudo iptables -X
-sudo iptables -F
-sudo iptables -t nat -X
-sudo iptables -t nat -F
+IPTABLES="$(which iptables)"
+# RESET DEFAULT POLICIES
+$IPTABLES -P INPUT ACCEPT
+$IPTABLES -P FORWARD ACCEPT
+$IPTABLES -P OUTPUT ACCEPT
+$IPTABLES -t nat -P PREROUTING ACCEPT
+$IPTABLES -t nat -P POSTROUTING ACCEPT
+$IPTABLES -t nat -P OUTPUT ACCEPT
+$IPTABLES -t mangle -P PREROUTING ACCEPT
+$IPTABLES -t mangle -P OUTPUT ACCEPT
+# FLUSH ALL RULES, ERASE NON-DEFAULT CHAINS
+$IPTABLES -F
+$IPTABLES -X
+$IPTABLES -t nat -F
+$IPTABLES -t nat -X
+$IPTABLES -t mangle -F
+$IPTABLES -t mangle -X
 sudo iptables -t nat -A POSTROUTING -o wlx28f366aa5a6f -j MASQUERADE #--source 192.168.1.15
 sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE #--source 10.10.34.18
 sudo iptables -A FORWARD -i wlx28f366aa5a6f -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-# sudo iptables -A FORWARD -i wlx28f366aa5a6f -o wlan0 -j ACCEPT
 sudo iptables -A FORWARD -i wlan0 -o wlx28f366aa5a6f -j ACCEPT
 # -----------------------------------------------------------------
-# sudo iptables -X
-# sudo iptables -F
-# sudo iptables -t nat -X
-# sudo iptables -t nat -F
-# sudo iptables -I INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-# sudo iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-# sudo iptables -t nat -I POSTROUTING -o wlan0 -j MASQUERADE
+#  IPT=/sbin/iptables
+#  LOCAL_IFACE=wlan0
+#  INET_IFACE=wlx28f366aa5a6f
+#  INET_ADDRESS=10.10.34.18
+# # Flush the tables
+#  $IPT -F INPUT
+#  $IPT -F OUTPUT
+#  $IPT -F FORWARD
+# $IPT -t nat -P PREROUTING ACCEPT
+#  $IPT -t nat -P POSTROUTING ACCEPT
+#  $IPT -t nat -P OUTPUT ACCEPT
+# # Allow forwarding packets:
+#  $IPT -A FORWARD -p ALL -i $LOCAL_IFACE -o $INET_IFACE -j ACCEPT
+#  $IPT -A FORWARD -i $INET_IFACE -o $LOCAL_IFACE -m state --state ESTABLISHED,RELATED -j ACCEPT
+# # Packet masquerading
+#  $IPT -t nat -A POSTROUTING -o $LOCAL_IFACE -j MASQUERADE
+#  $IPT -t nat -A POSTROUTING -o $INET_IFACE -j SNAT --to-source $INET_ADDRESS
 # -----------------------------------------------------------------
 
 echo "Allowing ip_forward . . . 
