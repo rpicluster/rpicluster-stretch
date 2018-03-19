@@ -4,7 +4,7 @@ class IpSender(object):
     def sendIP(self, mac):
         print(mac)
         self.ip+=1
-        desiredIp = "192.168.0." + str(self.ip)
+        desiredIp = "192.168.1." + str(self.ip)
         with open("/etc/dnsmasq.conf", "a") as configFile:
             configFile.write("dhcp-host=" + mac + "," + desiredIp + "\n")
         return str(desiredIp)
@@ -13,6 +13,6 @@ class IpSender(object):
 import zerorpc
 
 s = zerorpc.Server(IpSender())
-s.bind("tcp://192.168.0.254:4444")
+s.bind("tcp://192.168.1.254:4444")
 # print("Running...")
 s.run()

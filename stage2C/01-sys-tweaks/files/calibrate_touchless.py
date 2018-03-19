@@ -21,6 +21,6 @@ def getMacAddr():
         return new_mac
 
 c = zerorpc.Client()
-c.connect("tcp://192.168.0.254:4444")
+c.connect("tcp://192.168.1.254:4444")
 mac = getMacAddr()
 print(c.sendIP(mac))

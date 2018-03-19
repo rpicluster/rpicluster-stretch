@@ -16,8 +16,6 @@ install -m 755 files/fabfile.py                         ${ROOTFS_DIR}/rpicluster
 
 install -m 755 files/config_ip.sh                       ${ROOTFS_DIR}/rpicluster/config
 
-install -m 755 files/revert.sh                          ${ROOTFS_DIR}/rpicluster/config
-
 install -d                                              ${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d
 
 install -m 644 files/ttyoutput.conf                     ${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/

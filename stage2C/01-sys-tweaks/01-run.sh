@@ -8,23 +8,7 @@ install -d                                              ${ROOTFS_DIR}/rpicluster
 
 install -d                                              ${ROOTFS_DIR}/rpicluster/config
 
-# install -m 755 files/pointercal                         ${ROOTFS_DIR}/etc
-
 install -m 755 files/calibrate_touchless.py             ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/LCD_show_35hdmi.tar.gz             ${ROOTFS_DIR}/rpicluster/
-
-# install -m 755 files/calibrate.py                       ${ROOTFS_DIR}/rpicluster/config
-
-install -m 755 files/clientFunctions.py                 ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/revert.sh                          ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/getevent.py                        ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/demo.py                            ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/event_config.sh                    ${ROOTFS_DIR}/rpicluster/config
 
 install -d                                              ${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d
 
@@ -86,43 +70,6 @@ on_chroot << EOF
 pip install zerorpc
 sudo systemctl set-default multi-user.target
 sudo ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
-# cd rpicluster
-# sudo chmod +x LCD_show_35hdmi.tar.gz
-# tar -xzvf LCD_show_35hdmi.tar.gz
-# cd LCD_show_35hdmi
-# apt-get update
-# sudo ./LCD_backup
-# sudo ./LCD35_810*540
-# sudo apt-mark hold raspberrypi-kernel
-# sudo apt-mark hold raspberrypi-bootloader
-# cd ../..
 EOF
-
-# on_chroot << EOF
-# sudo wget -O /usr/bin/ts_test http://tronnes.org/downloads/ts_test
-# sudo chmod +x /usr/bin/ts_test
-# cat <<EOF | sudo tee /etc/profile.d/tslib.sh
-# echo "export TSLIB_TSDEVICE=/dev/input/touchscreen
-# export TSLIB_FBDEVICE=/dev/fb0" > /etc/profile.d/tslib.sh
-# EOF
-# cat <<EOF | sudo tee /etc/sudoers.d/tslib 
-# echo "Defaults env_keep += \"TSLIB_TSDEVICE TSLIB_FBDEVICE\"" > /etc/sudoers.d/tslib
-# EOF
-# sudo chmod 0440 /etc/sudoers.d/tslib
-
-# cat <<EOF | sudo tee /etc/profile.d/sdl.sh
-# echo "export SDL_VIDEODRIVER=fbcon
-# export SDL_FBDEV=/dev/fb0
-# if [[ -e /dev/input/touchscreen ]]; then
-#     export SDL_MOUSEDRV=TSLIB
-#     export SDL_MOUSEDEV=/dev/input/touchscreen
-# fi" > /etc/profile.d/sdl.sh
-# EOF
-
-# cat <<EOF | sudo tee /etc/sudoers.d/sdl
-# echo "Defaults env_keep += \"SDL_VIDEODRIVER SDL_FBDEV SDL_MOUSEDRV SDL_MOUSEDEV\"" > /etc/sudoers.d/sdl
-# # EOF
-# sudo chmod 0440 /etc/sudoers.d/tslib
-# EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
