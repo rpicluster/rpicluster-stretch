@@ -8,25 +8,15 @@ install -d                                              ${ROOTFS_DIR}/rpicluster
 
 install -d                                              ${ROOTFS_DIR}/rpicluster/config
 
-# install -m 755 files/LCD_show_35hdmi.tar.gz               ${ROOTFS_DIR}/rpicluster
-
-# install -m 755 files/pointercal                           ${ROOTFS_DIR}/etc
-
 install -m 755 files/config.py                          ${ROOTFS_DIR}/rpicluster/config
 
 install -m 755 files/list_leases.py                     ${ROOTFS_DIR}/rpicluster/config
 
 install -m 755 files/fabfile.py                         ${ROOTFS_DIR}/rpicluster/config
 
-# install -m 755 files/calibrate_screen.sh                ${ROOTFS_DIR}/rpicluster/config
-
 install -m 755 files/config_ip.sh                       ${ROOTFS_DIR}/rpicluster/config
 
 install -m 755 files/revert.sh                          ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/server_demo.py                     ${ROOTFS_DIR}/rpicluster/config
-
-# install -m 755 files/run_demo.sh                        ${ROOTFS_DIR}/rpicluster/config
 
 install -d                                              ${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d
 
@@ -86,16 +76,6 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-# cd rpicluster
-# sudo chmod +x LCD_show_35hdmi.tar.gz
-# tar -xzvf LCD_show_35hdmi.tar.gz
-# cd LCD_show_35hdmi
-# apt-get update
-# sudo ./LCD_backup
-# sudo ./LCD35_810*540
-# sudo apt-mark hold raspberrypi-kernel
-# sudo apt-mark hold raspberrypi-bootloader
-# cd ../..
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*

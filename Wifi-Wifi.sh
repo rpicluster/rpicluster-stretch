@@ -19,7 +19,8 @@ Generating new wpa_supplicant . . .
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
 
-sudo echo "network={
+sudo echo "
+network={
         ssid=\"CSLabs\"
         psk=\"1kudlick\"
 }" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
@@ -39,9 +40,7 @@ Updating dhcpcd.conf . . .
 
 sudo echo "interface wlan0
 metric 300
-static ip_address=192.168.1.15/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.1.1
+static ip_address=192.168.1.254/24
 
 interface wlx28f366aa5a6f
 metric 200" | sudo tee -a /etc/dhcpcd.conf
@@ -61,11 +60,11 @@ Generating new hostapd.conf . . .
 
 sudo echo "interface=wlan0
 driver=nl80211
-ssid=Pi-AP
+ssid=rpicluster
 channel=1
 wmm_enabled=0
 wpa=1
-wpa_passphrase=raspberry
+wpa_passphrase=rpicluster
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
@@ -91,11 +90,11 @@ Generating new dnsmasq.conf . . .
 
 sudo echo "no-resolv #potentially needed
 interface=wlan0  
-listen-address=192.168.1.15
+listen-address=192.168.1.254
 server=8.8.8.8       # Use Google DNS  
 domain-needed        # Don't forward short names  
 bogus-priv           # Drop the non-routed address spaces.  
-dhcp-range=192.168.1.50,192.168.1.150,12h # IP range and lease time
+dhcp-range=192.168.1.1,192.168.1.100,12h
 #log each DNS query as it passes through
 log-queries
 dhcp-authoritative
