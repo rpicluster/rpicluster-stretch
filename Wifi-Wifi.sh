@@ -1,12 +1,12 @@
 
 echo "
-Updating machine . . . 
+Updating machine . . .
 "
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 
 echo "
-Installing host services . . . 
+Installing host services . . .
 "
 sudo apt-get install -y dnsmasq
 sudo apt-get install -y hostapd
@@ -14,19 +14,18 @@ sudo apt-get install -y rng-tools
 
 
 echo "
-Generating new wpa_supplicant . . . 
+Generating new wpa_supplicant . . .
 "
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
 
-sudo echo "
-network={
-        ssid=\"CSLabs\"
-        psk=\"1kudlick\"
+sudo echo "network={
+ssid=\"CSLabs\"
+psk=\"1kudlick\"
 }" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
 
 echo "
-Stopping host serices . . . 
+Stopping host serices . . .
 "
 
 sudo systemctl stop dnsmasq
@@ -35,18 +34,20 @@ sudo systemctl stop hostapd
 
 #-----------------------------------------------------------
 echo "
-Updating dhcpcd.conf . . . 
+Updating dhcpcd.conf . . .
 "
 
 sudo echo "interface wlan0
 metric 300
 static ip_address=192.168.1.254/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
 
 interface wlx28f366aa5a6f
 metric 200" | sudo tee -a /etc/dhcpcd.conf
 
 echo "
-Rebooting daemon and dhcpcd service . . . 
+Rebooting daemon and dhcpcd service . . .
 "
 
 sudo systemctl daemon-reload
@@ -55,16 +56,16 @@ sudo service dhcpcd restart
 #------------------------------------------------------------
 
 echo "
-Generating new hostapd.conf . . . 
+Generating new hostapd.conf . . .
 "
 
 sudo echo "interface=wlan0
 driver=nl80211
-ssid=rpicluster
+ssid=Pi-AP
 channel=1
 wmm_enabled=0
 wpa=1
-wpa_passphrase=rpicluster
+wpa_passphrase=raspberry
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
@@ -75,7 +76,7 @@ logger_stdout_level=2
 " | sudo tee /etc/hostapd/hostapd.conf
 
 echo "
-Linking new hostapd.conf . . . 
+Linking new hostapd.conf . . .
 "
 
 sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
@@ -85,16 +86,16 @@ sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hosta
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 echo "
-Generating new dnsmasq.conf . . . 
+Generating new dnsmasq.conf . . .
 "
 
 sudo echo "no-resolv #potentially needed
-interface=wlan0  
+interface=wlan0
 listen-address=192.168.1.254
-server=8.8.8.8       # Use Google DNS  
-domain-needed        # Don't forward short names  
-bogus-priv           # Drop the non-routed address spaces.  
-dhcp-range=192.168.1.1,192.168.1.100,12h
+server=8.8.8.8 # Use Google DNS
+domain-needed # Don't forward short names
+bogus-priv # Drop the non-routed address spaces.
+dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
 #log each DNS query as it passes through
 log-queries
 dhcp-authoritative
@@ -102,7 +103,7 @@ dhcp-authoritative
 
 # IPTABLES: ------------------------------------------
 echo "
-Generating new iptable Rules . . . 
+Generating new iptable Rules . . .
 "
 
 sudo iptables -F
@@ -112,7 +113,7 @@ sudo iptables -A FORWARD -i wlx28f366aa5a6f -o wlan0 -m state --state RELATED,ES
 sudo iptables -A FORWARD -i wlan0 -o wlx28f366aa5a6f -j ACCEPT
 
 echo "
-Allowing ip_forward . . . 
+Allowing ip_forward . . .
 "
 
 sudo sed -i '28 s/#//' /etc/sysctl.conf
@@ -120,7 +121,7 @@ sudo sed -i '28 s/#//' /etc/sysctl.conf
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 echo "
-Saving / Restoring iptables . . . 
+Saving / Restoring iptables . . .
 "
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
@@ -128,7 +129,7 @@ sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 echo "
-Starting host services . . . 
+Starting host services . . .
 "
 
 sudo systemctl daemon-reload
@@ -137,7 +138,7 @@ sudo systemctl start dnsmasq
 sudo systemctl start hostapd
 
 echo "
-Getting Tired . . Time to reboot . . . 
+Getting Tired . . Time to reboot . . .
 "
 sleep 1
 
@@ -149,6 +150,3 @@ sudo reboot -h now
 # sudo service hostapd status
 # sudo hostapd -dd /etc/hostapd/hostapd.conf
 # sudo service rng-tools status
-
-
-
