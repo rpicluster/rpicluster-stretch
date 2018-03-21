@@ -33,3 +33,6 @@ libssl-dev
 libffi-dev
 python-pygame
 fabric
+dnsmasq
+hostapd
+rng-tools

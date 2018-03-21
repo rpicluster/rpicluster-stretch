@@ -59,11 +59,11 @@ Generating new hostapd.conf . . .
 
 sudo echo "interface=wlan0
 driver=nl80211
-ssid=Pi-AP
+ssid=rpicluster-AP
 channel=1
 wmm_enabled=0
 wpa=1
-wpa_passphrase=raspberry
+wpa_passphrase=rpicluster
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
