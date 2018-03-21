@@ -17,12 +17,12 @@ echo "
 Generating new wpa_supplicant . . .
 "
 
-sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
+sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
 sudo echo "network={
 ssid=\"CSLabs\"
 psk=\"1kudlick\"
-}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlx28f366aa5a6f.conf
+}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
 echo "
 Stopping host serices . . .
@@ -32,7 +32,6 @@ sudo systemctl stop dnsmasq
 sudo systemctl stop hostapd
 
 
-#-----------------------------------------------------------
 echo "
 Updating dhcpcd.conf . . .
 "
@@ -40,10 +39,10 @@ Updating dhcpcd.conf . . .
 sudo echo "interface wlan0
 metric 300
 static ip_address=192.168.1.254/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.1.1
+#static routers=192.168.1.1
+#static domain_name_servers=192.168.1.1
 
-interface wlx28f366aa5a6f
+interface wlan1
 metric 200" | sudo tee -a /etc/dhcpcd.conf
 
 echo "
@@ -53,7 +52,6 @@ Rebooting daemon and dhcpcd service . . .
 sudo systemctl daemon-reload
 
 sudo service dhcpcd restart
-#------------------------------------------------------------
 
 echo "
 Generating new hostapd.conf . . .
@@ -89,7 +87,7 @@ echo "
 Generating new dnsmasq.conf . . .
 "
 
-sudo echo "no-resolv #potentially needed
+sudo echo "no-resolv
 interface=wlan0
 listen-address=192.168.1.254
 server=8.8.8.8 # Use Google DNS
@@ -101,16 +99,16 @@ log-queries
 dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
 
-# IPTABLES: ------------------------------------------
+
 echo "
 Generating new iptable Rules . . .
 "
 
 sudo iptables -F
 sudo iptables -t nat -F
-sudo iptables -t nat -A POSTROUTING -o wlx28f366aa5a6f -j MASQUERADE #--source 192.168.1.15
-sudo iptables -A FORWARD -i wlx28f366aa5a6f -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-sudo iptables -A FORWARD -i wlan0 -o wlx28f366aa5a6f -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE 
+sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
 
 echo "
 Allowing ip_forward . . .
@@ -143,10 +141,3 @@ Getting Tired . . Time to reboot . . .
 sleep 1
 
 sudo reboot -h now
-
-
-
-# DEBUG --->>>
-# sudo service hostapd status
-# sudo hostapd -dd /etc/hostapd/hostapd.conf
-# sudo service rng-tools status

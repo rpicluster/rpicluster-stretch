@@ -1,0 +1,14 @@
+
+# PUT THIS AT /etc/udev/rules.d/70-persistent-net.rules
+
+# SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="28:f3:66:aa:5a:6f", ATTR{dev_id}=="0x0", ATTR{type}=="1", NAME="wlanTEST"
+
+
+
+
+
+# DEBUG --->>>
+# sudo service hostapd status
+# sudo hostapd -dd /etc/hostapd/hostapd.conf
+# sudo service rng-tools status
+
