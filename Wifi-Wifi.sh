@@ -37,13 +37,13 @@ Updating dhcpcd.conf . . .
 "
 
 sudo echo "interface wlan0
-metric 300
+metric 150
 static ip_address=192.168.1.254/24
 #static routers=192.168.1.1
 #static domain_name_servers=192.168.1.1
 
 interface wlan1
-metric 200" | sudo tee -a /etc/dhcpcd.conf
+metric 100" | sudo tee -a /etc/dhcpcd.conf
 
 echo "
 Rebooting daemon and dhcpcd service . . .
