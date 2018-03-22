@@ -7,6 +7,10 @@ install -v -d                                          "${ROOTFS_DIR}/etc/wpa_su
 
 install -v -m 600 files/wpa_supplicant.conf            "${ROOTFS_DIR}/etc/wpa_supplicant/"
 
+install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/rpicluster/config/"
+
+install -m 600 files/iptables.ipv4.nat                 "${ROOTFS_DIR}/etc/"
+
 
 on_chroot << EOF
 echo "
@@ -20,12 +24,12 @@ ssid=\"CSLabs\"
 psk=\"1kudlick\"
 }" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
-echo "
-Stopping host serices . . .
-"
+# echo "
+# Stopping host serices . . .
+# "
 
-sudo systemctl stop dnsmasq
-sudo systemctl stop hostapd
+# sudo systemctl stop dnsmasq
+# sudo systemctl stop hostapd
 
 
 echo "
@@ -33,21 +37,21 @@ Updating dhcpcd.conf . . .
 "
 
 sudo echo "interface wlan0
-metric 300
+metric 150
 static ip_address=192.168.1.254/24
 #static routers=192.168.1.1
 #static domain_name_servers=192.168.1.1
 
 interface wlan1
-metric 200" | sudo tee -a /etc/dhcpcd.conf
+metric 100" | sudo tee -a /etc/dhcpcd.conf
 
-echo "
-Rebooting daemon and dhcpcd service . . .
-"
+# echo "
+# Rebooting daemon and dhcpcd service . . .
+# "
 
-sudo systemctl daemon-reload
+# sudo systemctl daemon-reload
 
-sudo service dhcpcd restart
+# sudo service dhcpcd restart
 
 echo "
 Generating new hostapd.conf . . .
@@ -95,17 +99,6 @@ log-queries
 dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
 
-
-echo "
-Generating new iptable Rules . . .
-"
-
-sudo iptables -F
-sudo iptables -t nat -F
-sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE 
-sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
-
 echo "
 Allowing ip_forward . . .
 "
@@ -115,21 +108,12 @@ sudo sed -i '28 s/#//' /etc/sysctl.conf
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 echo "
-Saving / Restoring iptables . . .
+Updating rc.local . . .
 "
-
-sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
-echo "
-Starting host services . . .
-"
-
-sudo systemctl daemon-reload
-
-sudo systemctl start dnsmasq
-sudo systemctl start hostapd
+sudo sed -i '21i\sudo python /rpicluster/config/link_wifi_adaptor.py\' /etc/rc.local
 
 
 EOF
