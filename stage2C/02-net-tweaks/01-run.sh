@@ -7,3 +7,13 @@ install -v -d                                           ${ROOTFS_DIR}/etc/wpa_su
 install -v -m 600 files/wpa_supplicant.conf             ${ROOTFS_DIR}/etc/wpa_supplicant/
 
 
+
+
+on_chroot << EOF
+
+sudo echo "network={
+ssid=\"rpicluster-AP\"
+psk=\"rpicluster\"
+}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+
+EOF
