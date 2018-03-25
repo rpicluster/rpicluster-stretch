@@ -1,12 +1,19 @@
 #!/bin/bash
 
+echo "
+Enabling Wifi-Wifi networking scheme . . .
+"
 
-# Share Wifi with Eth device
-# 
-# 
-# DO THIS STUFF BEFORE INSTALLING SCRIPT
-# sudo apt-get update -y && sudo apt-get upgrade -y
-# # sudo apt-get install -y dnsmasq
+echo "
+Updating machine . . .
+"
+sudo apt-get update -y && sudo apt-get upgrade -y
+
+echo "
+Installing host services . . .
+"
+sudo apt-get install -y dnsmasq
+
 
 ip_address="192.168.2.1"
 netmask="255.255.255.0"

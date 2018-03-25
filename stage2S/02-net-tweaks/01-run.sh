@@ -9,111 +9,111 @@ install -v -m 600 files/wpa_supplicant.conf            "${ROOTFS_DIR}/etc/wpa_su
 
 install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/rpicluster/config/"
 
-install -m 600 files/iptables.ipv4.nat                 "${ROOTFS_DIR}/etc/"
+# install -m 600 files/iptables.ipv4.nat                 "${ROOTFS_DIR}/etc/"
 
 
-on_chroot << EOF
-echo "
-Generating new wpa_supplicant . . .
-"
-
-sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
-
-sudo echo "network={
-ssid=\"CSLabs\"
-psk=\"1kudlick\"
-}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
-
+# on_chroot << EOF
 # echo "
-# Stopping host serices . . .
+# Generating new wpa_supplicant . . .
 # "
 
-# sudo systemctl stop dnsmasq
-# sudo systemctl stop hostapd
+# sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
+# sudo echo "network={
+# ssid=\"CSLabs\"
+# psk=\"1kudlick\"
+# }" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
-echo "
-Updating dhcpcd.conf . . .
-"
+# # echo "
+# # Stopping host serices . . .
+# # "
 
-sudo echo "interface wlan0
-metric 150
-static ip_address=192.168.1.254/24
-#static routers=192.168.1.1
-#static domain_name_servers=192.168.1.1
+# # sudo systemctl stop dnsmasq
+# # sudo systemctl stop hostapd
 
-interface wlan1
-metric 100" | sudo tee -a /etc/dhcpcd.conf
 
 # echo "
-# Rebooting daemon and dhcpcd service . . .
+# Updating dhcpcd.conf . . .
 # "
 
-# sudo systemctl daemon-reload
+# sudo echo "interface wlan0
+# metric 150
+# static ip_address=192.168.1.254/24
+# #static routers=192.168.1.1
+# #static domain_name_servers=192.168.1.1
 
-# sudo service dhcpcd restart
+# interface wlan1
+# metric 100" | sudo tee -a /etc/dhcpcd.conf
 
-echo "
-Generating new hostapd.conf . . .
-"
+# # echo "
+# # Rebooting daemon and dhcpcd service . . .
+# # "
 
-sudo echo "interface=wlan0
-driver=nl80211
-ssid=rpicluster-AP
-channel=1
-wmm_enabled=0
-wpa=1
-wpa_passphrase=rpicluster
-wpa_key_mgmt=WPA-PSK
-wpa_pairwise=TKIP
-rsn_pairwise=CCMP
-auth_algs=1
-macaddr_acl=0
-logger_stdout=-1
-logger_stdout_level=2
-" | sudo tee /etc/hostapd/hostapd.conf
+# # sudo systemctl daemon-reload
 
-echo "
-Linking new hostapd.conf . . .
-"
+# # sudo service dhcpcd restart
 
-sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
+# echo "
+# Generating new hostapd.conf . . .
+# "
 
-sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
+# sudo echo "interface=wlan0
+# driver=nl80211
+# ssid=rpicluster-AP
+# channel=1
+# wmm_enabled=0
+# wpa=1
+# wpa_passphrase=rpicluster
+# wpa_key_mgmt=WPA-PSK
+# wpa_pairwise=TKIP
+# rsn_pairwise=CCMP
+# auth_algs=1
+# macaddr_acl=0
+# logger_stdout=-1
+# logger_stdout_level=2
+# " | sudo tee /etc/hostapd/hostapd.conf
 
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+# echo "
+# Linking new hostapd.conf . . .
+# "
 
-echo "
-Generating new dnsmasq.conf . . .
-"
+# sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
 
-sudo echo "no-resolv
-interface=wlan0
-listen-address=192.168.1.254
-server=8.8.8.8 # Use Google DNS
-domain-needed # Don't forward short names
-bogus-priv # Drop the non-routed address spaces.
-dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
-#log each DNS query as it passes through
-log-queries
-dhcp-authoritative
-" | sudo tee /etc/dnsmasq.conf
+# sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
 
-echo "
-Allowing ip_forward . . .
-"
+# sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
-sudo sed -i '28 s/#//' /etc/sysctl.conf
+# echo "
+# Generating new dnsmasq.conf . . .
+# "
 
-sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+# sudo echo "no-resolv
+# interface=wlan0
+# listen-address=192.168.1.254
+# server=8.8.8.8 # Use Google DNS
+# domain-needed # Don't forward short names
+# bogus-priv # Drop the non-routed address spaces.
+# dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
+# #log each DNS query as it passes through
+# log-queries
+# dhcp-authoritative
+# " | sudo tee /etc/dnsmasq.conf
 
-echo "
-Updating rc.local . . .
-"
+# echo "
+# Allowing ip_forward . . .
+# "
 
-sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
+# sudo sed -i '28 s/#//' /etc/sysctl.conf
 
-sudo sed -i '21i\sudo python /rpicluster/config/link_wifi_adaptor.py\' /etc/rc.local
+# sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+# echo "
+# Updating rc.local . . .
+# "
+
+# sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
+
+# sudo sed -i '21i\sudo python /rpicluster/config/link_wifi_adaptor.py\' /etc/rc.local
 
 
-EOF
+# EOF

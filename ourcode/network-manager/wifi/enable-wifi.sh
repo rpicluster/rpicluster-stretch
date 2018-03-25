@@ -1,3 +1,20 @@
+#!/bin/bash
+
+echo "
+Enabling Wifi-Wifi networking scheme . . .
+"
+
+echo "
+Generating new wpa_supplicant . . .
+"
+
+sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+
+sudo echo "network={
+ssid=\"CSLabs\"
+psk=\"1kudlick\"
+}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+
 
 echo "
 Updating machine . . .
@@ -35,6 +52,7 @@ sudo systemctl stop hostapd
 echo "
 Updating dhcpcd.conf . . .
 "
+sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 sudo echo "interface wlan0
 metric 150
@@ -81,11 +99,11 @@ sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/ho
 
 sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
 
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 echo "
 Generating new dnsmasq.conf . . .
 "
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 sudo echo "no-resolv
 interface=wlan0
@@ -119,8 +137,9 @@ sudo sed -i '28 s/#//' /etc/sysctl.conf
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 echo "
-Saving / Restoring iptables . . .
+Saving iptables / Updating rc.local . . .
 "
+sudo sed -i '21i\sudo python /rpicluster/config/link_wifi_adaptor.py\' /etc/rc.local
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
