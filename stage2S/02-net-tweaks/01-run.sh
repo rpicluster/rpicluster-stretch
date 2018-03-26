@@ -9,7 +9,7 @@ install -v -d                                          "${ROOTFS_DIR}/etc/rpiclu
 
 install -v -m 600 files/wpa_supplicant.conf            "${ROOTFS_DIR}/etc/wpa_supplicant/"
 
-install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/etc/rpicluster/config/"
+install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
 install -m 755 files/enable-wifi.sh                    "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 

@@ -139,7 +139,7 @@ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 echo "
 Saving iptables / Updating rc.local . . .
 "
-sudo sed -i '21i\sudo python /rpicluster/config/link_wifi_adaptor.py\' /etc/rc.local
+sudo sed -i '21i\sudo python /rpicluster/network-manager/link_wifi_adaptor.py\' /etc/rc.local
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
