@@ -9,23 +9,23 @@ install -v -d                                          "${ROOTFS_DIR}/etc/rpiclu
 
 install -v -m 600 files/wpa_supplicant.conf            "${ROOTFS_DIR}/etc/wpa_supplicant/"
 
-install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/rpicluster/config/"
+install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/etc/rpicluster/config/"
 
-install -m 755 files/enable-wifi.sh                    "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/enable-wifi.sh                    "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 755 files/disable-wifi.sh                   "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/disable-wifi.sh                   "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 755 files/enable-switch.sh                  "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/enable-switch.sh                  "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 755 files/disable-switch.sh                 "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/disable-switch.sh                 "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 755 files/startup.py                        "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/startup.py                        "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 755 files/network-manager.py                "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/network-manager.py                "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 600 files/configured.sh                     "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 600 files/configured.sh                     "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 755 files/.bash_aliases                     "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/.bash_aliases                     "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
 # install -m 600 files/iptables.ipv4.nat               "${ROOTFS_DIR}/etc/"
 
