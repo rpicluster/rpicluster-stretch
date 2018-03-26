@@ -1,0 +1,20 @@
+-add in headless mac set up
+
+-fix ssh keys
+
+-add in cluster status tool
+
+-host website with alex
+
+-host images
+
+NETWORK MANAGER:
+
+-need to create enable and disable scirpts for all 3 modes
+1)wifi : DONE
+2)switch : DONE
+3)otg : NOT DONE
+
+
+
+
