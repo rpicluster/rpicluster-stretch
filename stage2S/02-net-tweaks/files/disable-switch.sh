@@ -28,14 +28,7 @@ Restoring dnsmasq.conf . . .
 sudo rm /etc/dnsmasq.conf
 sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 
-echo "
-Restoring rc.local . . .
-"
 
-sed -i '21d' /etc/rc.local
-
-
-
-# TO-DO: WTF DO I DO ABOUT THE RESOLV CONFGI RESTORATION 
+TO-DO: WTF DO I DO ABOUT THE RESOLV CONFGI RESTORATION 
 # cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
 

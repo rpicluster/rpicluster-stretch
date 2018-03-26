@@ -81,12 +81,6 @@ dhcp-authoritative
 
 cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
 
-echo "
-Saving iptables / Updating rc.local . . .
-"
-sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
-sudo sed -i '21i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 
 echo "

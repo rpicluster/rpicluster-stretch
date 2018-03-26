@@ -58,7 +58,7 @@ sudo echo "interface wlan0
 metric 150
 static ip_address=192.168.1.254/24
 #static routers=192.168.1.1
-#static domain_name_servers=192.168.1.1
+static domain_name_servers=8.8.8.8 #192.168.1.1
 
 interface wlan1
 metric 100" | sudo tee -a /etc/dhcpcd.conf
@@ -143,7 +143,7 @@ sudo sed -i '21i\sudo python /rpicluster/config/link_wifi_adaptor.py\' /etc/rc.l
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
+sudo sed -i '22i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 echo "
 Starting host services . . .

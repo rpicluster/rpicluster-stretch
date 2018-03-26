@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "
-Enabling Wifi-Ethernet_Switch networking scheme . . .
+Enabling Wifi-OTG networking scheme . . .
 "
 
 echo "
@@ -34,8 +34,14 @@ Generating new iptable Rules . . .
 sudo iptables -F
 sudo iptables -t nat -F
 sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE  
-sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT  
-sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT 
+sudo iptables -A FORWARD -i wlan0 -o usb0 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i usb0 -o wlan0 -j ACCEPT 
+sudo iptables -A FORWARD -i wlan0 -o usb1 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i usb1 -o wlan0 -j ACCEPT 
+sudo iptables -A FORWARD -i wlan0 -o usb2 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i usb2 -o wlan0 -j ACCEPT 
+sudo iptables -A FORWARD -i wlan0 -o usb3 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i usb3 -o wlan0 -j ACCEPT 
 
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
@@ -44,14 +50,22 @@ Updating dhcpcd.conf . . .
 "
 sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
-sudo echo "interface eth0
-static ip_address=192.168.1.254/24
-#static routers=192.168.1.1
-#static domain_name_servers=192.168.1.1
-" | sudo tee -a /etc/dhcpcd.conf
+sudo echo "interface usb0
+static ip_address=192.168.1.250/24
+static domain_name_servers=8.8.8.8
 
-# Remove default route created by dhcpcd
-sudo ip route del 0/0 dev eth0 &> /dev/null
+interface usb1
+static ip_address=192.168.1.251/24
+static domain_name_servers=8.8.8.8
+
+interface usb2
+static ip_address=192.168.1.252/24
+static domain_name_servers=8.8.8.8
+
+interface usb3
+static ip_address=192.168.1.253/24
+static domain_name_servers=8.8.8.8
+" | sudo tee -a /etc/dhcpcd.conf
 
 
 echo "
@@ -81,12 +95,6 @@ dhcp-authoritative
 
 cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
 
-echo "
-Saving iptables / Updating rc.local . . .
-"
-sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
-sudo sed -i '21i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 
 echo "
