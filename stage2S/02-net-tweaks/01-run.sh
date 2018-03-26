@@ -23,7 +23,7 @@ install -m 755 files/startup.py                        "${ROOTFS_DIR}/etc/rpiclu
 
 install -m 755 files/network-manager.py                "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
-install -m 600 files/configured.sh                     "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
+install -m 600 files/configured                        "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
 install -m 755 files/.bash_aliases                     "${ROOTFS_DIR}/etc/rpicluster/network-manager/"
 
