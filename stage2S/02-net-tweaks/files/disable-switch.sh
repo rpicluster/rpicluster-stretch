@@ -29,6 +29,6 @@ sudo rm /etc/dnsmasq.conf
 sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 
 
-TO-DO: WTF DO I DO ABOUT THE RESOLV CONFGI RESTORATION 
+# TO-DO: WTF DO I DO ABOUT THE RESOLV CONFGI RESTORATION 
 # cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
 

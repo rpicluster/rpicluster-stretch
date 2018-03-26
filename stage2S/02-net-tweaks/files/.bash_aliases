@@ -1,1 +1,1 @@
-alias network-manager="sudo python /etc/rpicluster/network-manager/network-manager.py"
+alias network-manager="sudo python /rpicluster/network-manager/network-manager.py"
