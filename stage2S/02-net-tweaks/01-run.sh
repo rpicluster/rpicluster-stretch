@@ -5,7 +5,7 @@ install -v -m 644 files/wait.conf                      "${ROOTFS_DIR}/etc/system
 
 install -v -d                                          "${ROOTFS_DIR}/etc/wpa_supplicant"
 
-install -v -d                                          "${ROOTFS_DIR}/etc/rpicluster/network-manager"
+install -d                                             "${ROOTFS_DIR}/etc/rpicluster/network-manager"
 
 install -v -m 600 files/wpa_supplicant.conf            "${ROOTFS_DIR}/etc/wpa_supplicant/"
 
