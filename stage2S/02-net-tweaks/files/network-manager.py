@@ -24,7 +24,7 @@ print("Select a networking option:\n")
 option = input("1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 = wifi to OTG")
 if(option != network):
 	os.system("sudo bash " + switch_disable(network))
-	os.system("sudo bash " + switch_enable(option)
+	os.system("sudo bash " + switch_enable(option))
 	os.system("sudo echo " + option + " > /rpicluster/network-manager/configured")
 
 else:
