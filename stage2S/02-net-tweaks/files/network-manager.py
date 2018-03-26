@@ -24,7 +24,8 @@ option = int(input("1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 = wifi to O
 if(option != network):
     print("Network: " + network)
     print("Option: " + str(option))
-	os.system("sudo bash " + switch_disable(int(network)))
+    if(network != "0"):
+	    os.system("sudo bash " + switch_disable(int(network)))
 	os.system("sudo bash " + switch_enable(option))
     os.system("sudo sh -c \"echo " + str(option) + " > /rpicluster/network-manager/configured\"")
 	# os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
