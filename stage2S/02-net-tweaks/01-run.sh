@@ -23,6 +23,8 @@ install -m 755 files/startup.py                        "${ROOTFS_DIR}/rpicluster
 
 install -m 755 files/network-manager.py                "${ROOTFS_DIR}/rpicluster/network-manager/"
 
+install -m 755 files/wet-wifi.py                       "${ROOTFS_DIR}/rpicluster/network-manager/"
+
 install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
 install -m 777 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"

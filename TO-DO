@@ -6,6 +6,10 @@
 
 -host images
 
+-if host name fix works then add to client
+
+-prompt user to enter network name and password
+
 NETWORK MANAGER:
 
 -need to create enable and disable scirpts for all 3 modes

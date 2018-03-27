@@ -78,7 +78,7 @@ EOF
 
 on_chroot << EOF
 echo "rpicluster" > /etc/hostname
-sudo sed -i '6s/.*/127.0.1.1       rpicluster/' /etc/default/hostapd
+sudo sed -i '6s/.*/127.0.1.1       rpicluster/' /etc/hosts
 EOF
 
 
