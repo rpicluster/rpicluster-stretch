@@ -1,5 +1,3 @@
--add in headless mac set up
-
 -fix ssh keys
 
 -add in cluster status tool
@@ -14,6 +12,8 @@ NETWORK MANAGER:
 1)wifi : DONE
 2)switch : DONE
 3)otg : NOT DONE
+
+-fix rc.local, network manager cannot be called for initial setup here POSSIBLE FIX: (sudo crontab -e to edit) etc/crontab and add @reboot /path/to/python action.py
 
 DONE CHECK-the network configured file is staying zero idk why
 
