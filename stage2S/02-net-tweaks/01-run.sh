@@ -30,7 +30,7 @@ install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster
 install -m 777 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"
 
 on_chroot << EOF
-sudo echo "sudo python /rpicluster/network-manager/startup.py" >> /home/pi/
+sudo echo "sudo python /rpicluster/network-manager/startup.py" >> /home/pi/.profile
 EOF
 
 # on_chroot << EOF
