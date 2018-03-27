@@ -19,7 +19,6 @@ def switch_enable(option):
 
 f = open("/rpicluster/network-manager/configured","r")
 network = int(f.read(1))
-print("Select a networking option:\n")
 print("1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 = wifi to OTG\n")
 option = int(input("Select a networking option: "))
 f.close()
