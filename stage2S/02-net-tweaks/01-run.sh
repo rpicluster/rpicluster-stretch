@@ -25,10 +25,10 @@ install -m 755 files/network-manager.py                "${ROOTFS_DIR}/rpicluster
 
 install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
-install -m 600 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"
+install -m 777 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"
 
 on_chroot << EOF
-sudo sed -i '20i\sudo python /rpicluster/network-manager/startup.py\' /etc/rc.local
+sudo echo "sudo python /rpicluster/network-manager/startup.py" >> ~/.profile
 EOF
 
 # on_chroot << EOF
