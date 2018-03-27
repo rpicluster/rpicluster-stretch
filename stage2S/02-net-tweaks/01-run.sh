@@ -25,9 +25,7 @@ install -m 755 files/network-manager.py                "${ROOTFS_DIR}/rpicluster
 
 install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
-install -m 755 files/.bash_aliases                     "${ROOTFS_DIR}/rpicluster/network-manager/"
-
-# install -m 600 files/iptables.ipv4.nat               "${ROOTFS_DIR}/etc/"
+install -m 600 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"
 
 on_chroot << EOF
 sudo sed -i '20i\sudo python /rpicluster/network-manager/startup.py\' /etc/rc.local

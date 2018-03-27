@@ -56,9 +56,3 @@ Restoring rc.local . . .
 sed -i '21d' /etc/rc.local
 sed -i '22d' /etc/rc.local
 
-echo "
-Getting Tired . . Time to reboot . . .
-"
-sleep 1
-
-sudo reboot -h now

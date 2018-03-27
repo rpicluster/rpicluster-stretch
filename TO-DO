@@ -15,9 +15,13 @@ NETWORK MANAGER:
 2)switch : DONE
 3)otg : NOT DONE
 
--the network configured file is staying zero idk why
+DONE CHECK-the network configured file is staying zero idk why
 
--.bash_aliases isnt showing up
+DONE CHECK-.bash_aliases isnt showing up
+
+-for OTG: 
+1) dns to allow for a connection without a unique mac address on otg
+2) make connection, then run ip_configuration-like program to give the currently connected non-configured pi a unique ip address and otg mac address 
 
 
 

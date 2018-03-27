@@ -89,10 +89,3 @@ Starting host serices . . .
 
 sudo systemctl start dnsmasq
 
-
-echo "
-Getting Tired . . Time to reboot . . .
-"
-sleep 1
-
-sudo reboot -h now

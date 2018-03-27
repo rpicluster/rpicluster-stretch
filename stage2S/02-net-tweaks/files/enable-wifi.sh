@@ -154,9 +154,4 @@ sudo systemctl daemon-reload
 sudo systemctl start dnsmasq
 sudo systemctl start hostapd
 
-echo "
-Getting Tired . . Time to reboot . . .
-"
-sleep 1
 
-sudo reboot -h now
