@@ -32,6 +32,8 @@ install -m 777 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"
 
 on_chroot << EOF
 sudo echo "sudo python /rpicluster/network-manager/startup.py" >> /home/pi/.profile
+sudo echo "rpicluster" > /etc/hostname
+sudo sed -i '6s/.*/127.0.1.1       rpicluster/' /etc/hosts
 EOF
 
 # on_chroot << EOF
