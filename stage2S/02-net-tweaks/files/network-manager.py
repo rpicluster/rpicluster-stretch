@@ -26,12 +26,12 @@ if(option != network):
     print("Network: " + str(network))
     print("Option: " + str(option))
     if(network != 0):
-	    os.system("sudo bash " + switch_disable(network))
-	os.system("sudo bash " + switch_enable(option))
+        os.system("sudo bash " + switch_disable(network))
+    os.system("sudo bash " + switch_enable(option))
     os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
     print("Rebooting machine . . . ")
     os.system("sudo reboot -h now")
 
 else:
-	print("This network configuration is already active.")
+    print("This network configuration is already active.")
 
