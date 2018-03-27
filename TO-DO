@@ -10,6 +10,8 @@
 
 -prompt user to enter network name and password
 
+-add option to networkmanager that removes current networking and leaves it as normal network install
+
 NETWORK MANAGER:
 
 -need to create enable and disable scirpts for all 3 modes

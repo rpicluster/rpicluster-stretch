@@ -10,7 +10,7 @@ Generating new wpa_supplicant . . .
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
-sudo python /rpicluster/network-manager/set_wifi.py wpa_supplicant-wlan1.conf
+sudo python /rpicluster/network-manager/set-wifi.py wpa_supplicant-wlan1.conf
 # sudo echo "network={
 # ssid=\"CSLabs\"
 # psk=\"1kudlick\"
