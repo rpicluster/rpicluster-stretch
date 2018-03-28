@@ -15,10 +15,10 @@
 -ask user to unplug ethernet when switching wifi-wifi
 
 -change locale to en_US and keyboard layout to en_US PLEASE
+    - NEED TO CHECK IF WORKS
 
 -double check that switch still works with commented out resolve line
-
--bash alias for update
+    - DOES NOT WORK
 
 NETWORK MANAGER:
 
