@@ -23,7 +23,7 @@ print("1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 = wifi to OTG\n")
 if(network != 0):
     print("Current network mode: " + str(network))
 option = int(input("Select a networking option: "))
-if(network == 2 && option == 1):
+if(network == 2 and option == 1):
     input("Make sure to unplug the ethernet! Press enter to continue.")
 f.close()
 if(option != network):
