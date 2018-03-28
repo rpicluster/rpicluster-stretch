@@ -125,11 +125,11 @@ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 echo "
 Saving iptables / Updating rc.local . . .
 "
-sudo sed -i '21i\sudo python /rpicluster/network-manager/link_wifi_adaptor.py\' /etc/rc.local
+sudo sed -i '20i\sudo python /rpicluster/network-manager/link_wifi_adaptor.py\' /etc/rc.local
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-sudo sed -i '22i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
+sudo sed -i '21i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 echo "
 Starting host services . . .

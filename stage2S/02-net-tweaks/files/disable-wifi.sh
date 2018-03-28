@@ -53,6 +53,6 @@ echo "
 Restoring rc.local . . .
 "
 
+sed -i '20d' /etc/rc.local
 sed -i '21d' /etc/rc.local
-sed -i '22d' /etc/rc.local
 

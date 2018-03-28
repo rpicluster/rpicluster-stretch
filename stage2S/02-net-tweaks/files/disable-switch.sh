@@ -35,3 +35,10 @@ Restoring resolv.conf . . .
 sudo rm /run/dnsmasq/resolv.conf
 sudo mv /run/dnsmasq/resolv.conf.orig /run/dnsmasq/resolv.conf
 
+echo "
+Restoring rc.local . . .
+"
+
+sudo sed -i '20d' /etc/rc.local
+
+

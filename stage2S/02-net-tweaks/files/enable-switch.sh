@@ -12,8 +12,6 @@ sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplica
 
 sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
 
-sudo service networking restart
-
 echo "
 Updating machine . . .
 "
@@ -44,7 +42,7 @@ sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 sudo echo "interface eth0
 static ip_address=192.168.1.254/24
 #static routers=192.168.1.1
-#static domain_name_servers=192.168.1.1
+static domain_name_servers=192.168.1.1
 " | sudo tee -a /etc/dhcpcd.conf
 
 # Remove default route created by dhcpcd
@@ -79,6 +77,13 @@ dhcp-authoritative
 sudo cp /run/dnsmasq/resolv.conf /run/dnsmasq/resolv.conf.orig
 
 cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
+
+echo "
+Saving iptables / Updating rc.local . . .
+"
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
+sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 
 
