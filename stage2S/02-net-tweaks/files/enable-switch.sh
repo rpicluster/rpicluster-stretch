@@ -10,7 +10,7 @@ Generating new wpa_supplicant . . .
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.orig
 
-sudo python /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
+sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
 
 sudo service networking restart
 
@@ -76,7 +76,9 @@ dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
 
 
-# cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
+sudo cp /run/dnsmasq/resolv.conf /run/dnsmasq/resolv.conf.orig
+
+cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
 
 
 

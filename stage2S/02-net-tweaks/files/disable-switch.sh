@@ -28,7 +28,10 @@ Restoring dnsmasq.conf . . .
 sudo rm /etc/dnsmasq.conf
 sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 
+echo "
+Restoring resolv.conf . . .
+"
 
-# TO-DO: WTF DO I DO ABOUT THE RESOLV CONFGI RESTORATION 
-# cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
+sudo rm /run/dnsmasq/resolv.conf
+sudo mv /run/dnsmasq/resolv.conf.orig /run/dnsmasq/resolv.conf
 
