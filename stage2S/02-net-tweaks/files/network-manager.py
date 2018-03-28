@@ -12,7 +12,7 @@ def switch_disable(network):
 def switch_enable(option):
     switcher = {
         1: "/rpicluster/network-manager/enable-wifi.sh",
-        2: "/rpicluster/network-manager/switch-test.sh",
+        2: "/rpicluster/network-manager/enable-switch.sh",
         3: "/rpicluster/network-manager/enable-otg.sh",
     }
     return switcher.get(option, "Invalid Network Option")

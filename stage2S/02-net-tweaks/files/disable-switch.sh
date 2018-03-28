@@ -28,12 +28,6 @@ Restoring dnsmasq.conf . . .
 sudo rm /etc/dnsmasq.conf
 sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 
-echo "
-Restoring resolv.conf . . .
-"
-
-sudo rm /run/dnsmasq/resolv.conf
-sudo mv /run/dnsmasq/resolv.conf.orig /run/dnsmasq/resolv.conf
 
 echo "
 Restoring rc.local . . .

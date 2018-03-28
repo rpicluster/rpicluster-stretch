@@ -16,14 +16,18 @@ echo "
 Installing host services . . .
 "
 sudo apt-get install -y dnsmasq
-sudo apt-get install -y rng-tools
 
 echo "
-Stopping host serices . . .
+Generating new iptable Rules . . .
 "
 
-sudo systemctl stop dnsmasq
+sudo iptables -F
+sudo iptables -t nat -F
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE  
+sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT 
 
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 echo "
 Updating dhcpcd.conf . . .
@@ -31,21 +35,21 @@ Updating dhcpcd.conf . . .
 sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 sudo echo "interface eth0
-metric 150
 static ip_address=192.168.1.254/24
 #static routers=192.168.1.1
-static domain_name_servers=8.8.8.8
+static domain_name_servers=192.168.1.1
+" | sudo tee -a /etc/dhcpcd.conf
 
-interface wlan0
-metric 100" | sudo tee -a /etc/dhcpcd.conf
+# Remove default route created by dhcpcd
+sudo ip route del 0/0 dev eth0 &> /dev/null
+
 
 echo "
-Rebooting daemon and dhcpcd service . . .
+Stopping host serices . . .
 "
 
-sudo systemctl daemon-reload
+sudo systemctl stop dnsmasq
 
-sudo service dhcpcd restart
 
 echo "
 Generating new dnsmasq.conf . . .
@@ -65,23 +69,9 @@ dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
 
 
-echo "
-Generating new iptable Rules . . .
-"
+sudo cp /run/dnsmasq/resolv.conf /run/dnsmasq/resolv.conf.orig
 
-sudo iptables -F
-sudo iptables -t nat -F
-sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE 
-sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
-
-echo "
-Allowing ip_forward . . .
-"
-
-sudo sed -i '28 s/#//' /etc/sysctl.conf
-
-sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+cp /etc/dnsmasq.conf /run/dnsmasq/resolv.conf
 
 echo "
 Saving iptables / Updating rc.local . . .
@@ -90,12 +80,11 @@ sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
+
+
 echo "
-Starting host services . . .
+Starting host serices . . .
 "
 
-sudo systemctl daemon-reload
-
 sudo systemctl start dnsmasq
-
 
