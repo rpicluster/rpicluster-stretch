@@ -76,10 +76,4 @@ on_chroot << EOF
 pip install zerorpc
 EOF
 
-on_chroot << EOF
-# echo "rpicluster" > /etc/hostname
-# sudo sed -i '6s/.*/127.0.1.1       rpicluster/' /etc/hosts
-EOF
-
-
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
