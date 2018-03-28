@@ -13,11 +13,6 @@ sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplica
 sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
 
 echo "
-Updating machine . . .
-"
-sudo apt-get update -y && sudo apt-get upgrade -y
-
-echo "
 Installing host services . . .
 "
 sudo apt-get install -y dnsmasq
