@@ -14,6 +14,10 @@
 
 -ask user to unplug ethernet when switching wifi-wifi
 
+-change locale to en_US and keyboard layout to en_US PLEASE
+
+-double check that switch still works with commented out resolve line
+
 NETWORK MANAGER:
 
 -need to create enable and disable scirpts for all 3 modes

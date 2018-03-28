@@ -10,7 +10,7 @@ Generating new wpa_supplicant . . .
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.orig
 
-sudo python /rpicluster/network-manager/set-wifi.py wpa_supplicant.conf
+sudo python /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
 
 sudo service networking restart
 

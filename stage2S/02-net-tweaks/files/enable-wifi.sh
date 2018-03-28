@@ -10,7 +10,7 @@ Generating new wpa_supplicant . . .
 
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
-sudo python /rpicluster/network-manager/set-wifi.py wpa_supplicant-wlan1.conf
+sudo python /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
 
 sudo service networking restart
 
@@ -26,18 +26,6 @@ Installing host services . . .
 sudo apt-get install -y dnsmasq
 sudo apt-get install -y hostapd
 sudo apt-get install -y rng-tools
-
-
-echo "
-Generating new wpa_supplicant . . .
-"
-
-sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
-
-sudo echo "network={
-ssid=\"CSLabs\"
-psk=\"1kudlick\"
-}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
 echo "
 Stopping host serices . . .
