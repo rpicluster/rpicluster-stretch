@@ -8,9 +8,11 @@
 
 -if host name fix works then add to client
 
--add option to networkmanager that removes current networking and leaves it as normal network install
+-add option to network manager that removes current networking and leaves it as normal network install
 
 -for all enable and disable scripts, keep original leases file and revert on network switch.
+
+-ask user to unplug ethernet when switching wifi-wifi
 
 NETWORK MANAGER:
 

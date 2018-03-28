@@ -8,8 +8,8 @@ echo "
 Restoring wpa_supplicant.conf . . .
 "
 
-sudo rm /etc/wpa_supplicant.conf
-sudo mv /etc/wpa_supplicant.conf.orig /etc/wpa_supplicant.conf
+sudo rm /etc/wpa_supplicant/wpa_supplicant.conf
+sudo mv /etc/wpa_supplicant/wpa_supplicant.conf.orig /etc/wpa_supplicant/wpa_supplicant.conf
 
 
 
