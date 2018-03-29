@@ -1,5 +1,7 @@
 -fix ssh keys
 
+-convert all to tabs to spaces
+
 -create python code that stamps user images on download
 
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
