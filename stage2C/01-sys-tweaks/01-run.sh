@@ -6,7 +6,7 @@ install -m 755 files/ssh                                "${ROOTFS_DIR}/boot/"
 
 install -d                                              "${ROOTFS_DIR}/home/pi/.ssh"
 
-install -m 600 files/authorized_keys                    "${ROOTFS_DIR}/home/pi/.ssh"
+install -m 755 files/authorized_keys                    "${ROOTFS_DIR}/home/pi/.ssh"
 
 install -d                                              "${ROOTFS_DIR}/rpicluster"
 
