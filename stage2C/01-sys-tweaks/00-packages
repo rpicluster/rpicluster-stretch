@@ -34,4 +34,4 @@ libssl-dev
 libffi-dev
 fabric
 openmpi-bin
-openmpi-dev
+libopenmpi-dev
