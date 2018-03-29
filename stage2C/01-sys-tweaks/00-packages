@@ -33,3 +33,5 @@ libts-bin
 libssl-dev
 libffi-dev
 fabric
+openmpi-bin
+openmpi-dev

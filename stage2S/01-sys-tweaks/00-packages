@@ -36,3 +36,6 @@ fabric
 dnsmasq
 hostapd
 rng-tools
+openmpi-bin
+openmpi-dev
+
