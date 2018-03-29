@@ -1,5 +1,9 @@
 -fix ssh keys
 
+-create python code that stamps user images on download
+
+-create code that checks for boot file that has been stamped and updates access point name and password accordingly
+
 -add in cluster status tool
 
 -normalize permissions of files
