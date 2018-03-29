@@ -1,5 +1,5 @@
 echo "- - - Set Up Wifi Interface - - -"
-
+echo " "
 read -p "Enter network ssid: " ssid
 read -sp "Enter network psk: " psk
 

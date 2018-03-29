@@ -24,7 +24,7 @@ if(network != 0):
     print("Current network mode: " + str(network))
 option = int(input("Select a networking option: "))
 if(network == 2 and option == 1):
-    input("Make sure to unplug the ethernet! Press enter to continue.")
+    raw_input("Make sure to unplug the ethernet! Press enter to continue.")
 f.close()
 if(option != network):
     print("Network: " + str(network))
@@ -35,7 +35,6 @@ if(option != network):
     os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
     print("Rebooting machine . . . ")
     os.system("sudo reboot -h now")
-
 else:
     print("This network configuration is already active.")
 
