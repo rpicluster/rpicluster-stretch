@@ -28,8 +28,6 @@ install -m 755 files/set-wifi.sh                       "${ROOTFS_DIR}/rpicluster
 
 install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
-install -m 777 files/.bash_aliases                     "${ROOTFS_DIR}/home/pi/"
-
 on_chroot << EOF
 sudo echo "sudo python /rpicluster/network-manager/startup.py" >> /home/pi/.profile
 sudo echo "rpicluster" > /etc/hostname

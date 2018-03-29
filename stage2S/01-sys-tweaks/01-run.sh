@@ -34,6 +34,8 @@ install -m 644 files/console-setup                      "${ROOTFS_DIR}/etc/defau
 
 install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
+install -m 777 files/.bash_aliases                      "${ROOTFS_DIR}/home/pi/"
+
 on_chroot << EOF
 systemctl disable hwclock.sh
 systemctl disable nfs-common
