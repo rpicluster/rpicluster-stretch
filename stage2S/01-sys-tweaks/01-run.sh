@@ -4,6 +4,10 @@ install -m 755 files/resize2fs_once                     "${ROOTFS_DIR}/etc/init.
 
 install -m 755 files/ssh                                "${ROOTFS_DIR}/boot/"
 
+install -d                                              "${ROOTFS_DIR}/home/pi/.ssh"
+
+install -m 600 files/id_rsa                             "${ROOTFS_DIR}/home/pi/.ssh/"
+
 install -d                                              "${ROOTFS_DIR}/rpicluster"
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"

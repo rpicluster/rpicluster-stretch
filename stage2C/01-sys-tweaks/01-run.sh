@@ -1,24 +1,28 @@
 #!/bin/bash -e
 
-install -m 755 files/resize2fs_once                     ${ROOTFS_DIR}/etc/init.d/
+install -m 755 files/resize2fs_once                     "${ROOTFS_DIR}/etc/init.d/"
 
-install -m 755 files/ssh                                ${ROOTFS_DIR}/boot/
+install -m 755 files/ssh                                "${ROOTFS_DIR}/boot/"
 
-install -d                                              ${ROOTFS_DIR}/rpicluster
+install -d                                              "${ROOTFS_DIR}/home/pi/.ssh"
 
-install -d                                              ${ROOTFS_DIR}/rpicluster/config
+install -m 600 files/authorized_keys                    "${ROOTFS_DIR}/home/pi/.ssh"
 
-install -m 755 files/calibrate_touchless.py             ${ROOTFS_DIR}/rpicluster/config
+install -d                                              "${ROOTFS_DIR}/rpicluster"
 
-install -d                                              ${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d
+install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-install -m 644 files/ttyoutput.conf                     ${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/
+install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
 
-install -m 644 files/50raspi                            ${ROOTFS_DIR}/etc/apt/apt.conf.d/
+install -d                                              "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d"
 
-install -m 644 files/console-setup                      ${ROOTFS_DIR}/etc/default/
+install -m 644 files/ttyoutput.conf                     "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/"
 
-install -m 755 files/rc.local                           ${ROOTFS_DIR}/etc/
+install -m 644 files/50raspi                            "${ROOTFS_DIR}/etc/apt/apt.conf.d/"
+
+install -m 644 files/console-setup                      "${ROOTFS_DIR}/etc/default/"
+
+install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
 on_chroot << EOF
 systemctl disable hwclock.sh
