@@ -1,2 +1,5 @@
-alias network-manager="sudo python /rpicluster/network-manager/network-manager.py"
-alias update="sudo apt-get update && sudo apt-get upgrade -y"
+alias rpicluster-networkmanager="sudo python /rpicluster/network-manager/network-manager.py"
+alias rpicluster-update="sudo apt-get update && sudo apt-get upgrade -y"
+alias rpicluster-configureips="sudo bash /rpicluster/config/config_ip.sh"
+alias rpicluster-help="sudo python /rpicluster/config/help.py"
+alias rpicluster-sshkeys="sudo bash /rpicluster/config_ip/send_ssh_keys.sh"

@@ -2,7 +2,11 @@
 
 -add in cluster status tool
 
+-normalize permissions of files
+
 -host website with alex
+
+-update alias should update every machine
 
 -host images
 
