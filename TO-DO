@@ -1,18 +1,20 @@
 -fix ssh keys
 
--convert all to tabs to spaces
-
 -create python code that stamps user images on download
 
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
 
--add in cluster status tool
+-add in cluster status tool TEST THIS ITS IN BUILD HAS ALIAS
+
+-put all code that as to do with networking in network-manager (example: listleases code is in config)
 
 -normalize permissions of files
 
 -host website with alex
 
 -update alias should update every machine
+
+-update status tool and network manager to include OTG MODE
 
 -host images
 

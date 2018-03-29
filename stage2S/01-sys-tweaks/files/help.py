@@ -5,5 +5,5 @@ print("Commands:\n\
   rpicluster-update                Updates rpicluster Head-Node and Slave-Nodes.\n\
   rpicluster-configureips          Configures Slave-Nodes ips.\n\
   rpicluster-sshkeys               Generates and distributes new ssh keys to Slave-Nodes.\n\
-  rpicluster-networkstatus         COMING SOON\n\
+  rpicluster-networkstatus         Prints out current network configuration.\n\
 \n")
