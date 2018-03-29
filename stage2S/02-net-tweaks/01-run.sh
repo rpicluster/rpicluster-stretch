@@ -18,8 +18,6 @@ install -m 755 files/disable-wifi.sh                   "${ROOTFS_DIR}/rpicluster
 
 install -m 755 files/enable-switch.sh                  "${ROOTFS_DIR}/rpicluster/network-manager/"
 
-install -m 755 files/switch-test.sh                    "${ROOTFS_DIR}/rpicluster/network-manager/"
-
 install -m 755 files/disable-switch.sh                 "${ROOTFS_DIR}/rpicluster/network-manager/"
 
 install -m 755 files/startup.py                        "${ROOTFS_DIR}/rpicluster/network-manager/"
