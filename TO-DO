@@ -12,7 +12,7 @@
 
 -host website with alex
 
--have ap set up on first login so you can always ssh without internet
+-TEST THIS have ap set up on first login so you can always ssh without internet ALSO if it works need to remove this host ap if we configure otg or network switch first
 
 -update alias should update every machine
 
