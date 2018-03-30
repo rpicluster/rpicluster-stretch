@@ -12,6 +12,8 @@
 
 -host website with alex
 
+-have ap set up on first login so you can always ssh without internet
+
 -update alias should update every machine
 
 -update status tool and network manager to include OTG MODE

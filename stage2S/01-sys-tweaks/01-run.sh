@@ -86,7 +86,7 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-sudo echo "For rpicluster help and commands type rpicluster-help." >> /home/pi/.profile
+sudo echo "sudo echo 'For rpicluster help and commands type rpicluster-help.'" >> /home/pi/.profile
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*

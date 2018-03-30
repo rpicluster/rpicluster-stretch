@@ -1,5 +1,7 @@
 import os
-import /rpicluster/config/list_leases
+import sys  
+sys.path.append('/rpicluster/config/')   
+from list_leases import *
 
 
 def get_ip(ip_output, interface):
@@ -27,8 +29,9 @@ machines = getMachines()
 network = int(f.read(1))
 stream = os.popen("ip addr", 'r')
 ip_output = stream.read()
-internet = ""
+internet_ip = ""
 access_point = ""
+internet_name = ""
 connection_name ="-1"
 
 
@@ -36,25 +39,27 @@ connection_name ="-1"
 if(connection_name != "-1"):
 
     if(network == 1):
-        internet = get_ip(ip_output, "wlan1")
+        internet_ip = get_ip(ip_output, "wlan1")
+        internet_name = "wlan1"
         access_point = get_ip(ip_output, "wlan0")
         connection_name = "Access Point"
 
-    else if(network == 2):
-        internet = get_ip(ip_output, "wlan0")
+    elif(network == 2):
+        internet_ip = get_ip(ip_output, "wlan0")
+        internet_name = "wlan0"
         access_point = get_ip(ip_output, "eth0")
         connection_name = "Switch"
 
     # else if(network == 3):
 
     print("Current network configuration: " + network_type(network))
-    print("Internet--> " + internet + "\n")
-    print("                  |\n")
-    print("                  |\n")
-    print("                  --> "+ connection_name + "--> " + access_point + "\n")
+    print("Internet on " + internet_name + "--> " + internet_ip + "\n")
+    print("                           |\n")
+    print("                           |\n")
+    print("                           --> "+ connection_name + "--> " + access_point + "\n")
     for x in range(len(machines)):
-        print("                                                          |\n")
-        print("                                                          --> " + machines[x] + "\n")
+        print("                                                                   |\n")
+        print("                                                                   --> " + machines[x] + "\n")
 
 else:
     print("No rpicluster Network configured ! ! !\n")
