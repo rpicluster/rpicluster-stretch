@@ -36,7 +36,7 @@ connection_name ="-1"
 
 
 
-if(connection_name != "-1"):
+if(network != "-1"):
 
     if(network == 1):
         internet_ip = get_ip(ip_output, "wlan1")
@@ -53,13 +53,13 @@ if(connection_name != "-1"):
     # else if(network == 3):
 
     print("Current network configuration: " + network_type(network))
-    print("Internet on " + internet_name + "--> " + internet_ip + "\n")
-    print("                           |\n")
-    print("                           |\n")
-    print("                           --> "+ connection_name + "--> " + access_point + "\n")
+    print("Internet on " + internet_name + "--> " + internet_ip)
+    print("                           |")
+    print("                           |")
+    print("                           --> "+ connection_name + "--> " + access_point)
     for x in range(len(machines)):
-        print("                                                                   |\n")
-        print("                                                                   --> " + machines[x] + "\n")
+        print("                                                              |")
+        print("                                                              --> " + machines[x])
 
 else:
     print("No rpicluster Network configured ! ! !\n")
