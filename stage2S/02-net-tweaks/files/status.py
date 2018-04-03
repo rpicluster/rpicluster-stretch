@@ -58,8 +58,8 @@ if(network != "-1"):
     print("                           |")
     print("                           --> "+ connection_name + "--> " + access_point)
     for x in range(len(machines)):
-        print("                                                              |")
-        print("                                                              --> " + machines[x])
+        print("                                                      |")
+        print("                                                      --> " + machines[x])
 
 else:
     print("No rpicluster Network configured ! ! !\n")
