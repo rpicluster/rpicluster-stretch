@@ -6,6 +6,9 @@ Enabling Wifi-Wifi networking scheme . . .
 
 read -p "Make sure to plug in the wifi adaptor! Press enter to continue. " plug
 
+sleep 1
+
+sudo python /rpicluster/network-manager/link_wifi_adaptor.py
 
 echo "
 Generating new wpa_supplicant . . .
@@ -22,12 +25,12 @@ sudo apt-get install -y dnsmasq
 sudo apt-get install -y hostapd
 sudo apt-get install -y rng-tools
 
-echo "
-Stopping host serices . . .
-"
+# echo "
+# Stopping host serices . . .
+# "
 
-sudo systemctl stop dnsmasq
-sudo systemctl stop hostapd
+# sudo systemctl stop dnsmasq
+# sudo systemctl stop hostapd
 
 
 echo "
@@ -127,11 +130,11 @@ sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
-echo "
-Starting host services . . .
-"
+# echo "
+# Starting host services . . .
+# "
 
-sudo systemctl start dnsmasq
-sudo systemctl start hostapd
+# sudo systemctl start dnsmasq
+# sudo systemctl start hostapd
 
 

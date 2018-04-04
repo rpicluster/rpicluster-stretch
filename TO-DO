@@ -1,5 +1,7 @@
 -fix ssh keys
 
+-remove initial hostapd when going to another network mode and re-enable it on zero network
+
 -create python code that stamps user images on download
 
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
