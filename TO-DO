@@ -4,8 +4,6 @@
 
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
 
--add in cluster status tool TEST THIS ITS IN BUILD HAS ALIAS
-
 -put all code that as to do with networking in network-manager (example: listleases code is in config)
 
 -normalize permissions of files
@@ -20,12 +18,11 @@
 
 -host images
 
+-test removing dhcpcd and daemon reload form enables
+
 -add option to network manager that removes current networking and leaves it as normal network install
 
 -for all enable and disable scripts, keep original leases file and revert on network switch.
-
--change locale to en_US and keyboard layout to en_US PLEASE
-    - NEED TO CHECK IF WORKS
 
 NETWORK MANAGER:
 

@@ -1,6 +1,0 @@
-
-# DEBUG --->>>
-# sudo service hostapd status
-# sudo hostapd -dd /etc/hostapd/hostapd.conf
-# sudo service rng-tools status
-
