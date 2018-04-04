@@ -19,7 +19,7 @@ def switch_enable(option):
 
 f = open("/rpicluster/network-manager/configured","r")
 network = int(f.read(1))
-print("1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 = wifi to OTG\n")
+print("0 = remove networking\n1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 = wifi to OTG\n")
 
 if(network != 0):
     print("Current network mode: " + str(network))
@@ -32,12 +32,11 @@ if(network == 2 and option == 1):
 f.close()
 
 if(option != network):
-    print("Network: " + str(network))
-    print("Option: " + str(option))
     if(network != 0):
         os.system("sudo bash " + switch_disable(network))
-    os.system("sudo bash " + switch_enable(option))
-    os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
+    if(option != 0):
+        os.system("sudo bash " + switch_enable(option))
+        os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
     print("Rebooting machine . . . ")
     os.system("sudo reboot -h now")
 else:
