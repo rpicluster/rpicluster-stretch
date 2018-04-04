@@ -123,7 +123,7 @@ sudo sed -i '25s/.*/sudo python /rpicluster/network-manager/link_wifi_adaptor.py
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
+sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
 
 # echo "
 # Starting host services . . .

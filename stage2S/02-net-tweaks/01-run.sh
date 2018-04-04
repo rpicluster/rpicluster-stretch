@@ -37,7 +37,7 @@ install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster
 on_chroot << EOF
 
 sudo echo "rpicluster" > /etc/hostname
-sudo sed -i '24s/.*/sudo python /rpicluster/network-manager/startup.py/' /home/pi/.profile
+sudo sed -i '24s/.*/sudo python \/rpicluster\/network-manager\/startup.py/' /home/pi/.profile
 sudo sed -i '6s/.*/127.0.1.1       rpicluster/' /etc/hosts
 
 sudo bash /rpicluster/network-manager/enable-base.sh
