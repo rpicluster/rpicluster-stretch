@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 
 echo "
 Disabling Wifi-Wifi networking scheme . . .
@@ -19,13 +21,13 @@ Restoring dhcpcd.conf . . .
 sudo rm /etc/dhcpcd.conf
 sudo mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
 
-echo "
-Rebooting daemon and dhcpcd service . . .
-"
+# echo "
+# Rebooting daemon and dhcpcd service . . .
+# "
 
-sudo systemctl daemon-reload
+# sudo systemctl daemon-reload
 
-sudo service dhcpcd restart
+# sudo service dhcpcd restart
 
 echo "
 Removing hostapd.conf . . .
@@ -54,5 +56,4 @@ Restoring rc.local . . .
 "
 
 sed -i '20d' /etc/rc.local
-# sed -i '21d' /etc/rc.local
 
