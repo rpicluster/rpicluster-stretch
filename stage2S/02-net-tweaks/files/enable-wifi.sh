@@ -4,6 +4,9 @@ echo "
 Enabling Wifi-Wifi networking scheme . . .
 "
 
+read -p "Make sure to plug in the wifi adaptor! Press enter to continue. " plug
+
+
 echo "
 Generating new wpa_supplicant . . .
 "
@@ -41,13 +44,13 @@ static domain_name_servers=8.8.8.8 #192.168.1.1
 interface wlan1
 metric 100" | sudo tee -a /etc/dhcpcd.conf
 
-echo "
-Rebooting daemon and dhcpcd service . . .
-"
+# echo "
+# Rebooting daemon and dhcpcd service . . .
+# "
 
-sudo systemctl daemon-reload
+# sudo systemctl daemon-reload
 
-sudo service dhcpcd restart
+# sudo service dhcpcd restart
 
 echo "
 Generating new hostapd.conf . . .
@@ -115,19 +118,18 @@ sudo sed -i '28 s/#//' /etc/sysctl.conf
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 echo "
-Saving iptables / Updating rc.local . . .
+Updating startup activities . . .
 "
-sudo sed -i '20i\sudo python /rpicluster/network-manager/link_wifi_adaptor.py\' /etc/rc.local
+# sudo sed -i '20i\sudo python /rpicluster/network-manager/link_wifi_adaptor.py\' /etc/rc.local
+sudo echo "sudo python /rpicluster/network-manager/link_wifi_adaptor.py" >> /home/pi/.profile
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-sudo sed -i '21i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
+sudo sed -i '20i\iptables-restore < /etc/iptables.ipv4.nat\' /etc/rc.local
 
 echo "
 Starting host services . . .
 "
-
-sudo systemctl daemon-reload
 
 sudo systemctl start dnsmasq
 sudo systemctl start hostapd

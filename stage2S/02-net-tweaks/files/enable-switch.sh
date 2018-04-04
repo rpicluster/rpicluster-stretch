@@ -84,7 +84,7 @@ sudo sed -i '28 s/#//' /etc/sysctl.conf
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
 echo "
-Saving iptables / Updating rc.local . . .
+Updating startup activities . . .
 "
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
