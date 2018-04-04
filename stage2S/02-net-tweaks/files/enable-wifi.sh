@@ -6,10 +6,6 @@ Enabling Wifi-Wifi networking scheme . . .
 
 read -p "Make sure to plug in the wifi adaptor! Press enter to continue. " plug
 
-sleep 1
-
-sudo python /rpicluster/network-manager/link_wifi_adaptor.py
-
 echo "
 Generating new wpa_supplicant . . .
 "
@@ -123,8 +119,7 @@ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 echo "
 Updating startup activities . . .
 "
-# sudo sed -i '20i\sudo python /rpicluster/network-manager/link_wifi_adaptor.py\' /etc/rc.local
-sudo echo "sudo python /rpicluster/network-manager/link_wifi_adaptor.py" >> /home/pi/.profile
+sudo sed -i '25s/.*/sudo python /rpicluster/network-manager/link_wifi_adaptor.py/' /home/pi/.profile
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 

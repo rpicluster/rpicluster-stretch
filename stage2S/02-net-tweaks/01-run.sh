@@ -31,8 +31,9 @@ install -m 755 files/set-wifi.sh                       "${ROOTFS_DIR}/rpicluster
 install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
 on_chroot << EOF
-sudo echo "sudo python /rpicluster/network-manager/startup.py" >> /home/pi/.profile
+
 sudo echo "rpicluster" > /etc/hostname
+sudo sed -i '24s/.*/sudo python /rpicluster/network-manager/startup.py/' /home/pi/.profile
 sudo sed -i '6s/.*/127.0.1.1       rpicluster/' /etc/hosts
 
 sudo apt-get install -y hostapd
