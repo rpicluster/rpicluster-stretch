@@ -2,6 +2,7 @@ import os, sys
 
 def switch_disable(network):
     switcher = {
+        0: "/rpicluster/network-manager/disable-base.sh",
         1: "/rpicluster/network-manager/disable-wifi.sh",
         2: "/rpicluster/network-manager/disable-switch.sh",
         3: "/rpicluster/network-manager/disable-otg.sh",
@@ -11,6 +12,7 @@ def switch_disable(network):
 
 def switch_enable(option):
     switcher = {
+        0: "/rpicluster/network-manager/enable-base.sh",
         1: "/rpicluster/network-manager/enable-wifi.sh",
         2: "/rpicluster/network-manager/enable-switch.sh",
         3: "/rpicluster/network-manager/enable-otg.sh",
@@ -38,6 +40,8 @@ if(option != network):
         os.system("sudo bash " + switch_enable(option))
         os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
     print("Rebooting machine . . . ")
+    if(option != 1 && network == 0):
+        os.system("sudo bash " + switch_disable(option))
     os.system("sudo reboot -h now")
 else:
     print("This network configuration is already active.")
