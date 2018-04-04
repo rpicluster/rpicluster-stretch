@@ -36,7 +36,7 @@ connection_name = ""
 
 
 
-if(network != "-1"):
+if(network != 4):
 
     if(network == 1):
         internet_ip = get_ip(ip_output, "wlan1")
