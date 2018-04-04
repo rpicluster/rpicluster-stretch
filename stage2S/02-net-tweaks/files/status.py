@@ -1,6 +1,6 @@
 import os
-import sys  
-sys.path.append('/rpicluster/config/')   
+import sys
+sys.path.append('/rpicluster/config/')
 from list_leases import *
 
 
@@ -16,7 +16,7 @@ def network_type(network):
         1: "Wifi-Wifi",
         2: "Wifi-Switch",
         3: "Wifi-OTG",
-        
+
     }
     return switcher.get(network)
 
@@ -32,7 +32,7 @@ ip_output = stream.read()
 internet_ip = ""
 access_point = ""
 internet_name = ""
-connection_name ="-1"
+connection_name = ""
 
 
 
@@ -52,14 +52,14 @@ if(network != "-1"):
 
     # else if(network == 3):
 
-    print("Current network configuration: " + network_type(network))
-    print("Internet on " + internet_name + "--> " + internet_ip)
-    print("                           |")
-    print("                           |")
-    print("                           --> "+ connection_name + "--> " + access_point)
+    print("\nCurrent network configuration: " + network_type(network))
+    print("\nInternet on " + internet_name + "--> " + internet_ip)
+    print("                            |")
+    print("                            |")
+    print("                            --> "+ connection_name + "--> " + access_point)
     for x in range(len(machines)):
-        print("                                                      |")
-        print("                                                      --> " + machines[x])
+        print("                                                       |")
+        print("                                                       --> " + machines[x])
 
 else:
-    print("No rpicluster Network configured ! ! !\n")
+    print("\nNo rpicluster Network configured ! ! !\n")
