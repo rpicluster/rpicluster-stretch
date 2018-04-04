@@ -57,4 +57,8 @@ sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/ho
 
 sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
 
+sudo sed -i '35s/.*/StrictHostKeyChecking no' /etc/ssh/ssh_config
+
+sudo sed -i '36 UserKnownHostsFile /dev/null' /etc/ssh/ssh_config
+
 EOF
