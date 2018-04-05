@@ -20,15 +20,13 @@
 
 -host images
 
--test removing dhcpcd and daemon reload form enables
-
--add option to network manager that removes current networking and leaves it as normal network install
-
 -for all enable and disable scripts, keep original leases file and revert on network switch.
 
 -use configure ips to check to see if ip is a node; update hostname to host+ip, add information to node file (like leases file but only holds nodes ip:MAC address).
 
 -update status tool to use newly created nodes file
+
+-change link wifi adaptor to just link wlan0 on initial boot as it will guranteed be wlan0
 
 NETWORK MANAGER:
 
