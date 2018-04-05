@@ -28,10 +28,10 @@ if(network != 0):
 
 option = int(input("Select a networking option: "))
 if(network == 2 and option == 1):
-    raw_input("Make sure to unplug the ethernet! Press enter to continue. ")
+    raw_input("\nMake sure to unplug the ethernet! Press enter to continue. ")
 
 if(option == 1):
-    raw_input("Make sure to plug in the wifi adaptor! Press enter to continue. ")
+    raw_input("\nMake sure to plug in the wifi adaptor! Press enter to continue. ")
 
 
 f.close()
@@ -42,7 +42,7 @@ if(option != network):
     # if(option != 0):
     os.system("sudo bash " + switch_enable(option))
     os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
-    print("Rebooting machine . . . ")
+    print("\nRebooting machine . . . ")
     # if(option != 1 and network == 0):
     #     os.system("sudo bash " + switch_disable(option))
     os.system("sudo reboot -h now")
