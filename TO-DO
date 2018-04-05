@@ -16,7 +16,7 @@
 
 -update alias should update every machine
 
--update status tool and network manager to include OTG MODE
+-update status tool, network manager, and help to include OTG MODE
 
 -host images
 
@@ -26,9 +26,13 @@
 
 -for all enable and disable scripts, keep original leases file and revert on network switch.
 
+-use configure ips to check to see if ip is a node; update hostname to host+ip, add information to node file (like leases file but only holds nodes ip:MAC address).
+
+-update status tool to use newly created nodes file
+
 NETWORK MANAGER:
 
--need to create enable and disable scirpts for all 3 modes
+-need to create enable and disable scripts for all 3 modes
 1)wifi : DONE
 2)switch : DONE
 3)otg : NOT DONE
