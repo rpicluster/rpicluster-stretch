@@ -9,10 +9,10 @@ removing wlan1 wpa_supplicant . . .
 "
 sudo rm /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
-echo "
-Stopping hostapd . . .
-"
-sudo systemctl stop hostapd
+# echo "
+# Stopping hostapd . . .
+# "
+# sudo systemctl stop hostapd
 
 
 echo "

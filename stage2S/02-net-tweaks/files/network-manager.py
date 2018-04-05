@@ -13,7 +13,7 @@ def switch_disable(network):
 def switch_enable(option):
     switcher = {
         0: "/rpicluster/network-manager/enable-base.sh",
-        1: "/rpicluster/network-manager/enable-wifi.sh",
+        1: "/rpicluster/network-manager/enable-wifi.sh",    
         2: "/rpicluster/network-manager/enable-switch.sh",
         3: "/rpicluster/network-manager/enable-otg.sh",
     }
@@ -28,7 +28,10 @@ if(network != 0):
 
 option = int(input("Select a networking option: "))
 if(network == 2 and option == 1):
-    raw_input("Make sure to unplug the ethernet! Press enter to continue.")
+    raw_input("Make sure to unplug the ethernet! Press enter to continue. ")
+
+if(option == 1):
+    raw_input("Make sure to plug in the wifi adaptor! Press enter to continue. ")
 
 
 f.close()

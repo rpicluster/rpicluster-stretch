@@ -4,8 +4,6 @@ echo "
 Enabling Wifi-Wifi networking scheme . . .
 "
 
-read -p "Make sure to plug in the wifi adaptor! Press enter to continue. " plug
-
 echo "
 Generating new wpa_supplicant . . .
 "
