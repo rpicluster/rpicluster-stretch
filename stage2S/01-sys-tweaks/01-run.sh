@@ -38,6 +38,9 @@ install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
 install -m 777 files/.bash_aliases                      "${ROOTFS_DIR}/home/pi/"
 
+install -m 777 files/.profile                           "${ROOTFS_DIR}/home/pi/"
+
+
 on_chroot << EOF
 systemctl disable hwclock.sh
 systemctl disable nfs-common
@@ -87,7 +90,7 @@ EOF
 on_chroot << EOF
 pip install zerorpc
 # sudo sed -i "23s/.*/sudo echo 'For rpicluster help and commands type rpicluster-help.'/" /home/pi/.profile
-sudo echo "sudo echo 'For rpicluster help and commands type rpicluster-help.'" | sudo tee -a /home/pi/.profile
+# sudo echo "sudo echo 'For rpicluster help and commands type rpicluster-help.'" | sudo tee -a /home/pi/.profile
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
