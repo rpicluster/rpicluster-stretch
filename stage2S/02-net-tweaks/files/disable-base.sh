@@ -6,6 +6,13 @@ Disabling Base networking scheme . . .
 "
 
 echo "
+Restoring dhcpcd.conf . . .
+"
+sudo rm /etc/dhcpcd.conf
+sudo mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
+
+
+echo "
 Removing hostapd.conf . . .
 "
 sudo rm /etc/hostapd/hostapd.conf
