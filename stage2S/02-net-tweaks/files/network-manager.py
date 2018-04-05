@@ -40,7 +40,7 @@ if(option != network):
         os.system("sudo bash " + switch_enable(option))
         os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
     print("Rebooting machine . . . ")
-    if(option != 1 && network == 0):
+    if(option != 1 and network == 0):
         os.system("sudo bash " + switch_disable(option))
     os.system("sudo reboot -h now")
 else:
