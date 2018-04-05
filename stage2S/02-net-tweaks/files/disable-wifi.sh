@@ -52,8 +52,9 @@ sudo rm /etc/dnsmasq.conf
 sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 
 echo "
-Restoring rc.local . . .
+Restoring rc.local / .profile . . .
 "
 
 sed -i '20d' /etc/rc.local
+sudo sed -i '25d' /home/pi/.profile
 
