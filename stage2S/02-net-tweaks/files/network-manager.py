@@ -34,14 +34,14 @@ if(network == 2 and option == 1):
 f.close()
 
 if(option != network):
-    if(network != 0):
-        os.system("sudo bash " + switch_disable(network))
-    if(option != 0):
-        os.system("sudo bash " + switch_enable(option))
-        os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
+    # if(network != 0):
+    os.system("sudo bash " + switch_disable(network))
+    # if(option != 0):
+    os.system("sudo bash " + switch_enable(option))
+    os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
     print("Rebooting machine . . . ")
-    if(option != 1 and network == 0):
-        os.system("sudo bash " + switch_disable(option))
+    # if(option != 1 and network == 0):
+    #     os.system("sudo bash " + switch_disable(option))
     os.system("sudo reboot -h now")
 else:
     print("This network configuration is already active.")
