@@ -34,6 +34,9 @@ install -m 755 files/set-wifi.sh                       "${ROOTFS_DIR}/rpicluster
 
 install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
+install -m 600 files/nodes                             "${ROOTFS_DIR}/rpicluster/config/"
+
+
 on_chroot << EOF
 
 sudo echo "rpicluster" > /etc/hostname
