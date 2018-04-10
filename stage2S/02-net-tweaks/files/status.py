@@ -6,7 +6,7 @@ def get_nodes():
     machines = []
     while(line!=None):
         split = line.split(',')
-        machines.append(split[0])
+        machines.append((split[0], split[2]))
         line = f.readline()
     return machines
 
@@ -66,7 +66,7 @@ if(network != 0):
     print("                            --> "+ connection_name + "--> " + access_point)
     for x in range(len(machines)):
         print("                                                       |")
-        print("                                                       --> " + machines[x])
+        print("                                                       --> " + machines[x][0] + "@" + machines[x][1])
 
 else:
     print("\nNo rpicluster Network configured ! ! !\n")
