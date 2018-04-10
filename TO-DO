@@ -1,6 +1,3 @@
--fix ssh keys
-
--remove initial hostapd when going to another network mode and re-enable it on zero network
 
 -create python code that stamps user images on download
 
@@ -10,15 +7,13 @@
 
 -normalize permissions of files
 
--host website with alex
-
--TEST THIS have ap set up on first login so you can always ssh without internet ALSO if it works need to remove this host ap if we configure otg or network switch first
-
 -update alias should update every machine
 
 -update status tool, network manager, and help to include OTG MODE
 
 -host images
+
+-set up a NFS cloud so the master and nodes can share files easily http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
 
 -for all enable and disable scripts, keep original leases file and revert on network switch.
 
@@ -26,7 +21,13 @@
 
 -update status tool to use newly created nodes file
 
--change link wifi adaptor to just link wlan0 on initial boot as it will guranteed be wlan0
+-TEST UPDATED LINK WIFI ADAPTOR
+
+-create repo for website and clone on WWW so we dont have to edit in nano
+
+-update about section on website
+
+-take photos for website
 
 NETWORK MANAGER:
 
