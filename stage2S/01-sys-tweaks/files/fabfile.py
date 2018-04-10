@@ -4,11 +4,10 @@ def config_ip(num):
     with settings(warn_only = True):
         rv = False
         with cd('/rpicluster/config'):
-            rv = run('sudo python calibrate_touchless.py')
-        if(rv == True):
-            with cd('/etc/hostname'):
-                run('echo node{} > hostname'.format(num))    
-            run('sudo reboot -h now')
+            run('sudo python calibrate_touchless.py')
+        with cd('/etc/hostname'):
+            run('sudo echo node{} > hostname'.format(num))
+        run('sudo reboot -h now')
 
 def send_SSH_keys(ssh_key):
     run('mkdir ~/.ssh/')
