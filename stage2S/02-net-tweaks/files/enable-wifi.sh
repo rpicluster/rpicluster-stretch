@@ -117,7 +117,7 @@ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 echo "
 Updating startup activities . . .
 "
-sudo echo "sudo python /rpicluster/network-manager/link_wifi_adaptor.py" | sudo tee -a /home/pi/.profile
+# sudo echo "sudo python /rpicluster/network-manager/link_wifi_adaptor.py" | sudo tee -a /home/pi/.profile
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 

@@ -56,5 +56,5 @@ Restoring rc.local / .profile . . .
 "
 
 sed -i '20d' /etc/rc.local
-sudo sed -i '25d' /home/pi/.profile
+# sudo sed -i '25d' /home/pi/.profile
 

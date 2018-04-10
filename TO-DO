@@ -1,6 +1,8 @@
 
 -create python code that stamps user images on download
 
+-check to see if ssh key tool works DEREK
+
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
 
 -put all code that as to do with networking in network-manager (example: listleases code is in config)
