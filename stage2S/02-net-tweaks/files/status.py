@@ -1,7 +1,14 @@
 import os
-import sys
-sys.path.append('/rpicluster/config/')
-from list_leases import *
+
+def get_nodes():
+    f = open("/rpicluster/config/nodes","r")
+    line = f.readline()
+    machines = []
+    while(line!=None):
+        split = line.split(',')
+        machines.append(split[0])
+        line = f.readline()
+    return machines
 
 
 def get_ip(ip_output, interface):
@@ -25,7 +32,7 @@ def network_type(network):
 
 f = open("/rpicluster/network-manager/configured","r")
 
-machines = getMachines()
+machines = get_nodes()
 network = int(f.read(1))
 stream = os.popen("ip addr", 'r')
 ip_output = stream.read()
