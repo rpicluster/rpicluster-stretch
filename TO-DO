@@ -25,9 +25,14 @@
 
 -create repo for website and clone on WWW so we dont have to edit in nano
 
+-move website code to new repo
+
+-remove website code from stretch repo
+
 -update about section on website
 
 -take photos for website
+
 
 NETWORK MANAGER:
 
