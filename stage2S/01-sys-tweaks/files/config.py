@@ -8,7 +8,7 @@ class IpSender(object):
         with open("/etc/dnsmasq.conf", "a") as configFile:
             configFile.write("dhcp-host=" + mac + "," + desiredIp + "\n")
         with open("/rpicluster/config/nodes", "a") as nodeFile:
-            nodeFile.write(desiredIp + "," + mac + "," + "node" + str(self.ip))
+            nodeFile.write(desiredIp + "," + mac + "," + "node" + str(self.ip) + "\n")
         return str(desiredIp)
 
 
