@@ -4,7 +4,6 @@ class IpSender(object):
     
     ip = 0
     def sendIP(self, mac):
-        print(mac)
         self.ip+=1
         desiredIp = "192.168.1." + str(self.ip)
         os.system("sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf")
@@ -12,6 +11,7 @@ class IpSender(object):
             configFile.write("dhcp-host=" + mac + "," + desiredIp + "\n")
         with open("/rpicluster/config/nodes", "wb") as nodeFile:
             nodeFile.write(desiredIp + "," + mac + "," + "node" + str(self.ip) + "\n")
+        print(desiredIp + ", " + mac + ", " + "node" + str(self.ip) + "\n")
         return str(desiredIp)
 
 
