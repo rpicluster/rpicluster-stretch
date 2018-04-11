@@ -1,6 +1,6 @@
 sudo python /rpicluster/config/config.py &
-cd /rpicluster/config
-output=`python -c 'from list_leases import *; print " ".join(getMachines())'`
+# cd /rpicluster/config
+output=`python -c 'from functions import *; print " ".join(get_machines())'`
 counter=0
 for i in ${output[@]}
 do
