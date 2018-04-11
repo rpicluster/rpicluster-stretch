@@ -1,4 +1,5 @@
-key=`ssh-keygen -t rsa -C pi@192.168.1.254`
+ssh-keygen -t rsa -C pi@192.168.1.254
+key='cat ~/.ssh/ip_rsa.pub'
 cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join([item[0] for item in get_nodes()])'`
 for i in ${output[@]}
