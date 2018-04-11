@@ -1,33 +1,6 @@
-import os
-
-def get_nodes():
-    f = open("/rpicluster/config/nodes","r")
-    line = f.readline()
-    machines = []
-    while(line!=''):
-        split = line.split(',')
-        machines.append((split[0], split[2]))
-        line = f.readline()
-    return machines
-
-
-def get_ip(ip_output, interface):
-    output = ip_output.split("\n")
-    for x in range(len(output)):
-        if (interface in output[x]):
-            content = output[x+2].split(" ")
-            return content[5]
-
-def network_type(network):
-    switcher = {
-        1: "Wifi-Wifi",
-        2: "Wifi-Switch",
-        3: "Wifi-OTG",
-
-    }
-    return switcher.get(network)
-
-
+import os, sys
+sys.path.append('/rpicluster/config')
+from functions import *
 
 
 f = open("/rpicluster/network-manager/configured","r")
