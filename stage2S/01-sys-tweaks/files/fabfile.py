@@ -18,6 +18,9 @@ def send_SSH_keys(ssh_key):
     run('touch ~/.ssh/authorized_keys')
     run('echo {} >> ~/.ssh/authorized_keys'.format(ssh_key))
 
+def update():
+    run('sudo apt-get update && sudo apt-get upgrade -y')
+
 def pingall():
     with settings(abort_exception = FabricException):
         try:

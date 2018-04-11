@@ -17,14 +17,6 @@
 
 -set up a NFS cloud so the master and nodes can share files easily http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
 
--for all enable and disable scripts, keep original leases file and revert on network switch.
-
--use configure ips to check to see if ip is a node; update hostname to host+ip, add information to node file (like leases file but only holds nodes ip:MAC address).
-
--update status tool to use newly created nodes file
-
--TEST UPDATED LINK WIFI ADAPTOR
-
 -remove website code from stretch repo
 
 -update about section on website

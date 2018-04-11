@@ -1,5 +1,6 @@
 import os, sys
 
+
 def switch_disable(network):
     switcher = {
         0: "/rpicluster/network-manager/disable-base.sh",
