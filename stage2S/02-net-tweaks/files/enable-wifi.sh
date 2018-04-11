@@ -78,7 +78,7 @@ log-queries
 dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
 
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 echo "
 Generating new iptable Rules . . .
