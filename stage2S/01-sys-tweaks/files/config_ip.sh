@@ -2,6 +2,7 @@ sudo python /rpicluster/config/config.py &
 # cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join(get_machines())'`
 counter=0
+
 for i in ${output[@]}
 do
     rv=$(fab pingall -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running)
