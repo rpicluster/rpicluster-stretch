@@ -19,6 +19,7 @@ def send_SSH_keys(ssh_key):
     run('echo {} >> ~/.ssh/authorized_keys'.format(ssh_key))
 
 def update():
+    run('sudo rm -rf /var/lib/apt/lists/* -f')
     run('sudo apt-get update && sudo apt-get upgrade -y')
 
 def pingall():
