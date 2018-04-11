@@ -9,11 +9,6 @@ removing wlan1 wpa_supplicant . . .
 "
 sudo rm /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
-# echo "
-# Stopping hostapd . . .
-# "
-# sudo systemctl stop hostapd
-
 
 echo "
 Restoring dhcpcd.conf . . .
@@ -21,13 +16,6 @@ Restoring dhcpcd.conf . . .
 sudo rm /etc/dhcpcd.conf
 sudo mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
 
-# echo "
-# Rebooting daemon and dhcpcd service . . .
-# "
-
-# sudo systemctl daemon-reload
-
-# sudo service dhcpcd restart
 
 echo "
 Removing hostapd.conf . . .
@@ -49,7 +37,7 @@ Restoring dnsmasq.conf . . .
 "
 
 sudo rm /etc/dnsmasq.conf
-sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
+sudo touch /etc/dnsmasq.conf
 
 echo "
 Restoring rc.local / .profile . . .
