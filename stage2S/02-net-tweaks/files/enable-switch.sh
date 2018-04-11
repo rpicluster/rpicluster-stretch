@@ -50,7 +50,6 @@ sudo service dhcpcd restart
 echo "
 Generating new dnsmasq.conf . . .
 "
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 sudo echo "no-resolv
 interface=eth0
@@ -63,6 +62,8 @@ dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
 log-queries
 dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
+
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 
 echo "

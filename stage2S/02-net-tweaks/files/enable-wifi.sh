@@ -19,14 +19,6 @@ sudo apt-get install -y dnsmasq
 sudo apt-get install -y hostapd
 sudo apt-get install -y rng-tools
 
-# echo "
-# Stopping host serices . . .
-# "
-
-# sudo systemctl stop dnsmasq
-# sudo systemctl stop hostapd
-
-
 echo "
 Updating dhcpcd.conf . . .
 "
@@ -40,14 +32,6 @@ static domain_name_servers=8.8.8.8 #192.168.1.1
 
 interface wlan1
 metric 100" | sudo tee -a /etc/dhcpcd.conf
-
-# echo "
-# Rebooting daemon and dhcpcd service . . .
-# "
-
-# sudo systemctl daemon-reload
-
-# sudo service dhcpcd restart
 
 echo "
 Generating new hostapd.conf . . .
@@ -81,7 +65,6 @@ sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hosta
 echo "
 Generating new dnsmasq.conf . . .
 "
-sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 sudo echo "no-resolv
 interface=wlan0
@@ -95,6 +78,7 @@ log-queries
 dhcp-authoritative
 " | sudo tee /etc/dnsmasq.conf
 
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 echo "
 Generating new iptable Rules . . .
@@ -117,17 +101,6 @@ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 echo "
 Updating startup activities . . .
 "
-# sudo echo "sudo python /rpicluster/network-manager/link_wifi_adaptor.py" | sudo tee -a /home/pi/.profile
-
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
-
-# echo "
-# Starting host services . . .
-# "
-
-# sudo systemctl start dnsmasq
-# sudo systemctl start hostapd
-
-

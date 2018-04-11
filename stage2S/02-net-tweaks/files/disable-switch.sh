@@ -26,7 +26,7 @@ Restoring dnsmasq.conf . . .
 "
 
 sudo rm /etc/dnsmasq.conf
-sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
+sudo touch /etc/dnsmasq.conf
 
 
 echo "
