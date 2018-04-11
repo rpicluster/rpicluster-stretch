@@ -5,7 +5,7 @@ def config_ip(num):
         rv = False
         with cd('/rpicluster/config'):
             run('sudo python calibrate_touchless.py')
-        with cd('/etc/hostname'):
+        with cd('/etc'):
             run('sudo echo node{} > hostname'.format(num))
         run('sudo reboot -h now')
 
