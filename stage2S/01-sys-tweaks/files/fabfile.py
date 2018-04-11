@@ -6,7 +6,9 @@ def config_ip(num):
         with cd('/rpicluster/config'):
             run('sudo python calibrate_touchless.py')
         with cd('/etc'):
+            run('sudo chmod 777 hostname')
             run('sudo echo node{} > hostname'.format(num))
+            run('sudo chmod 644 hostname')
         run('sudo reboot -h now')
 
 def send_SSH_keys(ssh_key):
