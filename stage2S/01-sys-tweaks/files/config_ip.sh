@@ -11,12 +11,13 @@ do
     then
         counter=$((counter+1))
         fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,running
-        echo "Node configured"
+        echo -e "Node configured\n"
     else
-    	echo "Failed to configure Non-Node device."
+    	echo -e "Failed to configure Non-Node device.\n"
     fi
 
 done
 echo "All Nodes Configured. Rebooting Cluster."
+sed -i 's/./1/2' /rpicluster/network-manager/configured
 sudo reboot -h now
 

@@ -34,18 +34,15 @@ if(network == 2 and option == 1):
 if(option == 1):
     raw_input("\nMake sure to plug in the wifi adaptor! Press enter to continue. ")
 
-
+configured = int(f.read(1))
 f.close()
 
 if(option != network):
-    # if(network != 0):
     os.system("sudo bash " + switch_disable(network))
-    # if(option != 0):
     os.system("sudo bash " + switch_enable(option))
-    os.system("sudo echo " + str(option) + " > /rpicluster/network-manager/configured")
+    os.system("sudo echo " + str(option) + configured +" > /rpicluster/network-manager/configured")
+
     print("\nRebooting machine . . . ")
-    # if(option != 1 and network == 0):
-    #     os.system("sudo bash " + switch_disable(option))
     os.system("sudo reboot -h now")
 else:
     print("This network configuration is already active.")
