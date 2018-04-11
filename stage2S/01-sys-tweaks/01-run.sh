@@ -16,6 +16,10 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/cloud"
 
+install -d                                              "${ROOTFS_DIR}/rpicluster/code"
+
+install -m 755 files/mpi_hello_world.c                  "${ROOTFS_DIR}/rpicluster/code"
+
 install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluster/config"
 
 install -m 755 files/list_leases.py                     "${ROOTFS_DIR}/rpicluster/config"
