@@ -11,7 +11,7 @@ class IpSender(object):
             configFile.write("dhcp-host=" + mac + "," + desiredIp + "\n")
         with open("/rpicluster/config/nodes", "wb") as nodeFile:
             nodeFile.write(desiredIp + "," + mac + "," + "node" + str(self.ip) + "\n")
-        print(desiredIp + ", " + mac + ", " + "node" + str(self.ip) + "\n")
+        print(desiredIp + ", " + mac + ", " + "node" + str(self.ip))
         return str(desiredIp)
 
 

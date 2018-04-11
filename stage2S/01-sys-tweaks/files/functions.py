@@ -1,6 +1,5 @@
 def get_nodes():
-    # f = open("/rpicluster/config/nodes","r")
-    f = open("nodes","r")
+    f = open("/rpicluster/config/nodes","r")
     line = f.readline()
     machines = []
     while(line!=''):
