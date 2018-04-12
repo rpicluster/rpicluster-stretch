@@ -2,7 +2,7 @@ sudo python /rpicluster/config/config.py &
 cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join(get_machines())'`
 counter=0
-sudo mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
+sudo cp /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 for i in ${output[@]}
 do
     echo "Attempting to configure machine at IP: $i"
