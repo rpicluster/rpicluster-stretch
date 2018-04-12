@@ -1,23 +1,13 @@
 
 -create python code that stamps user images on download
 
--check to see if ssh key tool works DEREK
-
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
-
--put all code that as to do with networking in network-manager (example: listleases code is in config)
 
 -normalize permissions of files
 
--update alias should update every machine
-
 -update status tool, network manager, and help to include OTG MODE
 
--host images
-
 -set up a NFS cloud so the master and nodes can share files easily http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
-
--remove website code from stretch repo
 
 -update about section on website
 
