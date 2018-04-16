@@ -19,9 +19,9 @@ while [ $count -lt $total ]; do
 		# echo "
 		# Installing host services . . .
 		# "
-		sudo apt-get install -y dnsmasq > /dev/null 1>&2
-		sudo apt-get install -y hostapd > /dev/null 1>&2
-		sudo apt-get install -y rng-tools > /dev/null 1>&2
+		sudo apt-get install -y dnsmasq &> /dev/null
+		sudo apt-get install -y hostapd &> /dev/null
+		sudo apt-get install -y rng-tools &> /dev/null
 	elif [ $count -eq 2 ] 
 		then
 
