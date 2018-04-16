@@ -15,13 +15,11 @@ while [ $count -lt $total ]; do
 	if [ $count -eq 0 ]
 		then
 
-		# ---------------------------------------------
 		# echo "
 		# Generating new wpa_supplicant . . .
 		# "
 		sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
-		# ---------------------------------------------
 	elif [ $count -eq 1 ]
 		then
 		# echo "
@@ -30,7 +28,6 @@ while [ $count -lt $total ]; do
 		sudo apt-get install -y dnsmasq
 		sudo apt-get install -y hostapd
 		sudo apt-get install -y rng-tools
-		# ---------------------------------------------
 	elif [ $count -eq 2 ] 
 		then
 
@@ -47,7 +44,6 @@ while [ $count -lt $total ]; do
 
 		interface wlan1
 		metric 100" >> /etc/dhcpcd.conf
-		# ---------------------------------------------
 	elif [ $count -eq 3 ] 
 		then
 
@@ -69,7 +65,6 @@ while [ $count -lt $total ]; do
 		logger_stdout=-1
 		logger_stdout_level=2
 		" > /etc/hostapd/hostapd.conf
-		# ---------------------------------------------
 	elif [ $count -eq 4 ] 
 		then
 
@@ -80,7 +75,6 @@ while [ $count -lt $total ]; do
 		sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
 
 		sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
-		# ---------------------------------------------
 	elif [ $count -eq 5 ] 
 		then
 
@@ -101,7 +95,6 @@ while [ $count -lt $total ]; do
 		" > /etc/dnsmasq.conf
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
-		# ---------------------------------------------
 	elif [ $count -eq 6 ] 
 		then
 
@@ -114,7 +107,6 @@ while [ $count -lt $total ]; do
 		sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE 
 		sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 		sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
-		# ---------------------------------------------
 	elif [ $count -eq 7 ]
 		then
 
@@ -125,9 +117,7 @@ while [ $count -lt $total ]; do
 		sudo sed -i '28 s/#//' /etc/sysctl.conf
 
 		sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-		# ---------------------------------------------
-	elif [ $count -eq 8] 
-		then
+	else
 
 		# echo "
 		# Updating startup activities . . .
@@ -135,7 +125,6 @@ while [ $count -lt $total ]; do
 		sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
-		# ---------------------------------------------
 	fi
     count=$(( $count + 1 ))
     pd=$(( $count * 73 / $total ))
