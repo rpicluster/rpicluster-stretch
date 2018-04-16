@@ -1,23 +1,0 @@
-Script started on Mon 16 Apr 2018 11:11:56 AM PDT
-echo 0 > .count
-
-# sudo bash test.sh 11 &
-exec script<"$0"
-flock script || echo failed
-echo $(( $(head -n 1 .count) + 1 ))>.count
-sleep 1
-
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# echo 0  > .count
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# 
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# # sudo  bash test.sh 11 &
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# exec s cript<"$0"
-bash: bash: No such file or directory
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# flock  script || echo failed
-flock: bad file descriptor: 'script'
-failed
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# echo $ (( $(head -n 1 .count) + 1 ))>.count
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# sleep  1
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# 
-]0;root@morty: ~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[01;32mroot@morty[00m:[01;34m~/Desktop/Code/rpicluster-stretch/stage2S/02-net-tweaks/files[00m# exit
-
-Script done on Mon 16 Apr 2018 11:11:58 AM PDT
