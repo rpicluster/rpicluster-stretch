@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo "
 Enabling Wifi-Wifi networking scheme . . .
 "
@@ -11,7 +12,8 @@ start=`date +%s`
 while [ $count -lt $total ]; do
     cur=`date +%s`
 
-	if [$count == 0] then
+	if [ $count -eq 0 ]
+		then
 
 		# ---------------------------------------------
 		# echo "
@@ -20,7 +22,8 @@ while [ $count -lt $total ]; do
 		sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
 		# ---------------------------------------------
-	elif [$count == 1] then
+	elif [ $count -eq 1 ]
+		then
 		# echo "
 		# Installing host services . . .
 		# "
@@ -28,7 +31,8 @@ while [ $count -lt $total ]; do
 		sudo apt-get install -y hostapd
 		sudo apt-get install -y rng-tools
 		# ---------------------------------------------
-	elif [$count == 2] then
+	elif [ $count -eq 2 ] 
+		then
 
 		# echo "
 		# Updating dhcpcd.conf . . .
@@ -44,7 +48,8 @@ while [ $count -lt $total ]; do
 		interface wlan1
 		metric 100" >> /etc/dhcpcd.conf
 		# ---------------------------------------------
-	elif [$count == 3] then
+	elif [ $count -eq 3 ] 
+		then
 
 		# echo "
 		# Generating new hostapd.conf . . .
@@ -65,7 +70,8 @@ while [ $count -lt $total ]; do
 		logger_stdout_level=2
 		" > /etc/hostapd/hostapd.conf
 		# ---------------------------------------------
-	elif [$count == 4] then
+	elif [ $count -eq 4 ] 
+		then
 
 		# echo "
 		# Linking new hostapd.conf . . .
@@ -75,7 +81,8 @@ while [ $count -lt $total ]; do
 
 		sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
 		# ---------------------------------------------
-	elif [$count == 5] then
+	elif [ $count -eq 5 ] 
+		then
 
 		# echo "
 		# Generating new dnsmasq.conf . . .
@@ -95,7 +102,8 @@ while [ $count -lt $total ]; do
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 		# ---------------------------------------------
-	elif [$count == 6] then
+	elif [ $count -eq 6 ] 
+		then
 
 		# echo "
 		# Generating new iptable Rules . . .
@@ -107,7 +115,8 @@ while [ $count -lt $total ]; do
 		sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 		sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
 		# ---------------------------------------------
-	elif [$count == 7] then
+	elif [ $count -eq 7 ]
+	    then
 
 		# echo "
 		# Allowing ip_forward . . .
@@ -117,7 +126,8 @@ while [ $count -lt $total ]; do
 
 		sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 		# ---------------------------------------------
-	elif [$count == 8] then
+	elif [ $count -eq 8] 
+		then
 
 		# echo "
 		# Updating startup activities . . .
