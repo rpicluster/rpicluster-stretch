@@ -10,6 +10,9 @@ def config_ip(num):
         with cd('/etc'):
             run('sudo chmod 777 hostname')
             run('sudo echo node{} > hostname'.format(num))
+            run('sudo sed -i \'6s/.*/127.0.1.1       node{}/\' /etc/hosts'.format(num))
+            run('sudo echo "192.168.1.254    rpicluster" >> /etc/hosts')
+            run('sudo echo "192.168.1.{}    node{}" >> /etc/hosts'.format(num, num))
             run('sudo chmod 644 hostname')
         run('sudo reboot -h now')
 
