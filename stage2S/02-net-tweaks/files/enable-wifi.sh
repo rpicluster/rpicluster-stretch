@@ -42,14 +42,13 @@ while [ $count -lt $total ]; do
 		static domain_name_servers=8.8.8.8 #192.168.1.1
 
 		interface wlan1
-		metric 100" | sudo tee -a /etc/dhcpcd.conf
+		metric 100" >> /etc/dhcpcd.conf
 		# ---------------------------------------------
 	elif [$count == 3] then
 
 		# echo "
 		# Generating new hostapd.conf . . .
 		# "
-
 		sudo echo "interface=wlan0
 		driver=nl80211
 		ssid=rpicluster-AP
@@ -64,7 +63,7 @@ while [ $count -lt $total ]; do
 		macaddr_acl=0
 		logger_stdout=-1
 		logger_stdout_level=2
-		" | sudo tee /etc/hostapd/hostapd.conf
+		" > /etc/hostapd/hostapd.conf
 		# ---------------------------------------------
 	elif [$count == 4] then
 
@@ -92,7 +91,7 @@ while [ $count -lt $total ]; do
 		#log each DNS query as it passes through
 		log-queries
 		dhcp-authoritative
-		" | sudo tee /etc/dnsmasq.conf
+		" > /etc/dnsmasq.conf
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 		# ---------------------------------------------
