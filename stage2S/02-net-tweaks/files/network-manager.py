@@ -31,9 +31,6 @@ option = int(input("Select a networking option: "))
 if(network == 2 and option == 1):
     raw_input("\nMake sure to unplug the ethernet! Press enter to continue. ")
 
-if(option == 1):
-    raw_input("\nMake sure to plug in the wifi adaptor! Press enter to continue. ")
-
 f.close()
 
 if(option != network):
