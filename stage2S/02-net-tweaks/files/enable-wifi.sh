@@ -4,30 +4,24 @@
 echo "
 Enabling Wifi-Wifi networking scheme . . .
 "
+sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
 
-count=0
+count=1
 total=9
 start=`date +%s`
 
 while [ $count -lt $total ]; do
     cur=`date +%s`
 
-	if [ $count -eq 0 ]
-		then
-
-		# echo "
-		# Generating new wpa_supplicant . . .
-		# "
-		sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
-		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
-	elif [ $count -eq 1 ]
+	if [ $count -eq 1 ]
 		then
 		# echo "
 		# Installing host services . . .
 		# "
-		sudo apt-get install -y dnsmasq
-		sudo apt-get install -y hostapd
-		sudo apt-get install -y rng-tools
+		sudo apt-get install -y dnsmasq > /dev/null 1>&2
+		sudo apt-get install -y hostapd > /dev/null 1>&2
+		sudo apt-get install -y rng-tools > /dev/null 1>&2
 	elif [ $count -eq 2 ] 
 		then
 
