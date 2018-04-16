@@ -116,7 +116,7 @@ while [ $count -lt $total ]; do
 		sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
 		# ---------------------------------------------
 	elif [ $count -eq 7 ]
-	    then
+		then
 
 		# echo "
 		# Allowing ip_forward . . .
