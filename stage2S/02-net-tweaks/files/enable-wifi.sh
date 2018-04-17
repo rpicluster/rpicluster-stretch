@@ -9,13 +9,12 @@ count=0
 total=9
 start=`date +%s`
 
-while [ $count -ne $total ]; do
-    cur=`date +%s`
+while [ $count -le $total ]; do
 
     if [ $count -eq 0 ]
     	then
 
-    	task = "Configuring Wifi Adaptor"
+    	task="Configuring Wifi Adaptor"
     	sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
 		sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan1
@@ -24,7 +23,7 @@ while [ $count -ne $total ]; do
 	elif [ $count -eq 1 ]
 		then
 
-		task = "Installing host services"
+		task="Installing host services"
 		sudo apt-get install -y dnsmasq &> /dev/null
 		sudo apt-get install -y hostapd &> /dev/null
 		sudo apt-get install -y rng-tools &> /dev/null
@@ -32,7 +31,7 @@ while [ $count -ne $total ]; do
 		then
 
 
-		task = "Updating dhcpcd.conf"
+		task="Updating dhcpcd.conf"
 		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 		sudo echo "interface wlan0
@@ -46,7 +45,7 @@ metric 100" >> /etc/dhcpcd.conf
 	elif [ $count -eq 3 ] 
 		then
 
-		task = "Generating new hostapd.conf"
+		task="Generating new hostapd.conf"
 		sudo echo "interface=wlan0
 driver=nl80211
 ssid=rpicluster-AP
@@ -64,14 +63,14 @@ logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 	elif [ $count -eq 4 ] 
 		then
 
-		task = "Linking new hostapd.conf"
+		task="Linking new hostapd.conf"
 		sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
 		sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
 	
 	elif [ $count -eq 5 ] 
 		then
 
-		task = "Generating new dnsmasq.conf"
+		task="Generating new dnsmasq.conf"
 
 		sudo echo "no-resolv
 interface=wlan0
@@ -88,7 +87,7 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 	elif [ $count -eq 6 ] 
 		then
 		
-		task = "Generating new iptable Rules"
+		task="Generating new iptable Rules"
 		sudo iptables -F
 		sudo iptables -t nat -F
 		sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE 
@@ -97,19 +96,20 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 	elif [ $count -eq 7 ]
 		then
 
-		task = "Allowing ip_forward"
+		task="Allowing ip_forward"
 		sudo sed -i '28 s/#//' /etc/sysctl.conf
 		sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 	elif [ $count -eq 8 ]
 		then
 
-		task = "Updating startup activities"
+		task="Updating startup activities"
 		sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
 	else
-		task = "Finished"
+		task="Finished"
 		count=$(( $count - 1 ))
 	fi
+	cur=`date +%s`
     count=$(( $count + 1 ))
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
