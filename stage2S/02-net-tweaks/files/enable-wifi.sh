@@ -9,7 +9,7 @@ count=0
 total=9
 start=`date +%s`
 
-while [ $count -eq $total ]; do
+while [ $count -ne $total ]; do
     cur=`date +%s`
 
     if [ $count -eq 0 ]
