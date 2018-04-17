@@ -9,30 +9,30 @@ count=0
 total=9
 start=`date +%s`
 
-while [ $count -lt $total ]; do
+while [ $count -eq $total ]; do
     cur=`date +%s`
 
     if [ $count -eq 0 ]
     	then
+
+    	task = "Configuring Wifi Adaptor"
     	sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
 		sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan1
-
+		echo " "
 
 	elif [ $count -eq 1 ]
 		then
-		# echo "
-		# Installing host services . . .
-		# "
+
+		task = "Installing host services"
 		sudo apt-get install -y dnsmasq &> /dev/null
 		sudo apt-get install -y hostapd &> /dev/null
 		sudo apt-get install -y rng-tools &> /dev/null
 	elif [ $count -eq 2 ] 
 		then
 
-		# echo "
-		# Updating dhcpcd.conf . . .
-		# "
+
+		task = "Updating dhcpcd.conf"
 		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 		sudo echo "interface wlan0
@@ -46,9 +46,7 @@ metric 100" >> /etc/dhcpcd.conf
 	elif [ $count -eq 3 ] 
 		then
 
-		# echo "
-		# Generating new hostapd.conf . . .
-		# "
+		task = "Generating new hostapd.conf"
 		sudo echo "interface=wlan0
 driver=nl80211
 ssid=rpicluster-AP
@@ -66,19 +64,14 @@ logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 	elif [ $count -eq 4 ] 
 		then
 
-		# echo "
-		# Linking new hostapd.conf . . .
-		# "
-
+		task = "Linking new hostapd.conf"
 		sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
-
 		sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
+	
 	elif [ $count -eq 5 ] 
 		then
 
-		# echo "
-		# Generating new dnsmasq.conf . . .
-		# "
+		task = "Generating new dnsmasq.conf"
 
 		sudo echo "no-resolv
 interface=wlan0
@@ -94,11 +87,8 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 	elif [ $count -eq 6 ] 
 		then
-
-		# echo "
-		# Generating new iptable Rules . . .
-		# "
-
+		
+		task = "Generating new iptable Rules"
 		sudo iptables -F
 		sudo iptables -t nat -F
 		sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE 
@@ -107,24 +97,21 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 	elif [ $count -eq 7 ]
 		then
 
-		# echo "
-		# Allowing ip_forward . . .
-		# "
-
+		task = "Allowing ip_forward"
 		sudo sed -i '28 s/#//' /etc/sysctl.conf
-
 		sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-	else
+	elif [ $count -eq 8 ]
+		then
 
-		# echo "
-		# Updating startup activities . . .
-		# "
+		task = "Updating startup activities"
 		sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
 		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
+	else
+		task = "Finished"
+		count=$(( $count - 1 ))
 	fi
     count=$(( $count + 1 ))
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
-    printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+    printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 done
