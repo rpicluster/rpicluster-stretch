@@ -6,6 +6,7 @@ Enabling Wifi-Wifi networking scheme . . .
 "
 sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
+sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan1
 
 count=1
 total=9
