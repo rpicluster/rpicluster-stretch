@@ -13,7 +13,7 @@ do
     if [ $rv -eq 0 ];
     then
         counter=$((counter+1))
-        fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,running
+        fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
         echo -e "Node configured.\n"
     else
     	echo -e "Skip configuration of non-node device.\n"
