@@ -11,7 +11,7 @@ if(os.path.isfile(path) == False):
     ip_output = stream.read()
     mac = getmac(ip_output, interface)
     f = open(path,"w")
-    f.write("ACTION==\"add\", SUBSYSTEM==\"net\", DRIVERS==\"?*\", ATTR{address}==\"{}\", KERNEL==\"w*\",NAME=\"{}\"".format(mac, interface))
+    f.write("ACTION==\"add\", SUBSYSTEM==\"net\", DRIVERS==\"?*\", ATTR{address}==\"%s\", KERNEL==\"w*\",NAME=\"%s\"" % (mac, interface))
     f.close()
     stream.close()
 
