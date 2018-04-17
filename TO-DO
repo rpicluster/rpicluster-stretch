@@ -12,11 +12,11 @@
 
 -set up a NFS cloud so the master and nodes can share files easily http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
 
--update about section on website
-
 -take photos for website
 
 -ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time. 
+
+-WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
 
 
 NETWORK MANAGER:

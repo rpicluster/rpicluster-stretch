@@ -1,57 +1,52 @@
 #!/bin/bash
 
+
 echo "
 Enabling Wifi-Ethernet_Switch networking scheme . . .
 "
 
-echo "
-Generating new wpa_supplicant . . .
-"
 
-sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.orig
+count=1
+total=7
+start=`date +%s`
 
-sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
+while [ $count -le $total ]; do
 
-echo "
-Installing host services . . .
-"
-sudo apt-get install -y dnsmasq
-sudo apt-get install -y rng-tools
+    if [ $count -eq 1 ]
+    	then
 
-echo "
-Stopping host serices . . .
-"
+    	task="Generating new wpa_supplicant"
+		sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.orig
+		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
 
-sudo systemctl stop dnsmasq
+    
+	elif [ $count -eq 2 ]
+		then
 
+		task="Installing host services"
+		sudo apt-get install -y dnsmasq &> /dev/null
+		sudo apt-get install -y rng-tools &> /dev/null
+	
+	elif [ $count -eq 3 ] 
+		then
 
-echo "
-Updating dhcpcd.conf . . .
-"
-sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
-
-sudo echo "interface eth0
+		task="Updating dhcpcd.conf"
+		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
+		sudo echo "interface eth0
 metric 150
 static ip_address=192.168.1.254/24
 #static routers=192.168.1.1
 static domain_name_servers=8.8.8.8
 
 interface wlan0
-metric 100" | sudo tee -a /etc/dhcpcd.conf
+metric 100" >> /etc/dhcpcd.conf
 
-echo "
-Rebooting daemon and dhcpcd service . . .
-"
 
-sudo systemctl daemon-reload
+	elif [ $count -eq 4 ] 
+		then
 
-sudo service dhcpcd restart
-
-echo "
-Generating new dnsmasq.conf . . .
-"
-
-sudo echo "no-resolv
+		task="Generating new dnsmasq.conf"
+		sudo echo "no-resolv
 interface=eth0
 listen-address=192.168.1.254
 server=8.8.8.8 # Use Google DNS
@@ -60,43 +55,46 @@ bogus-priv # Drop the non-routed address spaces.
 dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
 #log each DNS query as it passes through
 log-queries
-dhcp-authoritative
-" | sudo tee /etc/dnsmasq.conf
+dhcp-authoritative" > /etc/dnsmasq.conf
+		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
-sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+	elif [ $count -eq 5 ] 
+		then
 
+		task="Generating new iptable Rules"
+		sudo iptables -F
+		sudo iptables -t nat -F
+		sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE 
+		sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+		sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 
-echo "
-Generating new iptable Rules . . .
-"
+	elif [ $count -eq 6 ] 
+		then
 
-sudo iptables -F
-sudo iptables -t nat -F
-sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE 
-sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+		task="Allowing ip_forward"
+		sudo sed -i '28 s/#//' /etc/sysctl.conf
+		sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
-echo "
-Allowing ip_forward . . .
-"
+	elif [ $count -eq 7 ] 
+		then
+		
+		task="Updating startup activities"
+		sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
 
-sudo sed -i '28 s/#//' /etc/sysctl.conf
+	else
+		task="Finished"
 
-sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-
-echo "
-Updating startup activities . . .
-"
-sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
-sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
-
-echo "
-Starting host services . . .
-"
-
-sudo systemctl daemon-reload
-
-sudo systemctl start dnsmasq
-
+	fi
+	cur=`date +%s`
+	
+    runtime=$(( $cur-$start ))
+    estremain=$(( ($runtime * $total / $count)-$runtime ))
+    printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+    if [ $count -lt 9 ]
+		then
+        count=$(( $count + 1 ))
+    fi
+done
+printf "\r%d.%d%% complete (7 of 7) - est %d:%0.2d remaining - Finished\e[K" $(( 7*100/$total )) $(( (7*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 
