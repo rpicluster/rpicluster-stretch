@@ -6,7 +6,7 @@ Enabling Wifi-Wifi networking scheme . . .
 "
 
 count=0
-total=10
+total=9
 start=`date +%s`
 
 while [ $count -le $total ]; do
@@ -107,10 +107,13 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
 	else
 		task="Finished"
-		count=$(( $count - 1 ))
 	fi
 	cur=`date +%s`
-    count=$(( $count + 1 ))
+	if [ $count -ne 9 ]
+		then
+        count=$(( $count + 1 ))
+    fi
+    echo "$count"
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
     printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
