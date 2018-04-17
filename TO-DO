@@ -16,10 +16,6 @@
 
 -take photos for website
 
--ALEC: move set wifi into progress loop and see if it breaks the buffer
-
--ALEC: TEST NEW LINK WIFI ADAPTOR
-
 -ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time. 
 
 

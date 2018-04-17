@@ -6,7 +6,7 @@ Enabling Wifi-Wifi networking scheme . . .
 "
 
 count=0
-total=9
+total=10
 start=`date +%s`
 
 while [ $count -le $total ]; do
