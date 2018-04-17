@@ -1,5 +1,9 @@
 
 -create python code that stamps user images on download
+   fdisk -l Server.img (the unzipped file, this command gives you partition start)
+   sudo disktype Server.img (this command gives you the fs type)
+   sudo mount Server.img mount/ -t ext4 -o loop -o offset=50463744
+   (this command should mount at offset)
 
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
 
@@ -13,12 +17,11 @@
 
 -take photos for website
 
--ALEC: Remove echo | tee output form network scripts and change their output to new format --->
-      [time-stamp : Description . . . (see if you can get animated dots) : Success print out on success : Duration]
-
 -ALEC: move set wifi into progress loop and see if it breaks the buffer
 
 -ALEC: TEST NEW LINK WIFI ADAPTOR
+
+-ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time. 
 
 
 NETWORK MANAGER:
