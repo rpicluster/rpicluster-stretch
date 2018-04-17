@@ -21,6 +21,6 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 sudo echo $'For rpicluster help and commands type rpicluster-help.\n'
-sudo python /rpicluster/network-manager/link_wifi_adaptor.py
+sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan0
 sudo python /rpicluster/network-manager/startup.py
 

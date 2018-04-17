@@ -16,6 +16,10 @@
 -ALEC: Remove echo | tee output form network scripts and change their output to new format --->
       [time-stamp : Description . . . (see if you can get animated dots) : Success print out on success : Duration]
 
+-ALEC: move set wifi into progress loop and see if it breaks the buffer
+
+-ALEC: TEST NEW LINK WIFI ADAPTOR
+
 
 NETWORK MANAGER:
 
