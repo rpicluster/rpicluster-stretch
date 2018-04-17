@@ -111,7 +111,6 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 	fi
 	cur=`date +%s`
 	
-    echo ""
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
     printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
