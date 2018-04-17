@@ -4,18 +4,22 @@
 echo "
 Enabling Wifi-Wifi networking scheme . . .
 "
-sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
-sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
-sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan1
 
-count=1
+count=0
 total=9
 start=`date +%s`
 
 while [ $count -lt $total ]; do
     cur=`date +%s`
 
-	if [ $count -eq 1 ]
+    if [ $count -eq 0 ]
+    	then
+    	sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant-wlan1.conf
+		sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan1
+
+
+	elif [ $count -eq 1 ]
 		then
 		# echo "
 		# Installing host services . . .
@@ -32,13 +36,13 @@ while [ $count -lt $total ]; do
 		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 		sudo echo "interface wlan0
-		metric 150
-		static ip_address=192.168.1.254/24
-		#static routers=192.168.1.1
-		static domain_name_servers=8.8.8.8 #192.168.1.1
+metric 150
+static ip_address=192.168.1.254/24
+#static routers=192.168.1.1
+static domain_name_servers=8.8.8.8 #192.168.1.1
 
-		interface wlan1
-		metric 100" >> /etc/dhcpcd.conf
+interface wlan1
+metric 100" >> /etc/dhcpcd.conf
 	elif [ $count -eq 3 ] 
 		then
 
@@ -46,20 +50,19 @@ while [ $count -lt $total ]; do
 		# Generating new hostapd.conf . . .
 		# "
 		sudo echo "interface=wlan0
-		driver=nl80211
-		ssid=rpicluster-AP
-		channel=1
-		wmm_enabled=0
-		wpa=1
-		wpa_passphrase=rpicluster
-		wpa_key_mgmt=WPA-PSK
-		wpa_pairwise=TKIP
-		rsn_pairwise=CCMP
-		auth_algs=1
-		macaddr_acl=0
-		logger_stdout=-1
-		logger_stdout_level=2
-		" > /etc/hostapd/hostapd.conf
+driver=nl80211
+ssid=rpicluster-AP
+channel=1
+wmm_enabled=0
+wpa=1
+wpa_passphrase=rpicluster
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+auth_algs=1
+macaddr_acl=0
+logger_stdout=-1
+logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 	elif [ $count -eq 4 ] 
 		then
 
@@ -78,16 +81,15 @@ while [ $count -lt $total ]; do
 		# "
 
 		sudo echo "no-resolv
-		interface=wlan0
-		listen-address=192.168.1.254
-		server=8.8.8.8 # Use Google DNS
-		domain-needed # Don't forward short names
-		bogus-priv # Drop the non-routed address spaces.
-		dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
-		#log each DNS query as it passes through
-		log-queries
-		dhcp-authoritative
-		" > /etc/dnsmasq.conf
+interface=wlan0
+listen-address=192.168.1.254
+server=8.8.8.8 # Use Google DNS
+domain-needed # Don't forward short names
+bogus-priv # Drop the non-routed address spaces.
+dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
+#log each DNS query as it passes through
+log-queries
+dhcp-authoritative" > /etc/dnsmasq.conf
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 	elif [ $count -eq 6 ] 
@@ -122,8 +124,7 @@ while [ $count -lt $total ]; do
 		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
 	fi
     count=$(( $count + 1 ))
-    pd=$(( $count * 73 / $total ))
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
-    printf "\r%d.%d%% complete ($count of $total) - est %d:%0.2d remaining\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+    printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 done

@@ -1,4 +1,3 @@
-
 -create python code that stamps user images on download
    fdisk -l Server.img (the unzipped file, this command gives you partition start)
    sudo disktype Server.img (this command gives you the fs type)
