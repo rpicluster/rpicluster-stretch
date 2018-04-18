@@ -18,6 +18,19 @@
 
 -WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
 
+-distributed install: rpc-install <package> <nodes>
+
+-change rpicluster to rpc
+
+-mpi-hosts file
+
+-rpc-shutdown && rpc-reboot
+
+-fix -eq bug
+
+-DEREK: locale fix
+
+-think about changing estimated time to completion
 
 NETWORK MANAGER:
 
