@@ -97,8 +97,15 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-# sudo sed -i "23s/.*/sudo echo 'For rpicluster help and commands type rpicluster-help.'/" /home/pi/.profile
-# sudo echo "sudo echo 'For rpicluster help and commands type rpicluster-help.'" | sudo tee -a /home/pi/.profile
+# sudo sed -i '20i\sudo bash /rpicluster/config/config_ip.sh\' /etc/rc.local
+
+
+# sudo sed -i '20i\sudo systemctl start hostapd\' /etc/rc.local
+# sudo sed -i '21i\sudo systemctl start dnsmasq\' /etc/rc.local
+# sudo sed -i '22i\sudo systemctl start dhcpcd\' /etc/rc.local
+# sudo sed -i '23i\sudo systemctl daemon-reload\' /etc/rc.local
+
+
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
