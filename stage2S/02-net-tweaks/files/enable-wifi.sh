@@ -119,5 +119,5 @@ dhcp-authoritative" > /etc/dnsmasq.conf
         count=$(( $count + 1 ))
     fi
 done
-printf "\r%d.%d%% complete (9 of 9) - est %d:%0.2d remaining - Finished\e[K" $(( 9*100/$total )) $(( (9*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+printf "\r%d.%d%% complete (9 of 9 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 9*100/$total )) $(( (9*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 

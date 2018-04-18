@@ -52,5 +52,5 @@ while [ $count -le $total ]; do
         count=$(( $count + 1 ))
     fi
 done
-printf "\r%d.%d%% complete (4 of 4) - est %d:%0.2d remaining - Finished\e[K" $(( 4*100/$total )) $(( (4*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+printf "\r%d.%d%% complete (4 of 4 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 4*100/$total )) $(( (4*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 
