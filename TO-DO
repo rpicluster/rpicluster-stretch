@@ -18,6 +18,8 @@
 
 -WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
 
+-remove install host services from scripts ... ? we dont really need this step lol
+
 -distributed install: rpc-install <package> <nodes>
 
 -change rpicluster to rpc
