@@ -48,6 +48,8 @@ install -m 777 files/.bash_aliases                      "${ROOTFS_DIR}/home/pi/"
 
 install -m 777 files/.profile                           "${ROOTFS_DIR}/home/pi/"
 
+install -m 777 files/startup-rclocal.py                 "${ROOTFS_DIR}/rpicluster/config"
+
 
 on_chroot << EOF
 systemctl disable hwclock.sh
@@ -97,9 +99,6 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-# sudo sed -i '20i\sudo bash /rpicluster/config/config_ip.sh\' /etc/rc.local
-
-
 # sudo sed -i '20i\sudo systemctl start hostapd\' /etc/rc.local
 # sudo sed -i '21i\sudo systemctl start dnsmasq\' /etc/rc.local
 # sudo sed -i '22i\sudo systemctl start dhcpcd\' /etc/rc.local
