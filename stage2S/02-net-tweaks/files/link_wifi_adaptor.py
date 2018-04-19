@@ -15,4 +15,3 @@ if(os.path.isfile(path) == False):
     f.close()
     stream.close()
 
-
