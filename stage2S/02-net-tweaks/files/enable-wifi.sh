@@ -27,7 +27,8 @@ while [ $count -le $total ]; do
 		sudo apt-get install -y dnsmasq &> /dev/null
 		sudo apt-get install -y hostapd &> /dev/null
 		sudo apt-get install -y rng-tools &> /dev/null
-	elif [ $count -eq 3 ] 
+
+	elif [ $count -eq 3 ]
 		then
 
 
@@ -42,7 +43,7 @@ static domain_name_servers=8.8.8.8 #192.168.1.1
 
 interface wlan1
 metric 100" >> /etc/dhcpcd.conf
-	elif [ $count -eq 4 ] 
+	elif [ $count -eq 4 ]
 		then
 
 		task="Generating new hostapd.conf"
@@ -60,14 +61,14 @@ auth_algs=1
 macaddr_acl=0
 logger_stdout=-1
 logger_stdout_level=2" > /etc/hostapd/hostapd.conf
-	elif [ $count -eq 5 ] 
+	elif [ $count -eq 5 ]
 		then
 
 		task="Linking new hostapd.conf"
 		sudo sed -i '10s/.*/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/' /etc/default/hostapd
 		sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
-	
-	elif [ $count -eq 6 ] 
+
+	elif [ $count -eq 6 ]
 		then
 
 		task="Generating new dnsmasq.conf"
@@ -86,11 +87,11 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 	elif [ $count -eq 7 ] 
 		then
-		
+
 		task="Generating new iptable Rules"
 		sudo iptables -F
 		sudo iptables -t nat -F
-		sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE 
+		sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE
 		sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 		sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
 	elif [ $count -eq 8 ]
@@ -110,7 +111,7 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 
 	fi
 	cur=`date +%s`
-	
+
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
     printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
