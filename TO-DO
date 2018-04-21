@@ -14,7 +14,7 @@
 
 -take photos for website
 
--ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time. 
+-ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time.
 
 -WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
 
@@ -22,13 +22,9 @@
 
 -distributed install: rpc-install <package> <nodes>
 
--change rpicluster to rpc
-
 -mpi-hosts file
 
 -rpc-shutdown && rpc-reboot
-
--fix -eq bug
 
 -DEREK: locale fix
 
@@ -37,6 +33,8 @@
 -Write 5 sentence pitch
 
 -Draw up project plan and milestones
+
+-ADD ERROR CHECKING TO RPC-STATUS TOOL LOOOOL
 
 NETWORK MANAGER:
 

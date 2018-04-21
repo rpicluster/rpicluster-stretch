@@ -16,5 +16,5 @@ _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
-sudo python /rpicluster/config/startup-rclocal.py
+#sudo python /rpicluster/config/startup-rclocal.py
 exit 0

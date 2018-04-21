@@ -24,9 +24,9 @@ while [ $count -le $total ]; do
 		then
 
 		task="Installing host services"
-		sudo apt-get install -y dnsmasq &> /dev/null
-		sudo apt-get install -y hostapd &> /dev/null
-		sudo apt-get install -y rng-tools &> /dev/null
+		# sudo apt-get install -y dnsmasq &> /dev/null
+		# sudo apt-get install -y hostapd &> /dev/null
+		# sudo apt-get install -y rng-tools &> /dev/null
 
 	elif [ $count -eq 3 ]
 		then
@@ -85,7 +85,7 @@ log-queries
 dhcp-authoritative" > /etc/dnsmasq.conf
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
-	elif [ $count -eq 7 ] 
+	elif [ $count -eq 7 ]
 		then
 
 		task="Generating new iptable Rules"
@@ -121,4 +121,3 @@ dhcp-authoritative" > /etc/dnsmasq.conf
     fi
 done
 printf "\r%d.%d%% complete (9 of 9 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 9*100/$total )) $(( (9*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
-

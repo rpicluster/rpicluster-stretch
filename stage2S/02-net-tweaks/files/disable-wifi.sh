@@ -25,30 +25,30 @@ while [ $count -le $total ]; do
 		sudo rm /etc/dhcpcd.conf
 		sudo mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
 
-		
-	elif [ $count -eq 3 ] 
+
+	elif [ $count -eq 3 ]
 		then
 
 		task="Removing hostapd.conf"
 		sudo rm /etc/hostapd/hostapd.conf
 
 
-	elif [ $count -eq 4 ] 
+	elif [ $count -eq 4 ]
 		then
 
 		task="Unlinking hostapd.conf"
 		sudo sed -i '10s/.*/#DAEMON_CONF=""/' /etc/default/hostapd
 		sudo sed -i '19s/.*/#DAEMON_CONF=/' /etc/init.d/hostapd
 
-		
-	elif [ $count -eq 5 ] 
+
+	elif [ $count -eq 5 ]
 		then
 
 		task="Restoring dnsmasq.conf"
 		sudo rm /etc/dnsmasq.conf
 		sudo touch /etc/dnsmasq.conf
-		
-	elif [ $count -eq 6 ] 
+
+	elif [ $count -eq 6 ]
 		then
 
 		task="Restoring rc.local"
@@ -59,7 +59,7 @@ while [ $count -le $total ]; do
 
 	fi
 	cur=`date +%s`
-	
+
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
     printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
