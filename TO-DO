@@ -14,11 +14,7 @@
 
 -take photos for website
 
--ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time.
-
 -WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
-
--remove install host services from scripts ... ? we dont really need this step lol
 
 -distributed install: rpc-install <package> <nodes>
 
@@ -27,6 +23,8 @@
 -rpc-shutdown && rpc-reboot
 
 -DEREK: locale fix
+
+-DEREK: the -eq fix doesnt work sadly it just says "Node Configured" on every device even if its not a node and it failed to be configured
 
 -think about changing estimated time to completion
 
@@ -43,7 +41,7 @@ NETWORK MANAGER:
 2)switch : DONE
 3)otg : NOT DONE
 
--for OTG: 
+-for OTG:
 1) dns to allow for a connection without a unique mac address on otg
 2) make connection, then run ip_configuration-like program to give the currently connected non-configured pi a unique ip address and otg mac address 
 

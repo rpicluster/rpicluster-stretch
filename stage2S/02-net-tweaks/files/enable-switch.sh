@@ -7,7 +7,7 @@ Enabling Wifi-Ethernet_Switch networking scheme . . .
 
 
 count=1
-total=7
+total=6
 start=`date +%s`
 
 while [ $count -le $total ]; do
@@ -19,15 +19,7 @@ while [ $count -le $total ]; do
 		sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.orig
 		sudo bash /rpicluster/network-manager/set-wifi.sh wpa_supplicant.conf
 
-    
 	elif [ $count -eq 2 ]
-		then
-
-		task="Installing host services"
-		sudo apt-get install -y dnsmasq &> /dev/null
-		sudo apt-get install -y rng-tools &> /dev/null
-	
-	elif [ $count -eq 3 ] 
 		then
 
 		task="Updating dhcpcd.conf"
@@ -42,7 +34,7 @@ interface wlan0
 metric 100" >> /etc/dhcpcd.conf
 
 
-	elif [ $count -eq 4 ] 
+	elif [ $count -eq 3 ]
 		then
 
 		task="Generating new dnsmasq.conf"
@@ -58,7 +50,7 @@ log-queries
 dhcp-authoritative" > /etc/dnsmasq.conf
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
-	elif [ $count -eq 5 ] 
+	elif [ $count -eq 4 ]
 		then
 
 		task="Generating new iptable Rules"
@@ -68,16 +60,16 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 		sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 		sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
 
-	elif [ $count -eq 6 ] 
+	elif [ $count -eq 5 ]
 		then
 
 		task="Allowing ip_forward"
 		sudo sed -i '28 s/#//' /etc/sysctl.conf
 		sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
-	elif [ $count -eq 7 ] 
+	elif [ $count -eq 6 ]
 		then
-		
+
 		task="Updating startup activities"
 		sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 		sudo sed -i '20i\iptables-restore < \/etc\/iptables.ipv4.nat\' /etc/rc.local
@@ -87,14 +79,13 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 
 	fi
 	cur=`date +%s`
-	
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
     printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
-    if [ $count -lt 9 ]
+    if [ $count -lt 8 ]
 		then
         count=$(( $count + 1 ))
     fi
 done
-printf "\r%d.%d%% complete (7 of 7 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 7*100/$total )) $(( (7*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+printf "\r%d.%d%% complete (6 of 6 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 6*100/$total )) $(( (6*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 

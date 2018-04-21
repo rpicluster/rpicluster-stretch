@@ -33,10 +33,10 @@ if(network != 0):
     # else if(network == 3):
 
     print("\nCurrent network configuration: " + network_type(network))
-    print("\nInternet on " + internet_name + "--> " + internet_ip)
+    print("\nInternet on " + internet_name + "--> " + str(internet_ip))
     print("                            |")
     print("                            |")
-    print("                            --> "+ connection_name + "--> " + access_point)
+    print("                            --> "+ connection_name + "--> " + str(access_point))
     for x in range(len(machines)):
         print("                                                       |")
         print("                                                       --> " + machines[x][0] + " - " + machines[x][1])

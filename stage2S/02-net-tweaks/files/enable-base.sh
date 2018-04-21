@@ -6,20 +6,12 @@ Enabling Base networking scheme . . .
 "
 
 count=1
-total=5
+total=4
 start=`date +%s`
 
 while [ $count -le $total ]; do
 
-    if [ $count -eq 1 ]
-    	then
-
-    	task="Installing host services"
-    	sudo apt-get install -y dnsmasq
-		sudo apt-get install -y hostapd
-		sudo apt-get install -y rng-tools
-    
-	elif [ $count -eq 2 ]
+	if [ $count -eq 1 ]
 		then
 
 		task="Updating dhcpcd.conf"
@@ -31,8 +23,7 @@ static ip_address=192.168.1.254/24
 static domain_name_servers=8.8.8.8" >> /etc/dhcpcd.conf
 
 
-	
-	elif [ $count -eq 3 ] 
+	elif [ $count -eq 2 ]
 		then
 
 		task="Generating new hostapd.conf"
@@ -51,7 +42,7 @@ macaddr_acl=0
 logger_stdout=-1
 logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 
-	elif [ $count -eq 4 ] 
+	elif [ $count -eq 3 ]
 		then
 
 		task="Linking new hostapd.conf"
@@ -60,7 +51,7 @@ logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 		sudo sed -i '19s/.*/DAEMON_CONF=\/etc\/hostapd\/hostapd.conf/' /etc/init.d/hostapd
 
 
-	elif [ $count -eq 5 ] 
+	elif [ $count -eq 4 ]
 		then
 
 		task="Generating new dnsmasq.conf"
@@ -83,14 +74,13 @@ dhcp-authoritative" > /etc/dnsmasq.conf
 
 	fi
 	cur=`date +%s`
-	
     runtime=$(( $cur-$start ))
     estremain=$(( ($runtime * $total / $count)-$runtime ))
     printf "\r%d.%d%% complete ($count of $total tasks) - est %d:%0.2d remaining - $task\e[K" $(( $count*100/$total )) $(( ($count*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
-    if [ $count -lt 7 ]
+    if [ $count -lt 6 ]
 		then
         count=$(( $count + 1 ))
     fi
 done
-printf "\r%d.%d%% complete (5 of 5 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 5*100/$total )) $(( (5*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
+printf "\r%d.%d%% complete (4 of 4 tasks) - est %d:%0.2d remaining - Finished\e[K" $(( 4*100/$total )) $(( (4*1000/$total)%10)) $(( $estremain/60 )) $(( $estremain%60 ))
 

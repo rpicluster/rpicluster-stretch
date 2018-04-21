@@ -21,8 +21,6 @@ do
     fi
 
 done
-# echo "All nodes configured. Rebooting cluster."
 echo "All nodes configured."
 sed -i 's/./1/2' /rpicluster/network-manager/configured
-# sudo reboot -h now
 

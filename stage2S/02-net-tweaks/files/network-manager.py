@@ -38,7 +38,7 @@ if(option != network):
     os.system("sudo bash " + switch_enable(option))
     os.system("sudo echo " + str(option) + "0" +" > /rpicluster/network-manager/configured")
     print("\nConfiguring nodes . . . ")
-    os.system("sleep 2 && sudo bash /rpicluster/config/config_ip.sh")
+    os.system("sudo bash /rpicluster/config/config_ip.sh")
     print("\nRebooting machine . . . ")
     os.system("sudo reboot -h now")
 else:
