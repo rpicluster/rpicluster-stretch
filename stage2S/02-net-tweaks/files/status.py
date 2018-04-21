@@ -32,7 +32,7 @@ if(network != 0):
 
     # else if(network == 3):
     print("\nCurrent network configuration: " + network_type(network))
-
+    print("\nInternet on " + internet_name + "--> " + internet_ip)
     if(internet_ip != "None"):
         print("                            |")
         print("                            |")
