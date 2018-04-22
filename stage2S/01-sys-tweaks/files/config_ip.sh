@@ -6,12 +6,14 @@ sudo cp /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 sudo rm nodes
 sudo touch nodes
 sudo chmod 777 nodes
+$zero=0
+$zero_string="0"
 for i in ${output[@]}
 do
     echo "Attempting to configure machine at IP: $i"
     rv=$(fab pingall -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running)
 
-    if [ $rv ];
+    if [ $rv -eq $zero ] || [ $rv == $zero_string ];
     then
         counter=$((counter+1))
         fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
