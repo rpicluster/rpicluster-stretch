@@ -2,6 +2,7 @@
 
 
 echo "
+
 Enabling Base networking scheme . . .
 "
 

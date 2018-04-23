@@ -14,15 +14,15 @@
 
 -distributed install: rpc-install <package> <nodes>
 
--mpi-hosts file
+-ALEC: mpi-hosts file
 
--TEST rpc-shutdown && rpc-reboot
+-FIX AND TEST rpc-shutdown && rpc-reboot (currently doesnt do anythign i dont think)
 
 -DEREK: locale fix
 
--DEREK: the -eq fix doesnt work sadly it just says "Node Configured" on every device even if its not a node and it failed to be configured
+-DEREK: remove this warning for ssh Warning: Permanently added 'node1,192.168.1.1' (ECDSA) to the list of known hosts. it happens everytime
 
--think about changing estimated time to completion
+-ALEC: think about changing estimated time to completion
 
 -Write 5 sentence pitch
 
