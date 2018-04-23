@@ -27,9 +27,18 @@ print("0 = remove networking\n1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 =
 if(network != 0):
     print("Current network mode: " + str(network))
 
+w = open("rpicluster/config/.warn")
+warn = int(w.read(1))
+if(not int(warn)):
+    print("\nWARNING: Leave previous networking scheme connected durring this process\n")
+    val = raw_input("disable warning (y/n) ")
+    if(str(val) == "y"):
+        os.system("sudo echo 1 > /rpicluster/config/.warn")
 option = int(input("Select a networking option: "))
-if(network == 2 and option == 1):
-    raw_input("\nMake sure to unplug the ethernet! Press enter to continue. ")
+
+# if(network == 2 and option == 1):
+#     raw_input("\n    Make sure to unplug the ethernet! Press enter to continue. ")
+
 
 f.close()
 
@@ -39,7 +48,7 @@ if(option != network):
     os.system("sudo echo " + str(option) + "0" +" > /rpicluster/network-manager/configured")
     print("\nConfiguring nodes . . . ")
     os.system("sudo bash /rpicluster/config/config_ip.sh")
-    print("\nRebooting machine . . . ")
+    raw_input("\nWork complete. If applicable, disconnect old networking scheme. Press enter to continue. ")
     os.system("sudo reboot -h now")
 else:
     print("This network configuration is already active.")
