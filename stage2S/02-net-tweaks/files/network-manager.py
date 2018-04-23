@@ -48,7 +48,7 @@ if(option != network):
     os.system("sudo echo " + str(option) + "0" +" > /rpicluster/network-manager/configured")
     print("\n\nConfiguring nodes . . . ")
     os.system("sudo bash /rpicluster/config/config_ip.sh")
-    raw_input("\nWork complete. If applicable, disconnect old networking scheme. Press enter to continue. ")
+    raw_input("\nWork complete. If applicable, disconnect old networking and connect new networking scheme. Press enter to continue. ")
     os.system("sudo reboot -h now")
 else:
     print("This network configuration is already active.")
