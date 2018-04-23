@@ -24,6 +24,12 @@ def update():
     run('sudo rm -rf /var/lib/apt/lists/* -f')
     run('sudo apt-get update && sudo apt-get upgrade -y')
 
+def reboot():
+    run('sudo reboot -h now')
+
+def shutdown():
+    run('sudo shutdown -h now')
+
 def pingall():
     with settings(abort_exception = FabricException):
         try:
