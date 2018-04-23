@@ -6,8 +6,8 @@ sudo cp /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
 sudo rm nodes
 sudo touch nodes
 sudo chmod 777 nodes
-$zero=0
-$zero_string="0"
+zero=0
+zero_string="0"
 for i in ${output[@]}
 do
     echo "Attempting to configure machine at IP: $i"

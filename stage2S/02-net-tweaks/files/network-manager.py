@@ -27,13 +27,13 @@ print("0 = remove networking\n1 = wifi to wifi\n2 = wifi to ethernet-switch\n3 =
 if(network != 0):
     print("Current network mode: " + str(network))
 
-w = open("rpicluster/config/.warn")
+w = open("/rpicluster/config/.warn")
 warn = int(w.read(1))
-if(not int(warn)):
-    print("\nWARNING: Leave previous networking scheme connected durring this process\n")
-    val = raw_input("disable warning (y/n) ")
+if(int(warn)):
+    val = raw_input("\nWARNING: Leave previous networking scheme connected durring this process. disable warning (y/n) ")
     if(str(val) == "y"):
-        os.system("sudo echo 1 > /rpicluster/config/.warn")
+        os.system("sudo echo 0 > /rpicluster/config/.warn")
+
 option = int(input("Select a networking option: "))
 
 # if(network == 2 and option == 1):
