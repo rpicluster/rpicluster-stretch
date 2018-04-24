@@ -9,11 +9,13 @@ def config_ip(num):
             run('sudo python calibrate_touchless.py')
         with cd('/etc'):
             run('sudo chmod 777 hostname')
+            run('sudo chmod 777 hosts')
             run('sudo echo node{} > hostname'.format(num))
-            run('sudo sed -i \'6s/.*/127.0.1.1       node{}/\' /etc/hosts'.format(num))
+            run('sudo sed -i \'8s/.*/#MPI CLUSTER SETUP/\' /etc/hosts')
             run('sudo echo "192.168.1.254    rpicluster" >> /etc/hosts')
             run('sudo echo "192.168.1.{}    node{}" >> /etc/hosts'.format(num, num))
             run('sudo chmod 644 hostname')
+            run('sudo chmod 644 hosts')
         run('sudo reboot -h now')
 
 def send_SSH_keys(ssh_key):

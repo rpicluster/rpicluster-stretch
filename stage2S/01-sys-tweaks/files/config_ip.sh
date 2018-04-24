@@ -8,8 +8,12 @@ sudo touch nodes
 sudo chmod 777 nodes
 zero=0
 zero_string="0"
+amount=0
 for i in ${output[@]}
 do
+    sudo sed -i '8s/.*/#MPI CLUSTER SETUP/\' /etc/hosts
+    sudo echo "192.168.1.254    rpicluster" >> /etc/hosts
+    sudo echo "rpicluster slots=1  max-slots=1" >> ~/NFS/MPI/mpiHosts
     echo "Attempting to configure machine at IP: $i"
     rv=$(fab pingall -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running)
 
@@ -18,11 +22,12 @@ do
         counter=$((counter+1))
         fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
         echo -e "Node configured.\n"
+        amount=$amount+1
     else
         echo -e "Skip configuration of non-node device.\n"
     fi
 
 done
-echo "All nodes configured."
+echo "$amount nodes configured."
 sed -i 's/./1/2' /rpicluster/network-manager/configured
 

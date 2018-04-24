@@ -38,3 +38,4 @@ hostapd
 rng-tools
 openmpi-bin
 libopenmpi-dev
+nfs-kernel-server

@@ -35,3 +35,4 @@ libffi-dev
 fabric
 openmpi-bin
 libopenmpi-dev
+nfs-common
