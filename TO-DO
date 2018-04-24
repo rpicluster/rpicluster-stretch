@@ -1,5 +1,3 @@
--create python code that stamps user images on download
-
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
 
 -normalize permissions of files
@@ -22,13 +20,9 @@
 
 -DEREK: remove this warning for ssh Warning: Permanently added 'node1,192.168.1.1' (ECDSA) to the list of known hosts. it happens everytime
 
--ALEC: think about changing estimated time to completion
-
 -Write 5 sentence pitch
 
 -Draw up project plan and milestones
-
--CREATE COMPANY ONE PAGE THING
 
 NETWORK MANAGER:
 
