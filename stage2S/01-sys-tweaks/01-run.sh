@@ -18,6 +18,8 @@ install -d                                              "${ROOTFS_DIR}/home/pi/N
 
 install -d                                              "${ROOTFS_DIR}/home/pi/NFS/MPI"
 
+install -m 755 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/NFS/MPI"
+
 install -m 755 files/mpi_hello_world.c                  "${ROOTFS_DIR}/rpicluster/code"
 
 install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluster/config"
@@ -110,8 +112,6 @@ EOF
 on_chroot << EOF
 pip install zerorpc
 sudo echo "/home/pi/NFS *(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-sudo touch ~/NFS/MPI/mpiHosts
-sudo exportfs -a
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
