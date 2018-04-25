@@ -14,13 +14,13 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/NFS"
+install -d                                              "${ROOTFS_DIR}/home/pi/nfs"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/NFS/MPI"
+install -d                                              "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -m 755 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/NFS/MPI"
+install -m 755 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -m 755 files/mpi_hello_world.c                  "${ROOTFS_DIR}/rpicluster/code"
+install -m 755 files/mpi_hello_world.c                  "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluster/config"
 
