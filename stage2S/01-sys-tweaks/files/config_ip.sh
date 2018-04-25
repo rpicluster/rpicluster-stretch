@@ -1,4 +1,4 @@
-# sudo exportfs -a
+sudo exportfs -a
 sudo python /rpicluster/config/config.py &
 cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join(get_machines())'`
@@ -31,6 +31,5 @@ do
 
 done
 echo "$amount nodes configured."
-# sudo exportfs -a
 sed -i 's/./1/2' /rpicluster/network-manager/configured
 
