@@ -3,6 +3,7 @@ cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join(get_machines())'`
 counter=0
 sudo cp /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
+sudo cp /etc/hosts.orig /etc/hosts
 sudo rm nodes
 sudo touch nodes
 sudo chmod 777 nodes
@@ -22,7 +23,7 @@ do
         counter=$((counter+1))
         fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
         echo -e "Node configured.\n"
-        amount=$amount+1
+        amount=$((amount + 1))
     else
         echo -e "Skip configuration of non-node device.\n"
     fi

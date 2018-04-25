@@ -18,4 +18,5 @@ psk=\"rpicluster\"
 
 echo "node" > /etc/hostname
 sudo sed -i '6s/.*/127.0.1.1       node/' /etc/hosts
+sudo cp /etc/hosts /etc/hosts.orig
 EOF
