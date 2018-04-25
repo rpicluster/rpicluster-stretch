@@ -4,15 +4,11 @@
 
 -update status tool, network manager, and help to include OTG MODE
 
--set up a NFS cloud so the master and nodes can share files easily http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
-
 -take photos for website
 
 -WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
 
 -distributed install: rpc-install <package> <nodes>
-
--ALEC: mpi-hosts file
 
 -FIX AND TEST rpc-shutdown && rpc-reboot (currently doesnt do anythign i dont think)
 

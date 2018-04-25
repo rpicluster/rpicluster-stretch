@@ -24,7 +24,7 @@ install -m 755 files/enable-base.sh                    "${ROOTFS_DIR}/rpicluster
 
 install -m 755 files/disable-base.sh                   "${ROOTFS_DIR}/rpicluster/network-manager/"
 
-install -m 755 files/startup-profile.py                        "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/startup-profile.py                     "${ROOTFS_DIR}/rpicluster/network-manager/"
 
 install -m 755 files/network-manager.py                "${ROOTFS_DIR}/rpicluster/network-manager/"
 

@@ -14,7 +14,9 @@ def get_ip(ip_output, interface):
     for x in range(len(output)):
         if (interface in output[x]):
             content = output[x+2].split(" ")
-            return content[5]
+            if(len(content) > 1):
+                return content[5]
+            return None
 
 def network_type(network):
     switcher = {

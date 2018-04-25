@@ -36,9 +36,6 @@ if(int(warn)):
 
 option = int(input("Select a networking option: "))
 
-# if(network == 2 and option == 1):
-#     raw_input("\n    Make sure to unplug the ethernet! Press enter to continue. ")
-
 
 f.close()
 
