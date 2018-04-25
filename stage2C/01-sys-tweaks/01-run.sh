@@ -12,7 +12,7 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/nfs"
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
 
 install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
 
