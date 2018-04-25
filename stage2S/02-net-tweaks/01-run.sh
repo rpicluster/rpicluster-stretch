@@ -49,6 +49,8 @@ sudo sed -i '35s/.*/StrictHostKeyChecking no/' /etc/ssh/ssh_config
 
 sudo sed -i '36s/.*/UserKnownHostsFile \/dev\/null/' /etc/ssh/ssh_config
 
+sudo sed -i '37s/.*/LogLevel QUIET' /etc/ssh/ssh_config
+
 sudo cp /etc/hosts /etc/hosts.orig
 
 
