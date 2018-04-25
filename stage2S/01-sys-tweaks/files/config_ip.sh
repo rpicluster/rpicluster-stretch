@@ -13,7 +13,7 @@ zero_string="0"
 amount=0
 sudo echo "#MPI CLUSTER SETUP" >> /etc/hosts
 sudo echo "192.168.1.254    rpicluster" >> /etc/hosts
-sudo echo "rpicluster slots=1  max-slots=1" >> /home/pi/NFS/MPI/mpiHosts
+sudo echo "rpicluster slots=1  max-slots=1" >> /home/pi/nfs/mpi/mpiHosts
 for i in ${output[@]}
 do
     echo "Attempting to configure machine at IP: $i"

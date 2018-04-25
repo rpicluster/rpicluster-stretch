@@ -12,7 +12,7 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/NFS"
+install -d                                              "${ROOTFS_DIR}/home/pi/nfs"
 
 install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
 
@@ -77,8 +77,8 @@ on_chroot << EOF
 pip install zerorpc
 sudo systemctl set-default multi-user.target
 sudo ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
-sudo mount -t nfs rpicluster:/home/pi/NFS ~/NFS
-sudo echo "rpicluster:/home/pi/NFS /home/pi/NFS nfs" >> /etc/fstab
+sudo mount -t nfs rpicluster:/home/pi/nfs ~/nfs
+sudo echo "rpicluster:/home/pi/nfs /home/pi/nfs nfs" >> /etc/fstab
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
