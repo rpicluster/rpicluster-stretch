@@ -11,11 +11,6 @@ install -v -m 600 files/wpa_supplicant.conf             ${ROOTFS_DIR}/etc/wpa_su
 
 on_chroot << EOF
 
-sudo echo "network={
-ssid=\"rpicluster-AP\"
-psk=\"rpicluster\"
-}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-
 echo "node" > /etc/hostname
 sudo sed -i '6s/.*/127.0.1.1       node/' /etc/hosts
 sudo cp /etc/hosts /etc/hosts.orig

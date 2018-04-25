@@ -65,6 +65,7 @@ install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
 
 
 
+# systemctl disable nfs-common
 
 on_chroot << EOF
 systemctl disable hwclock.sh
