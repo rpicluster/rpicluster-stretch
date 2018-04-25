@@ -17,12 +17,12 @@ sudo echo "rpicluster slots=1  max-slots=1" >> /home/pi/nfs/mpi/mpiHosts
 for i in ${output[@]}
 do
     echo "Attempting to configure machine at IP: $i"
-    rv=$(fab pingall -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running)
+    rv=$(fab pingall -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running,stderr)
 
     if [ $rv -eq $zero ] || [ $rv == $zero_string ];
     then
         counter=$((counter+1))
-        fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
+        fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running,stderr
         echo -e "Node configured.\n"
         amount=$((amount + 1))
     else
