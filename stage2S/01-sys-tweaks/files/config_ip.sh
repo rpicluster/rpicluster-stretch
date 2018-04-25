@@ -11,7 +11,7 @@ zero_string="0"
 amount=0
 for i in ${output[@]}
 do
-    sudo sed -i '8s/.*/#MPI CLUSTER SETUP/\' /etc/hosts
+    sudo echo "#MPI CLUSTER SETUP" >> /etc/hosts
     sudo echo "192.168.1.254    rpicluster" >> /etc/hosts
     sudo echo "rpicluster slots=1  max-slots=1" >> ~/NFS/MPI/mpiHosts
     echo "Attempting to configure machine at IP: $i"
