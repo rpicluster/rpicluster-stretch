@@ -14,9 +14,9 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/nfs"
+install -m 755 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/nfs/mpi"
+install -m 755 -d                                       "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 755 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
