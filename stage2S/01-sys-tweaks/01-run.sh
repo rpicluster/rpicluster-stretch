@@ -60,6 +60,9 @@ install -m 777 files/shutdown.sh                        "${ROOTFS_DIR}/rpicluste
 
 install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
+install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
+
+
 
 
 
@@ -111,7 +114,7 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-sudo echo "/home/pi/NFS *(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+sudo service nfs-kernel-server restart
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*

@@ -26,9 +26,10 @@ install -m 644 files/console-setup                      "${ROOTFS_DIR}/etc/defau
 
 install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
+
+# systemctl disable nfs-common
 on_chroot << EOF
 systemctl disable hwclock.sh
-systemctl disable nfs-common
 systemctl disable rpcbind
 systemctl disable ssh
 systemctl enable regenerate_ssh_host_keys

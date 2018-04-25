@@ -12,7 +12,7 @@ def config_ip(num):
             run('sudo chmod 777 hosts')
             run('sudo cp hosts.orig hosts')
             run('sudo echo node{} > hostname'.format(num))
-            run('sudo sed -i \'8s/.*/#MPI CLUSTER SETUP/\' /etc/hosts')
+            run('sudo echo "#MPI CLUSTER SETUP" >> /etc/hosts')
             run('sudo echo "192.168.1.254    rpicluster" >> /etc/hosts')
             run('sudo echo "192.168.1.{}    node{}" >> /etc/hosts'.format(num, num))
             run('sudo chmod 644 hostname')
