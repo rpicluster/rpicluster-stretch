@@ -21,7 +21,6 @@
 TESTING:
 -had to run !ssh-keygen every time wtf
 -why does the -eq bug come upt everytime
--why do the ips get fucked up
 -why are old leases still active
 -no reboot on configure
 
