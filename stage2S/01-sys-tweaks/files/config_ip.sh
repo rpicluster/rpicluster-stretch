@@ -20,6 +20,7 @@ do
         rv=0
     else
         rv=1
+    fi
 
     if [ $rv -eq 0 ];
     then
