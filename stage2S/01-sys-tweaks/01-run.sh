@@ -28,6 +28,8 @@ install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluste
 
 install -m 755 files/update.sh                          "${ROOTFS_DIR}/rpicluster/config"
 
+install -m 755 files/install.sh                         "${ROOTFS_DIR}/rpicluster/config"
+
 install -m 755 files/fabfile.py                         "${ROOTFS_DIR}/rpicluster/config"
 
 install -m 755 files/functions.py                       "${ROOTFS_DIR}/rpicluster/config"
