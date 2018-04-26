@@ -36,6 +36,12 @@ NETWORK MANAGER:
 1) dns to allow for a connection without a unique mac address on otg
 2) make connection, then run ip_configuration-like program to give the currently connected non-configured pi a unique ip address and otg mac address 
 
+DevOps tooling
+Long Running Services
+Batch Scheduling
+Big Data Processing
+Data Storage
+Machine Learning
 
 
 

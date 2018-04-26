@@ -53,5 +53,8 @@ sudo sed -i '37s/.*/LogLevel ERROR/' /etc/ssh/ssh_config
 
 sudo cp /etc/hosts /etc/hosts.orig
 
+sudo echo "LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+LANGUAGE=en_US.UTF-8" >> /etc/default/locale
 
 EOF
