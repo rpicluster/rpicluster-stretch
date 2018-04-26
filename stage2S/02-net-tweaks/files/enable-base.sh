@@ -28,22 +28,37 @@ static domain_name_servers=8.8.8.8" >> /etc/dhcpcd.conf
 		then
 
 		task="Generating new hostapd.conf"
-		sudo echo "interface=wlan0
+		sudo echo "#INTERFACE
+interface=wlan0
+
+#DRIVER SETTINGS
 driver=nl80211
+
+#WLAN SETTINGS
+country_code=US
 ssid=rpicluster-AP
 channel=11
-wmm_enabled=0
+wmm_enabled=1
 hw_mode=g
+
+#N-WLAN SETTINGS
 ieee80211n=1
-obss_interval=1
+obss_interval=0
+require_ht=0
 ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
-wpa=1
+
+#WPA SETTINGS
+wpa=2
 wpa_passphrase=rpicluster
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
-auth_algs=1
+auth_algs=3
 macaddr_acl=0
+
+# Logging
+logger_syslog=-1
+logger_syslog_level=3
 logger_stdout=-1
 logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 
