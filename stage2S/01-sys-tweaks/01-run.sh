@@ -52,8 +52,6 @@ install -m 777 files/.bash_aliases                      "${ROOTFS_DIR}/home/pi/"
 
 install -m 777 files/.profile                           "${ROOTFS_DIR}/home/pi/"
 
-install -m 777 files/startup-rclocal.py                 "${ROOTFS_DIR}/rpicluster/config"
-
 install -m 777 files/.warn                              "${ROOTFS_DIR}/rpicluster/config"
 
 install -m 777 files/reboot.sh                          "${ROOTFS_DIR}/rpicluster/config"

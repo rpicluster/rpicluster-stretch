@@ -4,4 +4,4 @@ for i in ${output[@]}
 do
     fab shutdown -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
 done
-
+sudo shutdown -h now
