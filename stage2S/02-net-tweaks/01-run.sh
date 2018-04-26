@@ -51,6 +51,12 @@ sudo sed -i '36s/.*/UserKnownHostsFile \/dev\/null/' /etc/ssh/ssh_config
 
 sudo sed -i '37s/.*/LogLevel ERROR/' /etc/ssh/ssh_config
 
+sudo sed -i '157 s/#//' /etc/locale.gen
+
+sudo locale-gen en_US.UTF-8
+
+sudo update-locale en_US.UTF-8
+
 sudo cp /etc/hosts /etc/hosts.orig
 
 sudo echo "LANG=en_US.UTF-8
