@@ -22,7 +22,7 @@ install -m 755 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/n
 
 install -m 777 files/code_examples/hello_world.c        "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -m 777 files/code_examples/life_mpi             "${ROOTFS_DIR}/home/pi/nfs/mpi"
+install -d files/code_examples/life_mpi                 "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluster/config"
 
