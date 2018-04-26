@@ -16,13 +16,13 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
 
-install -d                                              "${ROOTFS_DIR}/home/pi/nfs/mpi"
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -m 755 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
+install -m 777 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -m 777 files/code_examples/hello_world.c        "${ROOTFS_DIR}/home/pi/nfs/mpi"
+install -m 777 files/code_examples/hello_world          "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -d files/code_examples/life_mpi                 "${ROOTFS_DIR}/home/pi/nfs/mpi"
+install -m 777 files/code_examples/game_of_life         "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluster/config"
 

@@ -18,11 +18,12 @@
 
 -Draw up project plan and milestones
 
+-STAMP TOOl
+
 TESTING:
--had to run !ssh-keygen every time wtf
 -why does the -eq bug come upt everytime
 -why are old leases still active
--no reboot on configure
+
 
 NETWORK MANAGER:
 
