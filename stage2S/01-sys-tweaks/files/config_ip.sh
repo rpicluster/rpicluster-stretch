@@ -1,4 +1,3 @@
-sudo exportfs -a
 sudo python /rpicluster/config/config.py &
 cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join(get_machines())'`
@@ -13,7 +12,7 @@ zero_string="0"
 amount=0
 sudo echo "#MPI CLUSTER SETUP" >> /etc/hosts
 sudo echo "192.168.1.254    rpicluster" >> /etc/hosts
-sudo echo "rpicluster slots=1  max-slots=1" > /home/pi/nfs/mpi/mpiHosts
+sudo echo "rpicluster slots=4  max-slots=4" > /home/pi/nfs/mpi/mpiHosts
 for i in ${output[@]}
 do
     echo "Attempting to configure machine at IP: $i"
