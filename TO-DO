@@ -18,6 +18,13 @@
 
 -Draw up project plan and milestones
 
+TESTING:
+-had to run !ssh-keygen every time wtf
+-why does the -eq bug come upt everytime
+-why do the ips get fucked up
+-why are old leases still active
+-no reboot on configure
+
 NETWORK MANAGER:
 
 -need to create enable and disable scripts for all 3 modes

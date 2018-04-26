@@ -43,7 +43,8 @@ metric 100" >> /etc/dhcpcd.conf
 		sudo echo "interface=wlan0
 driver=nl80211
 ssid=rpicluster-AP
-channel=1
+channel=acs_survey
+acs_num_scans=5
 wmm_enabled=0
 wpa=1
 wpa_passphrase=rpicluster

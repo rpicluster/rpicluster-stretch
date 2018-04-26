@@ -15,7 +15,7 @@ class IpSender(object):
         with open("/home/pi/nfs/mpi/mpiHosts", "a") as mpiHosts:
             mpiHosts.write("node" + str(self.ip) + " slots=" + str(self.slots) + " max-slots=" + str(self.slots) + "\n")
         with open("/etc/hosts", "a") as hosts:
-            hosts.write(desiredIp + "    node" + str(self.ip))
+            hosts.write(desiredIp + "    node" + str(self.ip) + "\n")
         print("Configured IP: " + desiredIp + " on node" + str(self.ip) + " - " + mac)
         return str(desiredIp)
 
