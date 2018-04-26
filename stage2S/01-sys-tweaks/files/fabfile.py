@@ -42,3 +42,6 @@ def pingall():
         except FabricException:
             print(1)
             return 1
+
+def install(package):
+    run("sudo apt get install {} -y".format(package))

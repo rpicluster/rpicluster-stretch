@@ -6,4 +6,4 @@ alias rpc-sshkeys="sudo bash /rpicluster/config/send_ssh_keys.sh"
 alias rpc-status="sudo python /rpicluster/network-manager/status.py"
 alias rpc-reboot="sudo bash /rpicluster/config/reboot.sh && sudo reboot -h now"
 alias rpc-shutdown="sudo bash /rpicluster/config/shutdown.sh && sudo shutdown -h now"
-
+alias rpc-install="sudo bash /rpicluster/config/install.sh"

@@ -20,4 +20,3 @@ if [[ $answer == 'y' ]]; then
 	}" >> /etc/wpa_supplicant/$1
 
 fi
-
