@@ -30,7 +30,8 @@ if(network != 0):
 w = open("/rpicluster/config/.warn")
 warn = int(w.read(1))
 if(int(warn)):
-    val = raw_input("WARNING: Leave previous networking scheme connected durring this process. disable warning (y/n) ")
+    sys.stdout.write("\033[1;31m WARNING: ")
+    val = raw_input("\033[1;37m Leave previous networking scheme connected durring this process. disable warning (y/n) ")
     if(str(val) == "y"):
         os.system("sudo echo 0 > /rpicluster/config/.warn")
 
@@ -46,7 +47,8 @@ if(option != network):
     if(option != 0):
         print("\n\nConfiguring nodes . . . ")
         os.system("sudo bash /rpicluster/config/config_ip.sh")
-    raw_input("\nWork complete. If applicable, disconnect old networking and connect new networking scheme. Press enter to continue. ")
+    raw_input("\nIf applicable, connect new networking scheme. Press enter to continue. ")
+    print("\nCluster will now reboot.")
     os.system("sudo reboot -h now")
 else:
     print("This network configuration is already active.")

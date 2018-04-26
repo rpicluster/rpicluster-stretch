@@ -15,7 +15,7 @@ do
     echo "Attempting to configure machine at IP: $i"
     rv=$(fab pingall -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running,stderr)
 
-    if [[ ! -z "$rv" && "$rv" != ’’ && $rv -eq 0]]
+    if [[ ! -z "$rv" && "$rv" != ’’ && $rv -eq 0 ]]
     then
         counter=$((counter+1))
         fab config_ip:"$counter" -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running,stderr

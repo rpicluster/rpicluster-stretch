@@ -14,7 +14,7 @@ def config_ip(num):
             run('sudo echo node{} > hostname'.format(num))
             run('sudo echo "#MPI CLUSTER SETUP" >> /etc/hosts')
             run('sudo echo "192.168.1.254    rpicluster" >> /etc/hosts')
-            run('sudo echo "192.168.1.{}    node{}" >> /etc/hosts'.format(num, num))
+            run('sudo echo "192.168.1.{}      node{}" >> /etc/hosts'.format(num, num))
             run('sudo chmod 644 hostname')
             run('sudo chmod 644 hosts')
         run('sudo reboot -h now')

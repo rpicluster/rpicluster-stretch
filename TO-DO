@@ -20,6 +20,8 @@
 
 -STAMP TOOl
 
+-remove reboot from config and instead check for config in PS and kill it if it exists
+
 TESTING:
 -why does the -eq bug come upt everytime
 -why are old leases still active
