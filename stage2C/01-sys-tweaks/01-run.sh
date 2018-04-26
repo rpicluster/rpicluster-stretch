@@ -26,6 +26,8 @@ install -m 644 files/console-setup                      "${ROOTFS_DIR}/etc/defau
 
 install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
+install -m 777 files/.profile                           "${ROOTFS_DIR}/home/pi/"
+
 
 # systemctl disable nfs-common
 on_chroot << EOF
