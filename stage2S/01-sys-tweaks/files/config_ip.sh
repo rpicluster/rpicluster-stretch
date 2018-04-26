@@ -1,4 +1,3 @@
-sudo exportfs -a
 sudo python /rpicluster/config/config.py &
 cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join(get_machines())'`

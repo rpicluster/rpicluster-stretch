@@ -115,6 +115,7 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
+exportfs -a
 sudo service nfs-kernel-server restart
 EOF
 
