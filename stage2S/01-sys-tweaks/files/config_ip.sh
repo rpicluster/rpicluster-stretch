@@ -26,5 +26,7 @@ do
 
 done
 echo "$counter nodes configured."
+sudo rm /var/lib/misc/dnsmasq.leases
+sudo touch dnsmasq.leases
 sed -i 's/./1/2' /rpicluster/network-manager/configured
 

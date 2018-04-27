@@ -9,7 +9,7 @@ class IpSender(object):
         self.ip+=1
         desiredIp = "192.168.1." + str(self.ip)
         with open("/etc/dnsmasq.conf", "a") as configFile:
-            configFile.write("dhcp-host=" + mac + "," + desiredIp + "\n")
+            configFile.write("dhcp-host=" + mac + "," + desiredIp + ",node" + str(self.ip) + ",infinite\n")
         with open("/rpicluster/config/nodes", "a") as nodeFile:
             nodeFile.write(desiredIp + "," + mac + "," + "node" + str(self.ip) + "\n")
         with open("/home/pi/nfs/mpi/mpiHosts", "a") as mpiHosts:
