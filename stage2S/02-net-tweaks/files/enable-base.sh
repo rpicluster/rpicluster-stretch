@@ -80,12 +80,12 @@ logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 		sudo echo "no-resolv
 interface=wlan0
 listen-address=192.168.1.254
-server=8.8.8.8 # Use Google DNS
-domain-needed # Don't forward short names
-bogus-priv # Drop the non-routed address spaces.
+bind-interfaces #ensures that Dnsmasq will listen only to the addresses specificied with listen-address
+cache-size=10000 #local copy of the addresses we have visited
+domain-needed #blocks incomplete requests from leaving your network, such as google instead of google.com
+bogus-priv #prevents non-routable private addresses from being forwarded out of your network
 dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
-#log each DNS query as it passes through
-log-queries
+log-queries #log each DNS query as it passes through
 dhcp-authoritative" > /etc/dnsmasq.conf
 
 

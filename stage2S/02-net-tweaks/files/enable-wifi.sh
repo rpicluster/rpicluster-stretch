@@ -29,13 +29,13 @@ while [ $count -le $total ]; do
 		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 		sudo echo "interface wlan0
-metric 150
-static ip_address=192.168.1.254/24
-#static routers=192.168.1.1
-static domain_name_servers=8.8.8.8 #192.168.1.1
+	metric 150
+	static ip_address=192.168.1.254/24
+	#static routers=192.168.1.1
+	#static domain_name_servers=8.8.8.8 
 
 interface wlan1
-metric 100" >> /etc/dhcpcd.conf
+	metric 100" >> /etc/dhcpcd.conf
 	elif [ $count -eq 3 ]
 		then
 
@@ -89,13 +89,16 @@ logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 		sudo echo "no-resolv
 interface=wlan0
 listen-address=192.168.1.254
-server=8.8.8.8 # Use Google DNS
-domain-needed # Don't forward short names
-bogus-priv # Drop the non-routed address spaces.
+bind-interfaces #ensures that Dnsmasq will listen only to the addresses specificied with listen-address
+cache-size=10000 #local copy of the addresses we have visited
+domain-needed #blocks incomplete requests from leaving your network, such as google instead of google.com
+bogus-priv #prevents non-routable private addresses from being forwarded out of your network
 dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
-#log each DNS query as it passes through
-log-queries
-dhcp-authoritative" > /etc/dnsmasq.conf
+dhcp-authoritative #only use dnsmasq and dhcp server
+
+#LOGGING
+log-queries #log each DNS query as it passes through
+log-dhcp" > /etc/dnsmasq.conf
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 	elif [ $count -eq 6 ]
