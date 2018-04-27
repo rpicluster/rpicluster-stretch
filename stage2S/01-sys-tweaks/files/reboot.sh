@@ -2,6 +2,6 @@ cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join([item[0] for item in get_nodes()])'`
 for i in ${output[@]}
 do
-    fab reboot -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
+    fab reboot_nodes -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
 done
 sudo reboot -h now

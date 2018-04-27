@@ -10,7 +10,7 @@
 
 -distributed install: rpc-install <package> <nodes>
 
--FIX AND TEST rpc-shutdown && rpc-reboot (currently doesnt do anythign i dont think)
+-FIX AND TEST rpc-shutdown && rpc-reboot (currently doesnt do anything i dont think)
 
 -DEREK: locale fix
 
@@ -21,6 +21,9 @@
 -STAMP TOOl
 
 -remove reboot from config and instead check for config in PS and kill it if it exists
+
+-add output for rpc-update/reboot/shutdown/install so we know how close to being done it is TRY THIS sudo apt-get install <package> | debconf-apt-progress
+
 
 TESTING:
 -why does the -eq bug come upt everytime

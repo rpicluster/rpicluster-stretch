@@ -1,4 +1,4 @@
-read -p "Which package do you want to install?: " package
+package=$1
 
 cd /rpicluster/config
 output=`python -c 'from functions import *; print " ".join([item[0] for item in get_nodes()])'`

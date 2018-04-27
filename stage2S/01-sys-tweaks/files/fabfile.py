@@ -27,10 +27,10 @@ def update():
     run('sudo rm -rf /var/lib/apt/lists/* -f')
     run('sudo apt-get update && sudo apt-get upgrade -y')
 
-def reboot():
+def reboot_nodes():
     run('sudo reboot -h now')
 
-def shutdown():
+def shutdown_nodes():
     run('sudo shutdown -h now')
 
 def pingall():
@@ -44,4 +44,4 @@ def pingall():
             return 1
 
 def install(package):
-    run("sudo apt get install {} -y".format(package))
+    run("sudo apt-get install {} -y".format(package))
