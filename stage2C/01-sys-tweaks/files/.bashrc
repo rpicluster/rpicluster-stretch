@@ -111,5 +111,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-echo test
+
 sudo mount -t nfs rpicluster:/home/pi/nfs ~/nfs
