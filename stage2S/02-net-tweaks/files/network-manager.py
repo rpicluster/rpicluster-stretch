@@ -30,12 +30,12 @@ if(network != 0):
 w = open("/rpicluster/config/.warn")
 warn = int(w.read(1))
 if(int(warn)):
-    sys.stdout.write("\033[1;31m WARNING: ")
-    val = raw_input("\033[1;37m Leave previous networking scheme connected durring this process. disable warning (y/n) ")
+    sys.stdout.write("\033[1;31mWARNING: ")
+    val = raw_input("\033[1;37mLeave previous networking scheme connected durring this process. disable warning (y/n) ")
     if(str(val) == "y"):
         os.system("sudo echo 0 > /rpicluster/config/.warn")
 
-option = int(input("Select a networking option: "))
+option = int(input("\nSelect a networking option: "))
 
 
 f.close()

@@ -20,7 +20,10 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-sudo echo $'For rpicluster help and commands type rpc-help.\n'
+
+BLUE='\033[0;36m'
+NC='\033[0m'
+printf "${BLUE}For rpicluster help and commands type rpc-help.${NC}\n"
 sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan0
 sudo python /rpicluster/network-manager/startup-profile.py
 
