@@ -47,7 +47,9 @@ if(option != network):
     if(option != 0):
         print("\n\nConfiguring nodes . . . ")
         os.system("sudo bash /rpicluster/config/config_ip.sh")
-    raw_input("\nIf applicable, connect new networking scheme. Press enter to continue. ")
+    raw_input("\nIf applicable, connect new networking scheme. Press enter when complete. ")
+    if(option == 1):
+        os.system("sudo python /rpicluster/network-manager/link_wifi_adaptor.py wlan1")
     print("\nCluster will now reboot.")
     os.system("sudo reboot -h now")
 else:
