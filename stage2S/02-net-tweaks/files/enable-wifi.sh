@@ -29,13 +29,13 @@ while [ $count -le $total ]; do
 		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 
 		sudo echo "interface wlan0
-	metric 150
-	static ip_address=192.168.1.254/24
-	#static routers=192.168.1.1
-	#static domain_name_servers=8.8.8.8 
+metric 150
+static ip_address=192.168.1.254/24
+#static routers=192.168.1.1
+static domain_name_servers=8.8.8.8
 
 interface wlan1
-	metric 100" >> /etc/dhcpcd.conf
+metric 100" >> /etc/dhcpcd.conf
 	elif [ $count -eq 3 ]
 		then
 
@@ -89,6 +89,7 @@ logger_stdout_level=2" > /etc/hostapd/hostapd.conf
 		sudo echo "no-resolv
 interface=wlan0
 listen-address=192.168.1.254
+server=8.8.8.8
 bind-interfaces #ensures that Dnsmasq will listen only to the addresses specificied with listen-address
 cache-size=10000 #local copy of the addresses we have visited
 domain-needed #blocks incomplete requests from leaving your network, such as google instead of google.com
