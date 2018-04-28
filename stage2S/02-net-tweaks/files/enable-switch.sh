@@ -26,13 +26,7 @@ while [ $count -le $total ]; do
 		task="Updating dhcpcd.conf"
 		sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 		sudo echo "interface eth0
-metric 150
-static ip_address=192.168.1.254/24
-#static routers=192.168.1.1
-static domain_name_servers=8.8.8.8
-
-interface wlan0
-metric 100" >> /etc/dhcpcd.conf
+static ip_address=192.168.1.254/24" >> /etc/dhcpcd.conf
 
 
 	elif [ $count -eq 3 ]
@@ -42,13 +36,17 @@ metric 100" >> /etc/dhcpcd.conf
 		sudo echo "no-resolv
 interface=eth0
 listen-address=192.168.1.254
-bind-interfaces #ensures that Dnsmasq will listen only to the addresses specificied with listen-address
-cache-size=10000 #local copy of the addresses we have visited
+server=8.8.8.8
+server=8.8.4.4
+cache-size=10000
 domain-needed #blocks incomplete requests from leaving your network, such as google instead of google.com
 bogus-priv #prevents non-routable private addresses from being forwarded out of your network
 dhcp-range=192.168.1.100,192.168.1.150,12h # IP range and lease time
+dhcp-authoritative #only use dnsmasq and dhcp server
+
+#LOGGING
 log-queries #log each DNS query as it passes through
-dhcp-authoritative" > /etc/dnsmasq.conf
+log-dhcp" > /etc/dnsmasq.conf
 
 		sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
