@@ -48,10 +48,6 @@ def getmac(ip_output, interface):
             return content[len(content)-3]
 
 def ping_node(hostname):
-    response = os.system("ping " + hostname)
-    if response == 0:
-        return 0
-    else:
-        return 1
+    return os.system("ping -c 1 " + hostname + " > /dev/null 2>&1")
 
         
