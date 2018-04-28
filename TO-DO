@@ -24,11 +24,11 @@
 
 -ALEC: add output for rpc-update/reboot/shutdown/install so we know how close to being done it is TRY THIS sudo apt-get install <package> | debconf-apt-progress
 
--ALEC: call link wifi adaptor inside set wifi not enable
-
 -ALEC: create rpc-connect to connect to new internet check network type and set accordingly
 
 -ALEC: if link wifi cant find a mac to map to then dont create the rule file...
+
+
 
 TESTING:
 -why does the -eq bug come upt everytime
