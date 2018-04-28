@@ -38,15 +38,17 @@ if(network != 0):
         print("                            |")
         print("                            --> "+ connection_name + "--> " + access_point)
         for x in range(len(machines)):
-            print("                                                       |")
-            print("                                                       --> " + machines[x][0] + " - " + machines[x][1])
+            if ping_node(machines[x][1]) == 0:
+                print("                                                       |")
+                print("                                                       --> " + machines[x][0] + " - " + machines[x][1])
     else:
         print("                       |")
         print("                       |")
         print("                       --> "+ connection_name + "--> " + access_point)
         for x in range(len(machines)):
-            print("                                                  |")
-            print("                                                  --> " + machines[x][0] + " - " + machines[x][1])
+            if ping_node(machines[x][1]) == 0:
+                print("                                                  |")
+                print("                                                  --> " + machines[x][0] + " - " + machines[x][1])
 
 else:
     print("\nNo rpicluster Network configured ! ! !\n")

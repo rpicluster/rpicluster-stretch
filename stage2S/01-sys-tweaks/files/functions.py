@@ -1,3 +1,5 @@
+import os
+
 def get_nodes():
     f = open("/rpicluster/config/nodes","r")
     line = f.readline()
@@ -45,3 +47,11 @@ def getmac(ip_output, interface):
             content = output[x+1].split(" ")
             return content[len(content)-3]
 
+def ping_node(hostname):
+    response = os.system("ping " + hostname)
+    if response == 0:
+        return 0
+    else:
+        return 1
+
+        
