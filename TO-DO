@@ -8,12 +8,6 @@
 
 -WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
 
--distributed install: rpc-install <package> <nodes>
-
--FIX AND TEST rpc-shutdown && rpc-reboot (currently doesnt do anything i dont think)
-
--DEREK: locale fix
-
 -Write 5 sentence pitch
 
 -Draw up project plan and milestones
@@ -28,7 +22,7 @@
 
 -ALEC: if link wifi cant find a mac to map to then dont create the rule file...
 
-
+-check how many nodes our cluster can actually support
 
 TESTING:
 -why does the -eq bug come upt everytime
