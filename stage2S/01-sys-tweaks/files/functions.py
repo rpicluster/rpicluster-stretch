@@ -6,7 +6,7 @@ def get_nodes():
     machines = []
     while(line!=''):
         split = line.split(',')
-        machines.append((split[0], split[2]))
+        machines.append((split[0].rstrip(), split[2].rstrip()))
         line = f.readline()
     return machines
 
@@ -48,5 +48,6 @@ def getmac(ip_output, interface):
             return content[len(content)-3]
 
 def ping_node(hostname):
-    return os.system("ping -c 1 " + hostname + " &> /dev/null")
+    command = "ping -c 1 " + hostname + " > /dev/null"
+    return os.system(command)
 
