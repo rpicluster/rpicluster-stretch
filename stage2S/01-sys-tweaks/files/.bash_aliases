@@ -1,5 +1,6 @@
 alias rpc-networkmanager="sudo python /rpicluster/network-manager/network-manager.py"
-alias rpc-update="(sudo bash /rpicluster/config/update.sh &) && sudo apt-get update && sudo apt-get upgrade -y"
+# alias rpc-update="(sudo bash /rpicluster/config/update.sh &) && sudo apt-get update && sudo apt-get upgrade -y"
+alias rpc-update="sudo bash /rpicluster/config/update.sh"
 alias rpc-configure="sudo bash /rpicluster/config/config_ip.sh && sudo reboot -h now"
 alias rpc-help="sudo python /rpicluster/config/help.py"
 alias rpc-sshkeys="sudo bash /rpicluster/config/send_ssh_keys.sh"
