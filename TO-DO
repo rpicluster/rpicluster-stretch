@@ -64,7 +64,7 @@ edit Makefile, line 22, to get rid if the -msse2 flag:
 export CFLAGS = -O3 $(WARNFLAGS)
 
 cd xgboost; make -j4
-aptitude install libblas-dev liblapack-dev
+aptitude install libblas-dev liblapack-dev OR sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
 pip install scipy
 cd python-package; sudo python3 setup.py install
 
