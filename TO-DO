@@ -1,7 +1,5 @@
 -create code that checks for boot file that has been stamped and updates access point name and password accordingly
 
--normalize permissions of files
-
 -update status tool, network manager, and help to include OTG MODE
 
 -take photos for website
@@ -16,18 +14,11 @@
 
 -remove reboot from config and instead check for config in PS and kill it if it exists
 
--ALEC: add output for rpc-update/reboot/shutdown/install so we know how close to being done it is TRY THIS sudo apt-get install <package> | debconf-apt-progress
-
 -ALEC: create rpc-connect to connect to new internet check network type and set accordingly
 
 -ALEC: if link wifi cant find a mac to map to then dont create the rule file...
 
 -check how many nodes our cluster can actually support
-
-TESTING:
--why does the -eq bug come upt everytime
--why are old leases still active
-
 
 NETWORK MANAGER:
 
