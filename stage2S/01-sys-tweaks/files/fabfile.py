@@ -1,4 +1,4 @@
-from fabric.api import *
+from fabric.api import run, cd, settings
 
 class FabricException(Exception):
     pass

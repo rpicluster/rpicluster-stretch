@@ -15,6 +15,9 @@ do
     white=$(($total-$count))
     python progress_bar.py $count $white $action $i
     count=$(( $count + 1 ))
-    fab update -u pi -H "$i" -p "raspberry" --abort-on-prompts --hide warnings,stdout,aborts,status,running
+    fab update -u pi -H "$i" -p "raspberry" 
+#--abort-on-prompts --hide warnings,stdout,aborts,status,running
 done
-
+count=$(( $count + 1 ))
+white=$(($total-$count))
+python progress_bar.py $count $white Finished
