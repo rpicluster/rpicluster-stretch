@@ -12,6 +12,12 @@
 
 -STAMP TOOl
 
+-make rpc tool instead rpc-tool ex. rpc <tool>
+
+-makr rpc dev-update
+
+-make network manager more understandable
+
 -remove reboot from config and instead check for config in PS and kill it if it exists
 
 -ALEC: create rpc-connect to connect to new internet check network type and set accordingly

@@ -60,6 +60,8 @@ install -m 777 files/reboot.sh                          "${ROOTFS_DIR}/rpicluste
 
 install -m 777 files/shutdown.sh                        "${ROOTFS_DIR}/rpicluster/config"
 
+install -m 777 files/progress_bar.py                    "${ROOTFS_DIR}/rpicluster/config"
+
 install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
 install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
