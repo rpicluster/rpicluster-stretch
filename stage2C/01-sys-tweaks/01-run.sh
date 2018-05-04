@@ -82,6 +82,20 @@ sudo systemctl set-default multi-user.target
 sudo ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 sudo mount -t nfs rpicluster:/home/pi/nfs ~/nfs
 sudo echo "rpicluster:/home/pi/nfs /home/pi/nfs nfs" >> /etc/fstab
+
+
+#XGBOOST SETUP
+sudo apt-get -y install python3-numpy
+sudo apt-get -y install python3-scipy
+sudo apt-get -y install python3-sklearn
+sudo apt-get -y install python-setuptools
+sudo apt-get -y install libblas-dev liblapack-dev libatlas-base-dev gfortran
+cd
+git clone --recursive https://github.com/dmlc/xgboost
+cd xgboost
+sudo sed -i '22s/.*/export CFLAGS = -O3 $(WARNFLAGS)/' /etc/default/hostapd
+make -j4
+cd python-package; sudo python3 setup.py install
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
