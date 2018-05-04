@@ -36,6 +36,8 @@ install -m 755 files/send_ssh_keys.sh                   "${ROOTFS_DIR}/rpicluste
 
 install -m 755 files/help.py                            "${ROOTFS_DIR}/rpicluster/config"
 
+install -m 755 files/read_stamp.py                      "${ROOTFS_DIR}/rpicluster/config"
+
 install -d                                              "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d"
 
 install -m 644 files/ttyoutput.conf                     "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/"
