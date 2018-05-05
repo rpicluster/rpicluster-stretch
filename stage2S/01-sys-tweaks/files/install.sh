@@ -1,6 +1,5 @@
 #!/bin/bash
 package=$1
-then
 cd /rpicluster/config
 action="${package}-install "
 count=0

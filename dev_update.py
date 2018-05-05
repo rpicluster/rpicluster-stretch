@@ -17,6 +17,8 @@ def update_files():
             if(line.startswith("install")):
                 if("wpa_supplicant.conf" in line):
                     continue
+                if("configured" in line):
+                    continue
                 vals = line.split(" ")
                 for x in range(len(vals)):
                     if("files/" in vals[x]):
