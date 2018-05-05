@@ -5,6 +5,8 @@ def update_files():
         sysrun.readline()
         for line in sysrun:
             if(line.startswith("install")):
+                if("warn" in line):
+                    continue
                 vals = line.split(" ")
                 for x in range(len(vals)):
                     if("files/" in vals[x]):
@@ -18,6 +20,8 @@ def update_files():
                 if("wpa_supplicant.conf" in line):
                     continue
                 if("configured" in line):
+                    continue
+                if("nodes" in line):
                     continue
                 vals = line.split(" ")
                 for x in range(len(vals)):
