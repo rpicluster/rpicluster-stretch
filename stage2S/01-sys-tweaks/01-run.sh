@@ -64,7 +64,7 @@ install -m 777 files/shutdown.sh                        "${ROOTFS_DIR}/rpicluste
 
 install -m 777 files/progress_bar.py                    "${ROOTFS_DIR}/rpicluster/config"
 
-install -m 777 files/rpc.sh                             "${ROOTFS_DIR}/rpicluster/config"
+install -m 777 files/rpc.py                             "${ROOTFS_DIR}/rpicluster/config"
 
 install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
