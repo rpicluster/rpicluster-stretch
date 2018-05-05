@@ -15,6 +15,8 @@ def update_files():
         netrun.readline()
         for line in netrun:
             if(line.startswith("install")):
+                if("wpa_supplicant.conf" in line):
+                    continue
                 vals = line.split(" ")
                 for x in range(len(vals)):
                     if("files/" in vals[x]):

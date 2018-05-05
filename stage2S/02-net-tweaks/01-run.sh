@@ -1,14 +1,14 @@
 #!/bin/bash -e
 
-install -v -d                                          "${ROOTFS_DIR}/etc/systemd/system/dhcpcd.service.d"
+install -d                                             "${ROOTFS_DIR}/etc/systemd/system/dhcpcd.service.d"
 
-install -v -m 644 files/wait.conf                      "${ROOTFS_DIR}/etc/systemd/system/dhcpcd.service.d/"
+install -m 644 files/wait.conf                         "${ROOTFS_DIR}/etc/systemd/system/dhcpcd.service.d/"
 
-install -v -d                                          "${ROOTFS_DIR}/etc/wpa_supplicant"
+install -d                                             "${ROOTFS_DIR}/etc/wpa_supplicant"
 
 install -d                                             "${ROOTFS_DIR}/rpicluster/network-manager"
 
-install -v -m 600 files/wpa_supplicant.conf            "${ROOTFS_DIR}/etc/wpa_supplicant/"
+install -m 600 files/wpa_supplicant.conf               "${ROOTFS_DIR}/etc/wpa_supplicant/"
 
 install -m 755 files/link_wifi_adaptor.py              "${ROOTFS_DIR}/rpicluster/network-manager/"
 
