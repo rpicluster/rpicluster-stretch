@@ -1,6 +1,7 @@
 import sys, os
 
-if(sys.argv[1] == "network" )
+
+if(sys.argv[1] == "network")
     os.system("sudo python /rpicluster/network-manager/network-manager.py")
 
 elif(sys.argv[1] == "update")
