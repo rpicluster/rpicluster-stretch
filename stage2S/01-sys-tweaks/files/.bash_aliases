@@ -1,1 +1,1 @@
-alias rpc="sudo bash /rpicluster/config/rpc.sh $1 $2"
+alias rpc="sudo bash /rpicluster/config/rpc.py $1 $2"
