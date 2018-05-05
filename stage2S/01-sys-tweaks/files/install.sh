@@ -1,6 +1,6 @@
 #!/bin/bash
 package=$1
-if [[ ! -z "$rv" && "$rv" != ’’ && $rv -eq 0 ]]
+if [[ ! -z "$1" && "$1" != ’’ && $1 -eq 0 ]]
     then
     cd /rpicluster/config
     action="${package}-install "
