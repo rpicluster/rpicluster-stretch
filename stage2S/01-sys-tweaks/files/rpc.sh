@@ -1,4 +1,8 @@
-if [ $1 -eq "network" ]
+if [[ ! -z "$1" || "$1" != ’’]]]
+    then
+    sudo python /rpicluster/config/help.py
+
+elif [ $1 -eq "network" ]
     then
     sudo python /rpicluster/network-manager/network-manager.py
 
