@@ -14,7 +14,6 @@ def update_files():
         netrun.readline()
         for line in netrun:
             if(line.startswith("install")):
-                if(line.startswith("install")):
                 vals = line.split(" ")
                 if(vals[3] != "-d"):
                     vals[3] = "stage2S/02-net-tweaks/" + vals[3]
