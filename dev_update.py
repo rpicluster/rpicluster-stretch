@@ -5,13 +5,20 @@ def update_files():
         sysrun.readline()
         for line in sysrun:
             if(line.startswith("install")):
-                os.system("sudo " + line)
+                vals = line.split(" ")
+                if(vals[3] != "-d"):
+                    vals[3] = "stage2S/01-sys-tweaks/" + vals[3]
+                os.system("sudo " + " ".join(vals))
 
     with open("stage2S/02-net-tweaks/01-run.sh", "r") as netrun:
         netrun.readline()
         for line in netrun:
             if(line.startswith("install")):
-                os.system("sudo " + line)
+                if(line.startswith("install")):
+                vals = line.split(" ")
+                if(vals[3] != "-d"):
+                    vals[3] = "stage2S/02-net-tweaks/" + vals[3]
+                os.system("sudo " + " ".join(vals))
 
 
 update_files()
