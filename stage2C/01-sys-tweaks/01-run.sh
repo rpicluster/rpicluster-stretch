@@ -12,6 +12,8 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
+install -d files/xgboost                                "${ROOTFS_DIR}/home/pi/"
+
 install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
 
 install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
@@ -83,19 +85,17 @@ sudo ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.tar
 sudo mount -t nfs rpicluster:/home/pi/nfs ~/nfs
 sudo echo "rpicluster:/home/pi/nfs /home/pi/nfs nfs" >> /etc/fstab
 
-
 #XGBOOST SETUP
 sudo apt-get -y install python3-numpy
 sudo apt-get -y install python3-scipy
 sudo apt-get -y install python3-sklearn
 sudo apt-get -y install python-setuptools
 sudo apt-get -y install libblas-dev liblapack-dev libatlas-base-dev gfortran
-cd
-git clone --recursive https://github.com/dmlc/xgboost
-cd xgboost
+cd /home/pi/xgboost
 sudo sed -i '22s/.*/export CFLAGS = -O3 $(WARNFLAGS)/' /etc/default/hostapd
 make -j4
-cd python-package; sudo python3 setup.py install
+cd /home/pi/xgboost/python-package; sudo python3 setup.py install
+
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*
