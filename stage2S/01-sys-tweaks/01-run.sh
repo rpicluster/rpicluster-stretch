@@ -68,9 +68,6 @@ install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
 install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
 
-git clone --recursive https://github.com/dmlc/xgboost /home/pi/xgboost
-
-
 
 # systemctl disable nfs-common
 
@@ -126,6 +123,7 @@ exportfs -a
 sudo service nfs-kernel-server restart
 
 #XGBOOST SETUP
+sudo git clone --recursive https://github.com/dmlc/xgboost /home/pi/xgboost
 cd /home/pi/xgboost
 sudo sed -i '22s/.*/export CFLAGS = -O3 $(WARNFLAGS)/' Makefile
 make -j4
