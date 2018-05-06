@@ -12,8 +12,6 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-# install -d files/xgboost                                "${ROOTFS_DIR}/home/pi/"
-
 install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
 
 install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
@@ -30,6 +28,7 @@ install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
 install -m 755 files/.bashrc                           "${ROOTFS_DIR}/home/pi/"
 
+sudo cp -r files/xgboost "${ROOTFS_DIR}/home/pi/"
 
 
 # systemctl disable nfs-common
@@ -86,12 +85,6 @@ sudo mount -t nfs rpicluster:/home/pi/nfs ~/nfs
 sudo echo "rpicluster:/home/pi/nfs /home/pi/nfs nfs" >> /etc/fstab
 
 #XGBOOST SETUP
-sudo apt-get -y install python3-numpy
-sudo apt-get -y install python3-scipy
-sudo apt-get -y install python3-sklearn
-sudo apt-get -y install python-setuptools
-sudo apt-get -y install libblas-dev liblapack-dev libatlas-base-dev gfortran
-sudo cp files/xgboost /home/pi/
 cd /home/pi/xgboost
 sudo sed -i '22s/.*/export CFLAGS = -O3 $(WARNFLAGS)/' /etc/default/hostapd
 make -j4

@@ -18,8 +18,6 @@ install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/n
 
 install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-# install -D files/xgboost/*                              "${ROOTFS_DIR}/home/pi/xgboost"
-
 install -m 777 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 777 files/code_examples/hello_world          "${ROOTFS_DIR}/home/pi/nfs/mpi"
@@ -70,7 +68,7 @@ install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
 install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
 
-sudo cp files/xgboost "${ROOTFS_DIR}/home/pi/"
+sudo cp -r files/xgboost "${ROOTFS_DIR}/home/pi/"
 
 
 
