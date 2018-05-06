@@ -68,9 +68,7 @@ install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
 install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
 
-ls files/xgboost
-
-sudo cp -r files/xgboost "${ROOTFS_DIR}/home/pi/"
+git clone --recursive https://github.com/dmlc/xgboost /home/pi/xgboost
 
 
 
@@ -129,7 +127,7 @@ sudo service nfs-kernel-server restart
 
 #XGBOOST SETUP
 cd /home/pi/xgboost
-sudo sed -i '22s/.*/export CFLAGS = -O3 $(WARNFLAGS)/' /etc/default/hostapd
+sudo sed -i '22s/.*/export CFLAGS = -O3 $(WARNFLAGS)/' Makefile
 make -j4
 cd /home/pi/xgboost/python-package; sudo python3 setup.py install
 
