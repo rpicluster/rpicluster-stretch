@@ -18,6 +18,12 @@ install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/n
 
 install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/install"
+
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/packages"
+
+install -m 777 files/xgboost-install.sh                 "${ROOTFS_DIR}/home/pi/nfs/install"
+
 install -m 777 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 777 files/code_examples/hello_world          "${ROOTFS_DIR}/home/pi/nfs/mpi"
