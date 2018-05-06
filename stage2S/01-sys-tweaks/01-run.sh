@@ -68,6 +68,8 @@ install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
 
 install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
 
+ls files/xgboost
+
 sudo cp -r files/xgboost "${ROOTFS_DIR}/home/pi/"
 
 
