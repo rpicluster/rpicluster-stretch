@@ -26,8 +26,6 @@ if(len(sys.argv) > 1):
             os.system("sudo bash /rpicluster/config/install.sh %s" % sys.argv[2])
         else:
             print("Usage: rpc install <package>")
-
-
     else:
         os.system("sudo python /rpicluster/config/help.py")
 else:

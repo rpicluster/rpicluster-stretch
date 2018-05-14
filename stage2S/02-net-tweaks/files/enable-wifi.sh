@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo "
 
 Enabling Wifi-Wifi networking scheme . . .
@@ -35,6 +34,22 @@ static ip_address=192.168.1.254/24" >> /etc/dhcpcd.conf
 		then
 
 		task="Generating new hostapd.conf"
+
+		output=`python -c 'from functions import *; print " ".join(read_stamp("0100010001000001010101110100000101000101", "/boot/stamp"))'`
+		counter=0
+		network_name=""
+		password=""
+		for i in ${output[@]}
+		do
+			if [ counter -eq 0 ]
+			then 
+				network_name=$i
+			else
+				password=$i
+			fi
+			counter=$((counter+1))
+		done
+		
 		sudo echo "#INTERFACE
 interface=wlan0
 
@@ -43,7 +58,7 @@ driver=nl80211
 
 #WLAN SETTINGS
 country_code=US
-ssid=rpicluster-AP
+ssid=$network_name
 channel=11
 wmm_enabled=1
 hw_mode=g
@@ -56,7 +71,7 @@ ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
 
 #WPA SETTINGS
 wpa=2
-wpa_passphrase=rpicluster
+wpa_passphrase=$password
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
