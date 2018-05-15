@@ -76,7 +76,7 @@ def read_stamp(magic_num, file):
     len_network = fd.read(8)
     len_network = int(len_network, 2)
     len_pass = fd.read(8)
-    len_pass = int(len_network, 2)
+    len_pass = int(len_pass, 2)
     name = fd.read(network_name_length)
     passw = fd.read(password_length)
     return [bin_to_string(name), bin_to_string(passw)]
