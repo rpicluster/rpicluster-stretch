@@ -53,10 +53,10 @@ def ping_node(hostname):
 
 #read the stamp and give back the network name and password
 def read_stamp(magic_num, file):
-    network_name = raw_input("Enter your network name: ")
-    password = raw_input("Enter the password: ")
-    network_name = ''.join(format(ord(x), 'b') for x in network_name)
-    password = ''.join(format(ord(x), 'b') for x in password)
+    # network_name = raw_input("Enter your network name: ")
+    # password = raw_input("Enter the password: ")
+    # network_name = ''.join(format(ord(x), 'b') for x in network_name)
+    # password = ''.join(format(ord(x), 'b') for x in password)
     pos = 0
     fd = open(file, 'rb')
     char = ord(fd.read(1))
@@ -73,10 +73,10 @@ def read_stamp(magic_num, file):
     network_name_length = len(network_name)
     password_length = len(password)
     # use the length of the network and the password to read instead of asking again for input.
-    # len_network = fd.read(8)
-    # len_network = int(len_network, 2)
-    # len_pass = fd.read(8)
-    # len_pass = int(len_network, 2)
+    len_network = fd.read(8)
+    len_network = int(len_network, 2)
+    len_pass = fd.read(8)
+    len_pass = int(len_network, 2)
     name = fd.read(network_name_length)
     passw = fd.read(password_length)
     return [bin_to_string(name), bin_to_string(passw)]
