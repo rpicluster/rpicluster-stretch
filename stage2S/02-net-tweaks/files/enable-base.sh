@@ -32,7 +32,7 @@ static ip_address=192.168.1.254/24" >> /etc/dhcpcd.conf
 		password=""
 		for i in ${output[@]}
 		do
-			if [ counter -eq 0 ]
+			if [ $counter -eq 0 ]
 			then 
 				network_name=$i
 			else
