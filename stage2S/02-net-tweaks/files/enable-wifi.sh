@@ -34,8 +34,9 @@ static ip_address=192.168.1.254/24" >> /etc/dhcpcd.conf
 		then
 
 		task="Generating new hostapd.conf"
+        cd /rpicluster/config
 
-		output=`python -c 'from /rpicluster/config/functions import *; print " ".join(read_stamp("0100010001000001010101110100000101000101", "/boot/stamp"))'`
+		output=`python -c 'from functions import *; print " ".join(read_stamp("0100010001000001010101110100000101000101", "/boot/stamp"))'`
 		counter=0
 		network_name=""
 		password=""
