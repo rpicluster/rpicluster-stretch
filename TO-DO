@@ -10,12 +10,6 @@
 
 -Draw up project plan and milestones
 
--STAMP TOOl
-
--make rpc tool instead rpc-tool ex. rpc <tool>
-
--makr rpc dev-update
-
 -make network manager more understandable
 
 -remove reboot from config and instead check for config in PS and kill it if it exists
@@ -47,23 +41,6 @@ Machine Learning
 
 
 http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
-
-
-xgboost:
-
-
-update
-sudo apt-get install python-numpy
-sudo apt-get install python-setuptools
-git clone --recursive https://github.com/dmlc/xgboost
-
-edit Makefile, line 22, to get rid if the -msse2 flag:
-export CFLAGS = -O3 $(WARNFLAGS)
-
-cd xgboost; make -j4
-aptitude install libblas-dev liblapack-dev OR sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
-pip install scipy
-cd python-package; sudo python3 setup.py install
 
 
 
