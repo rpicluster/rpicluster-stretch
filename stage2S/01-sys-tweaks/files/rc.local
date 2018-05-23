@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash
 #
 # rc.local
 #
@@ -23,5 +23,7 @@ if [ $network == "0" ]
 then
   sudo bash /rpicluster/network-manager/enable-base.sh
 fi
+
+sudo systemctl restart hostapd
 
 exit 0
