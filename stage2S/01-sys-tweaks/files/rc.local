@@ -17,4 +17,11 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+read -n 1 network < /rpicluster/network-manager/configured
+
+if [ $network == "0" ]
+then
+  sudo bash /rpicluster/network-manager/enable-base.sh
+fi
+
 exit 0
