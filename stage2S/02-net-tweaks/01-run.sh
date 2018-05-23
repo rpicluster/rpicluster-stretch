@@ -32,7 +32,7 @@ install -m 755 files/status.py                         "${ROOTFS_DIR}/rpicluster
 
 install -m 755 files/set-wifi.sh                       "${ROOTFS_DIR}/rpicluster/network-manager/"
 
-install -m 600 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
+install -m 755 files/configured                        "${ROOTFS_DIR}/rpicluster/network-manager/"
 
 install -m 755 files/nodes                             "${ROOTFS_DIR}/rpicluster/config/"
 
