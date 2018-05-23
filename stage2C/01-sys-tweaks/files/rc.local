@@ -17,4 +17,6 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+sudo bash /rpicluster/config/stamp_net.sh
+
 exit 0

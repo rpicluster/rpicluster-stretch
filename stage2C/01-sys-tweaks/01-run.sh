@@ -14,6 +14,12 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
 
+install -m 755 files/functions.py                       "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 755 files/stamp_net.sh                       "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
+
 install -d                                              "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d"
 
 install -m 644 files/ttyoutput.conf                     "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/"
