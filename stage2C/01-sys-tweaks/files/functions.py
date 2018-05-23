@@ -31,4 +31,5 @@ def read_stamp(magic_num, file):
     return [bin_to_string(name), bin_to_string(passw)]
 
 def bin_to_string(binary_string):
-    return ''.join(format(chr(int(binary_string[i:i+7], 2))) for i in range(0, len(binary_string), 7))
+    # return ''.join(format(chr(int(binary_string[i:i+7], 2))) for i in range(0, len(binary_string), 7))
+    return binary_string.decode('utf-8')
