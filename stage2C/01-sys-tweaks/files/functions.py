@@ -21,9 +21,9 @@ def read_stamp(magic_num, file):
     # password_length = len(password)
     # use the length of the network and the password to read instead of asking again for input.
     len_network = fd.read(8)
-    len_network = int(len_network, 2)
+    len_network = int(len_network.decode('utf-8'), 2)
     len_pass = fd.read(8)
-    len_pass = int(len_pass, 2)
+    len_pass = int(len_pass.decode('utf-8'), 2)
     name = fd.read(len_network)
     passw = fd.read(len_pass)
     # name = fd.read(network_name_length)
