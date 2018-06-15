@@ -1,5 +1,3 @@
--create code that checks for boot file that has been stamped and updates access point name and password accordingly
-
 -update status tool, network manager, and help to include OTG MODE
 
 -take photos for website
@@ -10,13 +8,11 @@
 
 -Draw up project plan and milestones
 
--make network manager more understandable
-
 -remove reboot from config and instead check for config in PS and kill it if it exists
 
 -ALEC: create rpc-connect to connect to new internet check network type and set accordingly
 
--ALEC: if link wifi cant find a mac to map to then dont create the rule file...
+-ALEC: if link wifi can't find a MAC to map to then don't create the rule file...
 
 -check how many nodes our cluster can actually support
 
