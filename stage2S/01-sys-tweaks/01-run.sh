@@ -14,11 +14,21 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
-install -d                                              "${ROOTFS_DIR}/rpicluster/cloud"
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
 
-install -d                                              "${ROOTFS_DIR}/rpicluster/code"
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
-install -m 755 files/mpi_hello_world.c                  "${ROOTFS_DIR}/rpicluster/code"
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/install"
+
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs/packages"
+
+install -m 777 files/xgboost-install.sh                 "${ROOTFS_DIR}/home/pi/nfs/install"
+
+install -m 777 files/mpiHosts                           "${ROOTFS_DIR}/home/pi/nfs/mpi"
+
+install -m 777 files/code_examples/hello_world          "${ROOTFS_DIR}/home/pi/nfs/mpi"
+
+install -m 777 files/code_examples/game_of_life         "${ROOTFS_DIR}/home/pi/nfs/mpi"
 
 install -m 755 files/config.py                          "${ROOTFS_DIR}/rpicluster/config"
 
@@ -50,6 +60,24 @@ install -m 777 files/.bash_aliases                      "${ROOTFS_DIR}/home/pi/"
 
 install -m 777 files/.profile                           "${ROOTFS_DIR}/home/pi/"
 
+install -m 777 files/.warn                              "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 777 files/reboot.sh                          "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 777 files/shutdown.sh                        "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 777 files/progress_bar.py                    "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 777 files/rpc.py                             "${ROOTFS_DIR}/rpicluster/config"
+
+install -m 777 files/stamp                              "${ROOTFS_DIR}/boot"
+
+install -m 777 files/exports                            "${ROOTFS_DIR}/etc/"
+
+
+
+
+# systemctl disable nfs-common
 
 on_chroot << EOF
 systemctl disable hwclock.sh
@@ -99,8 +127,8 @@ EOF
 
 on_chroot << EOF
 pip install zerorpc
-# sudo sed -i "23s/.*/sudo echo 'For rpicluster help and commands type rpicluster-help.'/" /home/pi/.profile
-# sudo echo "sudo echo 'For rpicluster help and commands type rpicluster-help.'" | sudo tee -a /home/pi/.profile
+exportfs -a
+sudo service nfs-kernel-server restart
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*

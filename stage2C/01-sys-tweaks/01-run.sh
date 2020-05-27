@@ -12,6 +12,8 @@ install -d                                              "${ROOTFS_DIR}/rpicluste
 
 install -d                                              "${ROOTFS_DIR}/rpicluster/config"
 
+install -m 777 -d                                       "${ROOTFS_DIR}/home/pi/nfs"
+
 install -m 755 files/calibrate_touchless.py             "${ROOTFS_DIR}/rpicluster/config"
 
 install -m 755 files/functions.py                       "${ROOTFS_DIR}/rpicluster/config"
@@ -30,9 +32,13 @@ install -m 644 files/console-setup                      "${ROOTFS_DIR}/etc/defau
 
 install -m 755 files/rc.local                           "${ROOTFS_DIR}/etc/"
 
+install -m 755 files/.bashrc                           "${ROOTFS_DIR}/home/pi/"
+
+
+
+# systemctl disable nfs-common
 on_chroot << EOF
 systemctl disable hwclock.sh
-systemctl disable nfs-common
 systemctl disable rpcbind
 systemctl disable ssh
 systemctl enable regenerate_ssh_host_keys
@@ -80,6 +86,8 @@ on_chroot << EOF
 pip install zerorpc
 sudo systemctl set-default multi-user.target
 sudo ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+sudo mount -t nfs rpicluster:/home/pi/nfs ~/nfs
+sudo echo "rpicluster:/home/pi/nfs /home/pi/nfs nfs" >> /etc/fstab
 EOF
 
 rm -f ${ROOTFS_DIR}/etc/ssh/ssh_host_*_key*

@@ -1,38 +1,18 @@
--create python code that stamps user images on download
-   fdisk -l Server.img (the unzipped file, this command gives you partition start)
-   sudo disktype Server.img (this command gives you the fs type)
-   sudo mount Server.img mount/ -t ext4 -o loop -o offset=50463744
-   (this command should mount at offset)
-
--create code that checks for boot file that has been stamped and updates access point name and password accordingly
-
--normalize permissions of files
-
 -update status tool, network manager, and help to include OTG MODE
-
--set up a NFS cloud so the master and nodes can share files easily http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/
 
 -take photos for website
 
--ALEC: make it so the node config happens instantly on machine boot not .profile, this way before initial network config reboot we can say hey its gonna reboot twice just give it some time. 
+-Write 5 sentence pitch
 
--WHY do we copy the dnsmasq.conf to .orig after changing it in the enable scripts...?
+-Draw up project plan and milestones
 
--remove install host services from scripts ... ? we dont really need this step lol
+-remove reboot from config and instead check for config in PS and kill it if it exists
 
--distributed install: rpc-install <package> <nodes>
+-create rpc-connect to connect to new internet check network type and set accordingly
 
--change rpicluster to rpc
+-if link wifi can't find a MAC to map to then don't create the rule file...
 
--mpi-hosts file
-
--rpc-shutdown && rpc-reboot
-
--fix -eq bug
-
--DEREK: locale fix
-
--think about changing estimated time to completion
+-check how many nodes our cluster can actually support
 
 NETWORK MANAGER:
 
@@ -41,10 +21,15 @@ NETWORK MANAGER:
 2)switch : DONE
 3)otg : NOT DONE
 
--for OTG: 
+-for OTG:
 1) dns to allow for a connection without a unique mac address on otg
 2) make connection, then run ip_configuration-like program to give the currently connected non-configured pi a unique ip address and otg mac address 
 
+DevOps tooling
+Long Running Services
+Batch Scheduling
+Big Data Processing
+Data Storage
+Machine Learning
 
-
-
+http://mpitutorial.com/tutorials/running-an-mpi-cluster-within-a-lan/

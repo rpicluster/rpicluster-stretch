@@ -38,3 +38,9 @@ hostapd
 rng-tools
 openmpi-bin
 libopenmpi-dev
+nfs-kernel-server
+python3-numpy
+python3-scipy
+python3-sklearn
+python-setuptools
+libblas-dev liblapack-dev libatlas-base-dev gfortran
